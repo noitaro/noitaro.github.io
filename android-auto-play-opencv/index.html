@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Python で Android ゲーム を自動操作 | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="Python を使って アンドロイドのゲームを自動操作する方法を紹介します。 一度作ってしまえば、リセマラの周回とか自動で出来るようになります。 プログラム分からないって人でも出来るように紹介するので、回りくどくてグダグダした説明になってしまうかもしれませんがご了承下さい。 目標今回出来るようになること  アンドロイドの指定した場所を、自動でタップ。 アンドロイドの画面に、押したいボタンが出たら自">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python で Android ゲーム を自動操作">
+<meta property="og:url" content="https://noitaro.github.io/android-auto-play-opencv/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="Python を使って アンドロイドのゲームを自動操作する方法を紹介します。 一度作ってしまえば、リセマラの周回とか自動で出来るようになります。 プログラム分からないって人でも出来るように紹介するので、回りくどくてグダグダした説明になってしまうかもしれませんがご了承下さい。 目標今回出来るようになること  アンドロイドの指定した場所を、自動でタップ。 アンドロイドの画面に、押したいボタンが出たら自">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/3f7310d4-ws000490.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002333.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001449.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002505.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001452.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001453.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001454.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001455.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001456.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001457.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001458.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001459.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001460.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001461.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001462.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001463.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001464.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001465.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002504.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001467.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002493.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002335.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/Screenshot_20201017-143255.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/9e673db2-screenshot_20191028-040448.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/0a4ba830-screenshot_20191028-040622.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/1700fd04-screenshot_20191026-201142.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS001471.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002507.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002510.png">
+<meta property="og:image" content="https://noitaro.github.io/android-auto-play-opencv/WS002511.png">
+<meta property="article:published_time" content="2020-03-21T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:40.655Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="opencv">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="games">
+<meta property="article:tag" content="automation">
+<meta property="article:tag" content="android-auto-play">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/android-auto-play-opencv/3f7310d4-ws000490.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-android-auto-play-opencv" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Python で Android ゲーム を自動操作
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2020-03-21T00:00:00.000Z" itemprop="datePublished">2020-03-21</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.9k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>Python を使って アンドロイドのゲームを自動操作する方法を紹介します。</p>
+<p>一度作ってしまえば、リセマラの周回とか自動で出来るようになります。</p>
+<p>プログラム分からないって人でも出来るように紹介するので、回りくどくてグダグダした説明になってしまうかもしれませんがご了承下さい。</p>
+<h2 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h2><p>今回出来るようになること</p>
+<ol>
+<li>アンドロイドの指定した場所を、自動でタップ。</li>
+<li>アンドロイドの画面に、押したいボタンが出たら自動でタップ。</li>
+</ol>
+<p>この２点を目標に説明して行きます。</p>
+<h3 id="マウスを自動操作するツールとは何が違うの？"><a href="#マウスを自動操作するツールとは何が違うの？" class="headerlink" title="マウスを自動操作するツールとは何が違うの？"></a>マウスを自動操作するツールとは何が違うの？</h3><p>Python で アンドロイドゲームを自動操作 する場合、マウスを奪うことがありません。</p>
+<p>なので ネットサーフィンや他のPCゲームで遊びながら、アンドロイド実機を自動操作することができます。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://jp.bignox.com/">NoxPlayer</a> を自動操作することも出来ます。</p>
+<h2 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h2><p>ちょっと準備が大変ですが、準備させ整えばゲームの自動化ができるので頑張りましょう。</p>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.microsoft.com/store/productId/9MSSZTT1N39L">Python</a></p>
+<p>Microsoft Store から簡単にインストール出来ます。</p>
+<p><img src="3f7310d4-ws000490.png" alt="Python" loading="lazy"></p>
+<h4 id="ちゃんとインストール出来たか確認するには？"><a href="#ちゃんとインストール出来たか確認するには？" class="headerlink" title="ちゃんとインストール出来たか確認するには？"></a>ちゃんとインストール出来たか確認するには？</h4><p>コマンドプロンプトに下記を入力すると確認できます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python --version</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002333.png" loading="lazy"></p>
+<h3 id="android-auto-play-opencv"><a href="#android-auto-play-opencv" class="headerlink" title="android-auto-play-opencv"></a>android-auto-play-opencv</h3><p>OpenCV の画像認識を使って、Android を自動操作するライブラリです。</p>
+<p>指定したボタンが出てきたらタップするために使います。</p>
+<h4 id="インストール方法"><a href="#インストール方法" class="headerlink" title="インストール方法"></a>インストール方法</h4><p>「Win」キーと「R」キーを同時に押して「ファイル名を指定して実行」ダイアログに「cmd」と入力し、コマンドプロンプトを開きます。</p>
+<p><img src="WS001449.png" loading="lazy"></p>
+<p>で、開いたコマンドプロンプトに 下記コマンド を入力して android-auto-play-opencv をインストールします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install android-auto-play-opencv</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002505.png" loading="lazy"></p>
+<p>Successfully と出れば成功です。</p>
+<h3 id="Android-Debug-Bridge（adb）"><a href="#Android-Debug-Bridge（adb）" class="headerlink" title="Android Debug Bridge（adb）"></a>Android Debug Bridge（adb）</h3><p>アンドロイドを操作するために adb.exe を入手します。</p>
+<p>adb.exe は、SDK Platform-Tools に含まれているので、それをダウンロードして展開します。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://developer.android.com/studio/releases/platform-tools">SDK Platform-Tools</a></p>
+<p>公式サイト の Downloads の「Download SDK Platform-Tools for Windows」を押して、</p>
+<p><img src="WS001452.png" loading="lazy"></p>
+<p>利用規約に同意し、ダウンロードします。</p>
+<p><img src="WS001453.png" loading="lazy"></p>
+<p>適当なフォルダに展開します。</p>
+<p><img src="WS001454.png" loading="lazy"></p>
+<h3 id="サンプル集"><a href="#サンプル集" class="headerlink" title="サンプル集"></a>サンプル集</h3><p>Android自動操作ライブラリを使ったサンプル集です。無くても問題ないです。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/android-auto-play-opencv">android-auto-play-opencv</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/android-auto-play-opencv">https://github.com/noitaro/android-auto-play-opencv</a></p>
+<p>Clone or download の「Download ZIP」でダウンロードします。</p>
+<p><img src="WS001455.png" loading="lazy"></p>
+<p>適当なフォルダに展開します。</p>
+<p><img src="WS001456.png" loading="lazy"></p>
+<h3 id="拡張子を表示させる"><a href="#拡張子を表示させる" class="headerlink" title="拡張子を表示させる"></a>拡張子を表示させる</h3><p>この設定は必須じゃないですが、今後 Python コードを作成するため見えてると作業がしやすいので、表示させておきましょう。</p>
+<p>どこでもいいのでフォルダの 表示 を押して「ファイル名拡張子」にチェックを入れます。</p>
+<p><img src="WS001457.png" loading="lazy"></p>
+<p>これで準備完了です。</p>
+<h2 id="アンドロイド自動操作スクリプト作成"><a href="#アンドロイド自動操作スクリプト作成" class="headerlink" title="アンドロイド自動操作スクリプト作成"></a>アンドロイド自動操作スクリプト作成</h2><p>では早速、アンドロイドを操作するスクリプトを作成していきます。</p>
+<p>適当なフォルダを作って作業して下さい。今回は展開した「android-auto-play-opencv-master」フォルダ内で作業します。</p>
+<p>フォルダ内を右クリックし、新規作成の「テキストドキュメント」選択します。</p>
+<p><img src="WS001458.png" loading="lazy"></p>
+<p>ファイル名を「Main.py」に変更します。</p>
+<p><img src="WS001459.png" loading="lazy"></p>
+<p>拡張子も「txt」から「py」に変更するので、確認ダイアログが出ます。</p>
+<p>「はい」を押してファイル名を確定しましょう。</p>
+<p><img src="WS001460.png" loading="lazy"></p>
+<p>こんな感じになればOK。</p>
+<p><img src="WS001461.png" loading="lazy"></p>
+<p>次に先程作った「Main.py」をテキストエディッタで開きます。</p>
+<p>「Main.py」を選択した状態で右クリックをし「プログラムから開く」を選択します。</p>
+<p><img src="WS001462.png" loading="lazy"></p>
+<p>ファイルを開く方法で「その他のアプリ」を選びます。</p>
+<p><img src="WS001463.png" loading="lazy"></p>
+<p>メモ帳 を選択してから「OK」ボタンを押します。</p>
+<p><img src="WS001464.png" loading="lazy"></p>
+<p>これで「Main.py」を メモ帳 で開く事ができました。</p>
+<p><img src="WS001465.png" loading="lazy"></p>
+<p>中身は空っぽですけどね。</p>
+<p>メモ帳じゃなくても、普段使い慣れているテキストエディッタでも大丈夫です。</p>
+<h3 id="雛形をコピペする"><a href="#雛形をコピペする" class="headerlink" title="雛形をコピペする"></a>雛形をコピペする</h3><p>Python の雛形をコピーして貼り付けます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># This Python file uses the following encoding: utf-8</span><br><span class="line"># pip install android-auto-play-opencv</span><br><span class="line">import android_auto_play_opencv as am</span><br><span class="line">adbpath = &#x27;..\\platform-tools\\&#x27;</span><br><span class="line">def main():</span><br><span class="line">    aapo = am.AapoManager(adbpath)</span><br><span class="line">    while True:</span><br><span class="line">        # 画面キャプチャ</span><br><span class="line">        aapo.screencap()</span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002504.png" loading="lazy"></p>
+<p>Python は インデント が重要なので、コピペ時に空白を削除しないようにしましょう。あと、先頭のコメントも重要！</p>
+<p>これで、USB接続した アンドロイド実機の画面を、スクリーンショット して PCへ転送してくれます。</p>
+<h2 id="動作確認"><a href="#動作確認" class="headerlink" title="動作確認"></a>動作確認</h2><p>とりあえず、動くか動作確認をします。</p>
+<p>「android-auto-play-opencv-master」フォルダのアドレスバーに「cmd」と入力しエンターキーを押し、コマンドプロンプトを開きます。</p>
+<p><img src="WS001467.png" loading="lazy"></p>
+<p>開いたコマンドプロンプトに下記コマンドを入力すると Python を実行することが出来ます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./Main.py</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002493.png" loading="lazy"></p>
+<p>「アンドロイド端末が接続されていません。」と出れば成功です。Python が正しく機能しています。</p>
+<h3 id="アンドロイド実機を接続して動作確認"><a href="#アンドロイド実機を接続して動作確認" class="headerlink" title="アンドロイド実機を接続して動作確認"></a>アンドロイド実機を接続して動作確認</h3><p>次に、アンドロイド実機を PC と USB接続して動作確認してみます。</p>
+<p>PC と USB接続してから先程と同じように「Main.py」と入力し、エンターキーを押します。</p>
+<p><img src="WS002335.png" loading="lazy"></p>
+<p>ひたすら 画面キャプチャ と表示されれば成功です。</p>
+<h3 id="一瞬で閉じてしまう場合は？"><a href="#一瞬で閉じてしまう場合は？" class="headerlink" title="一瞬で閉じてしまう場合は？"></a>一瞬で閉じてしまう場合は？</h3><p>USBモードを メディアデバイス にする。</p>
+<p><img src="Screenshot_20201017-143255.png" alt="USBモードは メディアデバイス" loading="lazy"></p>
+<p>それでも駄目な場合は、アンドロイド実機の USBデバッグ が無効になっているかもしれません。</p>
+<h4 id="USBデバッグ-を有効にする方法"><a href="#USBデバッグ-を有効にする方法" class="headerlink" title="USBデバッグ を有効にする方法"></a>USBデバッグ を有効にする方法</h4><p>まず、設定 &gt; デバイス情報 &gt; ビルド番号 を 7回タップして 開発者向けオプション を有効にします。</p>
+<p><img src="9e673db2-screenshot_20191028-040448.png" alt="開発者向けオプションを有効にする" loading="lazy"></p>
+<p>開発者向けオプション 内の USB デバッグ を有効にします。</p>
+<p><img src="0a4ba830-screenshot_20191028-040622.png" alt="USB デバッグを有効にする" loading="lazy"></p>
+<p>そうすると「USB デバッグを許可しますか？」と表示されるので「常に許可する」にチェックを入れて「OK」して下さい。</p>
+<p><img src="1700fd04-screenshot_20191026-201142.png" alt="USB デバッグを許可しますか？" loading="lazy"></p>
+<h2 id="アンドロイド自動操作スクリプト改造"><a href="#アンドロイド自動操作スクリプト改造" class="headerlink" title="アンドロイド自動操作スクリプト改造"></a>アンドロイド自動操作スクリプト改造</h2><p>動作確認が出来たら、Python スクリプトを改造します。</p>
+<p>「Main_sample.py」を見て改造するのもいいかもしれません。</p>
+<p>今は 画面キャプチャしかしていないので、画面内で見つけたボタンをタップするように改造します。</p>
+<p>まず、template フォルダに元となる画像を入れます。</p>
+<p><img src="WS001471.png" loading="lazy"></p>
+<p>で、下記のようにファイル名を指定すると、その場所をタップしてくれます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aapo.touchImg(&#x27;./template/stage_clear.png&#x27;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002507.png" loading="lazy"></p>
+<p>Python を書く時は、インデントに気をつけましょう。</p>
+<h2 id="リファレンス"><a href="#リファレンス" class="headerlink" title="リファレンス"></a>リファレンス</h2><p>全ての関数は <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/android-auto-play-opencv">こちら</a> に記載してあります。</p>
+<h2 id="NoxPlayer-を自動操作する"><a href="#NoxPlayer-を自動操作する" class="headerlink" title="NoxPlayer を自動操作する"></a>NoxPlayer を自動操作する</h2><p>adbpath を変えることで、NoxPlayer を操作することも出来ます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adbpath = &#x27;..\\platform-tools\\&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>NoxPlayer を操作するには、NoxPlayer用の adb.exe を指定します。</p>
+<h3 id="NoxPlayer用の-adb-exe-の調べ方"><a href="#NoxPlayer用の-adb-exe-の調べ方" class="headerlink" title="NoxPlayer用の adb.exe の調べ方"></a>NoxPlayer用の adb.exe の調べ方</h3><p>デスクトップにある NoxPlayerのショートカットを右クリックして「ファイルの場所を開く」を選択</p>
+<p><img src="WS002510.png" loading="lazy"></p>
+<p>開かれたフォルダに NoxPlayer用の adb.exe があります。なので、そのフォルダパスを adbpath に指定すればOK</p>
+<p><img src="WS002511.png" loading="lazy"></p>
+<p>Python は エンマークがエスケープ文字に設定されているので、エンマークを使いたい時は2回続けて書く必要があります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adbpath = &#x27;D:\Program Files\Nox64\bin\&#x27; # NG</span><br><span class="line">adbpath = &#x27;D:\\Program Files\\Nox64\\bin\\&#x27; # OK</span><br></pre></td></tr></table></figure>
+
+<h2 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h2><p>これを使えば イベントの周回とかリセマラの周回とかが自動操作できるようになります。</p>
+<p>アンドロイド実機やNoxPlayer でマウスを奪われることもないのでストレスもありません。</p>
+<p>敷居が高そうに見えますが、楽をするために頑張ってみるのもいいものですよ。</p>
+<h3 id="新しい自動操作ツールを作りました"><a href="#新しい自動操作ツールを作りました" class="headerlink" title="新しい自動操作ツールを作りました"></a>新しい自動操作ツールを作りました</h3><p>新しくアンドロイド自動操作ツールを作りました。</p>
+<p><a href="https://noitaro.github.io/android-automation-tool/">https://noitaro.github.io/android-automation-tool/</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/cocos-creator-3d-model-animation/" title="Cocos Creator で 3Dモデルのアニメーションに挑戦">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Cocos Creator で 3Dモデルのアニメーションに挑戦
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/cocos-creator-live2d/" title="Cocos Creator で Live2dモデル を表示する">
+
+    <p class="title-text">
+      
+        Cocos Creator で Live2dモデル を表示する
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

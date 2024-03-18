@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>ASP.NET Core 3.1 と SQL Server を使って Webアプリ を作成する | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="マイクロソフトのチュートリアル通り進めると「映画の情報を管理するアプリ」が完成します。 https:&#x2F;&#x2F;docs.microsoft.com&#x2F;ja-jp&#x2F;aspnet&#x2F;core&#x2F;tutorials&#x2F;razor-pages&#x2F;razor-pages-start?view&#x3D;aspnetcore-3.1&amp;tabs&#x3D;visual-studio こいつを読み解きながら、作成して行こうと思います。 前提">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ASP.NET Core 3.1 と SQL Server を使って Webアプリ を作成する">
+<meta property="og:url" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="マイクロソフトのチュートリアル通り進めると「映画の情報を管理するアプリ」が完成します。 https:&#x2F;&#x2F;docs.microsoft.com&#x2F;ja-jp&#x2F;aspnet&#x2F;core&#x2F;tutorials&#x2F;razor-pages&#x2F;razor-pages-start?view&#x3D;aspnetcore-3.1&amp;tabs&#x3D;visual-studio こいつを読み解きながら、作成して行こうと思います。 前提">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_1-1.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_2.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_3.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_4.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_5.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_6.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_7.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_8.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_9.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_10.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_11.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_12.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_13.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_14.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_15.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_16.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_17.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_18.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_22.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_26.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_19.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_20.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_21.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_27.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_28.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_30.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_31.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_29.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_25.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_23.png">
+<meta property="og:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_24.png">
+<meta property="article:published_time" content="2020-08-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:40.747Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="visual-studio">
+<meta property="article:tag" content="sqlserver">
+<meta property="article:tag" content="docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/aspnetcore-3-1-web-app-created/200827_1-1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-aspnetcore-3-1-web-app-created" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        ASP.NET Core 3.1 と SQL Server を使って Webアプリ を作成する
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2020-08-28T00:00:00.000Z" itemprop="datePublished">2020-08-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>マイクロソフトのチュートリアル通り進めると「映画の情報を管理するアプリ」が完成します。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-3.1&tabs=visual-studio">https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-3.1&amp;tabs=visual-studio</a></p>
+<p>こいつを読み解きながら、作成して行こうと思います。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ul>
+<li>Visual Studio 2019</li>
+</ul>
+<p>Visual Studio を使って作業して行くので、事前に使えるようセットアップしておきましょう。</p>
+<ul>
+<li>Docker Desktop</li>
+</ul>
+<p>今回は Docker システムを使ってみたいのでインストールしておきます。SQL Server も Webアプリ も Docker 上で動作させます。ちょっとカッコいい。</p>
+<h2 id="プロジェクト作成"><a href="#プロジェクト作成" class="headerlink" title="プロジェクト作成"></a>プロジェクト作成</h2><p>まず初めに Webアプリケーション のプロジェクトを作成します。</p>
+<p>Visual Studio を実行し「新しいプロジェクトの作成」を選択します。</p>
+<p><img src="200827_1-1.png" alt="新しいプロジェクトの作成" loading="lazy"></p>
+<p>プロジェクトのテンプレートに「ASP.NET Core Web アプリケーション」を選択し「次へ」ボタンを押します。</p>
+<p><img src="200827_2.png" alt="ASP.NET Core Web アプリケーション" loading="lazy"></p>
+<p>プロジェクト構成を確認して問題がなければ「作成」ボタンを押します。</p>
+<p><img src="200827_3.png" alt="新しいプロジェクトを構成" loading="lazy"></p>
+<p>下記のようにアプリケーションを設定し「作成」ボタンを押します。</p>
+<ul>
+<li>フレームワーク：.NET Core</li>
+<li>フレームワークバージョン：ASP.NET Core 3.1</li>
+<li>プロジェクトテンプレート：Web アプリケーション (モデル ビュー コントローラー)</li>
+<li>認証：なし</li>
+<li>HTTPS構成：チェックあり</li>
+<li>Docker サポート：チェックあり</li>
+<li>Docker サポート OS：Linux</li>
+<li>Razor runtime：チェックあり</li>
+</ul>
+<p><img src="200827_4.png" alt="Web アプリケーション (モデル ビュー コントローラー)" loading="lazy"></p>
+<p>プロジェクトの作成が出来たら「デバッグの開始」ボタンを押して、正常に動くことを確認します。</p>
+<p><img src="200827_5.png" alt="デバッグの開始" loading="lazy"></p>
+<p><img src="200827_6.png" alt="正常に動くことを確認" loading="lazy"></p>
+<h2 id="モデル作成"><a href="#モデル作成" class="headerlink" title="モデル作成"></a>モデル作成</h2><p>映画を管理するクラスを作成します。</p>
+<p>また、モデルクラスは Entity Framework Core (EF Core) を使ってデータベースを操作します。EF Core は、データアクセスをする マッパー なので簡単に 追加・更新・削除 の機能を実装することができます。</p>
+<p>「Models」フォルダを選択し、マウスの右クリック を押します。</p>
+<p><img src="200827_7.png" alt="モデル作成" loading="lazy"></p>
+<p>コンテキストメニューから「追加 -&gt; クラス」を選択します。</p>
+<p><img src="200827_8.png" alt="「追加 -&gt; クラス」を選択" loading="lazy"></p>
+<p>名前を「Movie」に変更し「追加」ボタンを押します。</p>
+<p><img src="200827_9.png" alt="「追加」ボタンを押す" loading="lazy"></p>
+<p>Models フォルダ内に Movie のクラスファイルが追加されました。</p>
+<p><img src="200827_10.png" alt="Movie のクラスファイル" loading="lazy"></p>
+<p>Movie クラス に 下記プロパティを追加します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">using System;</span><br><span class="line">using System.ComponentModel.DataAnnotations;</span><br><span class="line"></span><br><span class="line">namespace WebApplication1.Models</span><br><span class="line">&#123;</span><br><span class="line">    public class Movie</span><br><span class="line">    &#123;</span><br><span class="line">        public int ID &#123; get; set; &#125;</span><br><span class="line">        public string Title &#123; get; set; &#125;</span><br><span class="line"></span><br><span class="line">        [DataType(DataType.Date)]</span><br><span class="line">        public DateTime ReleaseDate &#123; get; set; &#125;</span><br><span class="line">        public string Genre &#123; get; set; &#125;</span><br><span class="line">        public decimal Price &#123; get; set; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="200827_11.png" alt="プロパティを追加" loading="lazy"></p>
+<h2 id="スキャフォールディング"><a href="#スキャフォールディング" class="headerlink" title="スキャフォールディング"></a>スキャフォールディング</h2><p>次に、今作った Movieモデル を スキャフォールディング します。</p>
+<p>スキャフォールディング を実行すると、Movieモデル の 作成・読み取り・更新・削除 ページが自動生成されます。</p>
+<p>まず「Controllers」フォルダを選択し、マウスの右クリック を押します。</p>
+<p><img src="200827_12.png" alt="Controllers フォルダを選択" loading="lazy"></p>
+<p>コンテキストメニューから「追加 -&gt; 新規スキャフォールディングアイテム」を選択します。</p>
+<p><img src="200827_13.png" alt="追加 -&gt; 新規スキャフォールディングアイテム" loading="lazy"></p>
+<p>新規スキャフォールディング アイテムの追加で「Entity Framework を使用したビューがある MVC コントローラー」を選択し「追加」ボタンを押します。</p>
+<p><img src="200827_14.png" alt="Entity Framework を使用したビューがある MVC コントローラー を選択" loading="lazy"></p>
+<p>「Entity Framework を使用したビューがある MVC コントローラー の追加」画面の設定をしていきます。</p>
+<p>まず「モデル クラス」に「Movie (WebApplication1.Models)」を設定します。</p>
+<p><img src="200827_15.png" alt="Movie (WebApplication1.Models) を設定" loading="lazy"></p>
+<p>次に「データ コンテキスト クラス」の 「＋ (プラス)」ボタンを押して、データ コンテキストの追加をします。</p>
+<p>特に変更せず「追加」ボタンを押します。</p>
+<p><img src="200827_16.png" alt="追加ボタンを押す" loading="lazy"></p>
+<p>最後に下記設定をして「追加」ボタンを押せば、スキャフォールディング が実行されます。</p>
+<ul>
+<li>ビューの生成：チェックあり</li>
+<li>スクリプト ライブラリの参照：チェックあり</li>
+<li>レイアウト ページを使用：チェックあり</li>
+</ul>
+<p><img src="200827_17.png" alt="スキャフォールディング を実行" loading="lazy"></p>
+<p>NuGet のインストールがあるので少し時間はかかりますが、下記ファイルが作成されれば成功です。</p>
+<ul>
+<li>Controllers -&gt; MoviesController.cs</li>
+<li>Models -&gt; Movie.cs</li>
+<li>Views -&gt; Movies -&gt; Create.cshtml</li>
+<li>Views -&gt; Movies -&gt; Delete.cshtml</li>
+<li>Views -&gt; Movies -&gt; Details.cshtml</li>
+<li>Views -&gt; Movies -&gt; Edit.cshtml</li>
+<li>Views -&gt; Movies -&gt; Index.cshtml</li>
+</ul>
+<p><img src="200827_18.png" alt="下記ファイルが作成されれば成功" loading="lazy"></p>
+<h2 id="接続文字列の修正"><a href="#接続文字列の修正" class="headerlink" title="接続文字列の修正"></a>接続文字列の修正</h2><p>次の工程に進む前に、接続文字列の修正をします。</p>
+<p>先程の スキャフォールディング で「appsettings.json」に 接続文字列 が追加されました。</p>
+<p><img src="200827_22.png" alt="appsettings.json の接続文字列" loading="lazy"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;ConnectionStrings&quot;: &#123;</span><br><span class="line">  &quot;WebApplication1Context&quot;: &quot;Server=(localdb)\\mssqllocaldb;Database=WebApplication1Context-030d89c3-89e1-46f0-a903-ed108a831360;Trusted_Connection=True;MultipleActiveResultSets=true&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>今回は SQL Server につなぐので 下記に修正します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;ConnectionStrings&quot;: &#123;</span><br><span class="line">  &quot;WebApplication1Context&quot;: &quot;Data Source=localhost;Initial Catalog=WebApp1;User ID=SA;Password=&lt;YourStrong!Passw0rd&gt;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="データベース作成"><a href="#データベース作成" class="headerlink" title="データベース作成"></a>データベース作成</h2><p>今回使う データベース を作成しておきましょう。</p>
+<p><img src="200827_26.png" alt="データベース作成" loading="lazy"></p>
+<p>テーブルは次の工程で作成されますが、データベースは無理なのです。ちょっと残念。</p>
+<h2 id="自動テーブル作成"><a href="#自動テーブル作成" class="headerlink" title="自動テーブル作成"></a>自動テーブル作成</h2><h3 id="移行-SQL-作成"><a href="#移行-SQL-作成" class="headerlink" title="移行 SQL 作成"></a>移行 SQL 作成</h3><p>次に、今作った Movieモデル の移行 SQL を自動生成させます。</p>
+<p>テーブル作成 SQL が自動生成されるので、楽ちんですよ。</p>
+<p>「ツール」&gt;「NuGet パッケージ マネージャー」の順で パッケージ マネージャー コンソール (PMC) を開きます。</p>
+<p><img src="200827_19.png" alt="パッケージ マネージャー コンソール" loading="lazy"></p>
+<p>開いた パッケージ マネージャー コンソール に下記コマンドを入力して 移行 SQL を作成します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Add-Migration InitialCreate</span><br></pre></td></tr></table></figure>
+
+<p><img src="200827_20.png" alt="Add-Migration InitialCreate" loading="lazy"></p>
+<p>プロジェクト内に「Migrations」フォルダが作られて、そのフォルダ内に 2つ の 移行ファイルが出来上がります。</p>
+<p><img src="200827_21.png" alt="移行ファイルが完成" loading="lazy"></p>
+<h3 id="自動テーブル作成-1"><a href="#自動テーブル作成-1" class="headerlink" title="自動テーブル作成"></a>自動テーブル作成</h3><p>出来上がった移行ファイルを実行して、テーブルを作ります。</p>
+<p>パッケージ マネージャー コンソール に下記コマンドを入力すると、テーブルが作成されます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Update-Database</span><br></pre></td></tr></table></figure>
+
+<p><img src="200827_27.png" alt="Update-Database" loading="lazy"></p>
+<p><img src="200827_28.png" alt="テーブルが作成された" loading="lazy"></p>
+<p>ちなみに「dbo.__EFMigrationsHistory」はテーブルの移行履歴です。</p>
+<p>モデルクラスを変更して、再度自動生成をした時に変更分だけが更新されるようになっているので、安心です。</p>
+<h2 id="動作確認"><a href="#動作確認" class="headerlink" title="動作確認"></a>動作確認</h2><p>映画の情報を管理するアプリ が完成したので、実際に動かして動作確認をします。</p>
+<p>デバッグ実行をして「<a target="_blank" rel="external nofollow noopener noreferrer" href="https://localhost:32770/Movies/%E3%80%8D%E3%81%AB%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%8B%E3%82%89%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%99%E3%82%8B%E3%81%A8%E3%80%81%E4%BB%8A%E5%9B%9E%E4%BD%9C%E6%88%90%E3%81%97%E3%81%9F%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%8C%E8%A1%A8%E7%A4%BA%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82">https://localhost:32770/Movies/」にブラウザからアクセスすると、今回作成したページが表示されます。</a></p>
+<p><img src="200827_30.png" alt="動作確認" loading="lazy"></p>
+<p>追加・更新・削除 も問題なく動きます。</p>
+<p><img src="200827_31.png" alt="追加・更新・削除 の確認" loading="lazy"></p>
+<h3 id="SQL-Server-に接続出来ない時は？"><a href="#SQL-Server-に接続出来ない時は？" class="headerlink" title="SQL Server に接続出来ない時は？"></a>SQL Server に接続出来ない時は？</h3><p>Docker の SQL Server を使っている場合、下記エラーが表示されるかもしれません。</p>
+<blockquote>
+<p>An unhandled exception occurred while processing the request.<br>SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: TCP Provider, error: 40 - Could not open a connection to SQL Server)</p>
+</blockquote>
+<p><img src="200827_29.png" alt="サーバーが見つからなかったか、アクセスできませんでした。" loading="lazy"></p>
+<p>対処方法を下記にまとめたので修正します。</p>
+<h3 id="接続文字列の修正-1"><a href="#接続文字列の修正-1" class="headerlink" title="接続文字列の修正"></a>接続文字列の修正</h3><p>エラーの原因は Docker上の SQL Server につなげれないためです。</p>
+<p>Docker は DNSサーバー を有しているので IPアドレス を指定してあげないと つなぐことが出来ないみたいです。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/52926064/how-to-connect-to-sql-sever-docker-container-from-another-container">How to connect to SQL Sever docker container from another container?</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://stackoverflow.com/questions/52926064/how-to-connect-to-sql-sever-docker-container-from-another-container">https://stackoverflow.com/questions/52926064/how-to-connect-to-sql-sever-docker-container-from-another-container</a></p>
+<p>これに気づかず躓いたので気をつけポイントですね。</p>
+<p>まず、SQL Server の コンテナ名を調べます。</p>
+<p>Docker Dashboard にあるコレが SQL Server の コンテナ名 ですね。</p>
+<p><img src="200827_25.png" alt="Docker Dashboard でコンテナ名確認" loading="lazy"></p>
+<p>次に、下記コマンドで Doker コンテナー の ネットワーク ID を調べます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network ls</span><br></pre></td></tr></table></figure>
+
+<p><img src="200827_23.png" alt="docker network ls" loading="lazy"></p>
+<p>そして「bridge」の Network ID を コピーし、下記コマンドを実行します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network inspect 74b39dcb7346</span><br></pre></td></tr></table></figure>
+
+<p><img src="200827_24.png" alt="docker network inspect 74b39dcb7346" loading="lazy"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&quot;Containers&quot;: &#123;</span><br><span class="line">    &quot;00e2d51c7b8adc1697c95c8b7bf5a28d49141489ece06083c6e15aba7149436d&quot;: &#123;</span><br><span class="line">        &quot;Name&quot;: &quot;silly_engelbart&quot;,</span><br><span class="line">        &quot;EndpointID&quot;: &quot;8f5f1a8a9cca8f0312a17ff564ffdb16de69766932abfa2344c798d5b4aec1d1&quot;,</span><br><span class="line">        &quot;MacAddress&quot;: &quot;02:42:ac:11:00:03&quot;,</span><br><span class="line">        &quot;IPv4Address&quot;: &quot;172.17.0.3/16&quot;,</span><br><span class="line">        &quot;IPv6Address&quot;: &quot;&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;f926042848b093be6004e1c721191ab43dd678486416953a7b2ae07ad8bcf7cc&quot;: &#123;</span><br><span class="line">        &quot;Name&quot;: &quot;WebApplication1&quot;,</span><br><span class="line">        &quot;EndpointID&quot;: &quot;6c3d11c0c77ebd79c8c3c1c34447cbc1d0c7f5aa84e4fcc640b62cf9353301da&quot;,</span><br><span class="line">        &quot;MacAddress&quot;: &quot;02:42:ac:11:00:02&quot;,</span><br><span class="line">        &quot;IPv4Address&quot;: &quot;172.17.0.2/16&quot;,</span><br><span class="line">        &quot;IPv6Address&quot;: &quot;&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>「Containers」の中にある「IPv4Address」 が Docker上 IPアドレスになります。</p>
+<p>あとは「appsettings.json」の「ConnectionStrings」を修正して完成です。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;ConnectionStrings&quot;: &#123;</span><br><span class="line">  &quot;WebApplication1Context&quot;: &quot;Data Source=172.17.0.3;Initial Catalog=WebApp1;User ID=SA;Password=&lt;YourStrong!Passw0rd&gt;&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="終わりに"><a href="#終わりに" class="headerlink" title="終わりに"></a>終わりに</h2><p>SQL を一切書かずに 追加・更新・削除 の処理が作れたのに驚きました。</p>
+<p>見た目はシンプルですが最低限の機能が備わっているので、あとは肉付けしていくだけですね。</p>
+<p>Docker コンテナー になっているので、保守やメンテナンス・移行も簡単かもしれません。</p>
+<p>Linux 上で展開できるのも魅力的だと思いました。</p>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><p>今回作ったプロジェクトを置いておきました。よければどうぞ。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/aspnetcore-3-1-web-app-created">https://github.com/noitaro/aspnetcore-3-1-web-app-created</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-3.1&tabs=visual-studio">https://docs.microsoft.com/ja-jp/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-3.1&amp;tabs=visual-studio</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/nintendo-switch-ryujinx/" title="Nintendo Switch エミュレーター の Ryujinx を試す">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Nintendo Switch エミュレーター の Ryujinx を試す
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/docker-sql-server/" title="Docker で SQL Server 2019 を動かす">
+
+    <p class="title-text">
+      
+        Docker で SQL Server 2019 を動かす
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

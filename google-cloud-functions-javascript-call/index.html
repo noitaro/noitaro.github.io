@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Google Cloud Functions でAPIを公開して JavaScript から呼び出す | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="ちょっと手こずったので、忘れないうちに備忘録しときます。 環境 Windows 11 Home 21H2 22000.434 Node.js v16.13.1  Cloud Functions の準備Google Firebase の Cloud Functions を使ってAPIを公開するため、まず Firebase にプロジェクトを作成します。 無料枠を使うと 200万回の呼び出しまでできます">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google Cloud Functions でAPIを公開して JavaScript から呼び出す">
+<meta property="og:url" content="https://noitaro.github.io/google-cloud-functions-javascript-call/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="ちょっと手こずったので、忘れないうちに備忘録しときます。 環境 Windows 11 Home 21H2 22000.434 Node.js v16.13.1  Cloud Functions の準備Google Firebase の Cloud Functions を使ってAPIを公開するため、まず Firebase にプロジェクトを作成します。 無料枠を使うと 200万回の呼び出しまでできます">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-94.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-95.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-96.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-97.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-98.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-99.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-100.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-101.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-102.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-103.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-104.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-105.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-112.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-107.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-108.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-109.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-110.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-111.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-113.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-114.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-115.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-116.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-117.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-118.png">
+<meta property="og:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-119.png">
+<meta property="article:published_time" content="2022-02-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.091Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="firebase">
+<meta property="article:tag" content="google">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="node-js">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/google-cloud-functions-javascript-call/image-94.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-google-cloud-functions-javascript-call" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Google Cloud Functions でAPIを公開して JavaScript から呼び出す
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-02-06T00:00:00.000Z" itemprop="datePublished">2022-02-06</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.6k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>ちょっと手こずったので、忘れないうちに備忘録しときます。</p>
+<h2 id="環境"><a href="#環境" class="headerlink" title="環境"></a>環境</h2><ul>
+<li>Windows 11 Home 21H2 22000.434</li>
+<li>Node.js v16.13.1</li>
+</ul>
+<h2 id="Cloud-Functions-の準備"><a href="#Cloud-Functions-の準備" class="headerlink" title="Cloud Functions の準備"></a>Cloud Functions の準備</h2><p>Google Firebase の Cloud Functions を使ってAPIを公開するため、まず Firebase にプロジェクトを作成します。</p>
+<p>無料枠を使うと 200万回の呼び出しまでできます。ソレを超えると有料ですが、バズらない限り超えないと思うので、実質無料で使い放題ですね。</p>
+<p>Google の無料枠については <a target="_blank" rel="external nofollow noopener noreferrer" href="https://cloud.google.com/free" title="こちら">こちら</a> にまとめられていました。ごく稀に変更されるので、たまに気がついたら再確認するとよいです。</p>
+<h3 id="Firebase-プロジェクトの作成"><a href="#Firebase-プロジェクトの作成" class="headerlink" title="Firebase プロジェクトの作成"></a>Firebase プロジェクトの作成</h3><p>まず <a target="_blank" rel="external nofollow noopener noreferrer" href="https://console.firebase.google.com/" title="Firebaseコンソール">Firebaseコンソール</a> にアクセスしてプロジェクトを作成します。</p>
+<p><img src="image-94.png" alt="Firebase プロジェクトの作成" loading="lazy"></p>
+<p>適当なプロジェクト名を入力し、</p>
+<p><img src="image-95.png" alt="プロジェクト名を入力" loading="lazy"></p>
+<p>アナリティクスは無効にしておきます。オススメされてるが使わないのです。</p>
+<p><img src="image-96.png" alt="アナリティクス無効" loading="lazy"></p>
+<p>しばらく待つとプロジェクトが完成します。</p>
+<p><img src="image-97.png" alt="プロジェクト完成" loading="lazy"></p>
+<h3 id="Cloud-Functions-を有効化"><a href="#Cloud-Functions-を有効化" class="headerlink" title="Cloud Functions を有効化"></a>Cloud Functions を有効化</h3><p>続いて Cloud Functions を有効化します。</p>
+<p>Sparkプランだと Functions が使えないので、Blazeプラン(従量制) にアップグレードをします。アップグレードしても、すぐに請求されることも無いのでご安心を。ですが200万回呼び出しをしたら請求されます。</p>
+<h4 id="Blazeプランにアップグレード"><a href="#Blazeプランにアップグレード" class="headerlink" title="Blazeプランにアップグレード"></a>Blazeプランにアップグレード</h4><p>左メニューの「Functions」を選択しプロジェクトをアップグレードします。</p>
+<p><img src="image-98.png" alt="プロジェクトをアップグレード" loading="lazy"></p>
+<p>課金情報がない場合は、ここで請求先アカウントの作成に入ります。</p>
+<p><img src="image-99.png" alt="請求先アカウントの作成" loading="lazy"></p>
+<p>課金情報を作ったら、Blazeプラン(従量制) にアップグレードできます。</p>
+<p><img src="image-100.png" alt="Blazeプラン(従量制) にアップグレード" loading="lazy"></p>
+<h2 id="APIの作成"><a href="#APIの作成" class="headerlink" title="APIの作成"></a>APIの作成</h2><p>Firebase にプロジェクトが出来たら、APIの作成に入ります。</p>
+<p>まず作業用のフォルダーを作成して、右クリックメニューから Windowsターミナル を開きます。</p>
+<p><img src="image-101.png" alt="Windowsターミナル" loading="lazy"></p>
+<h3 id="Firebaseコマンドラインツールのインストール"><a href="#Firebaseコマンドラインツールのインストール" class="headerlink" title="Firebaseコマンドラインツールのインストール"></a>Firebaseコマンドラインツールのインストール</h3><p>はじめに、次のコマンドを入力して、Firebaseコマンドラインツールをインストールします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g firebase-tools</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-102.png" alt="npm install -g firebase-tools" loading="lazy"></p>
+<h3 id="プロジェクトの作成"><a href="#プロジェクトの作成" class="headerlink" title="プロジェクトの作成"></a>プロジェクトの作成</h3><p>続いて、次のコマンドを入力してプロジェクトの作成をします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firebase init</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-103.png" alt="firebase init" loading="lazy"></p>
+<p>対話をしながらプロジェクトの作成ができます。</p>
+<p>プロジェクトを作るディレクトリーに間違いがなければエンターキーを押します。</p>
+<p>ちなみに、YやNを入力せずにエンターキーを押すと大文字の方が選択されるみたいです。今回はYが大文字なのでYesってことですね。</p>
+<p>次に、どの機能を使うか聞かれるので「Functions」にチェックを入れてエンターキーを押します。</p>
+<p><img src="image-104.png" alt="Functions" loading="lazy"></p>
+<p>先ほど作ったプロジェクトにAPIを作成したいので「Use an existing project」を選択してエンターキーを押します。</p>
+<p><img src="image-105.png" alt="Use an existing project" loading="lazy"></p>
+<p>Firebaseのプロジェクトが表示されるので、先ほど作ったプロジェクト（今回は【functions-api】）を選択してエンターキーを押します。</p>
+<p><img src="image-112.png" alt="プロジェクト選択" loading="lazy"></p>
+<p>Cloud Functions で使う言語を聞かれるので「JavaScript」を選択してエンターキーを押します。</p>
+<p><img src="image-107.png" alt="JavaScript を選択" loading="lazy"></p>
+<p>ESLint は「No」を入力しエンターキーを押します！ ESLint はエラーとか警告とかがメンド臭かった思い出。</p>
+<p><img src="image-108.png" alt="ESLint" loading="lazy"></p>
+<p>依存関係のインストールもしたいのでそのままエンターキーを押します。</p>
+<p><img src="image-109.png" alt="依存関係のインストール" loading="lazy"></p>
+<p>これでプロジェクトの作成が完了です。</p>
+<p><img src="image-110.png" alt="プロジェクト作成完了" loading="lazy"></p>
+<h3 id="デプロイ"><a href="#デプロイ" class="headerlink" title="デプロイ"></a>デプロイ</h3><p>APIを作成して Cloud Functions にデプロイをします。</p>
+<p>とりあえず、サクッとサンプルのコメントを外してデプロイしてみます。</p>
+<p>functionsフォルダーの「index.js」を開いてコメントになっている処理を有効にします。</p>
+<p><img src="image-111.png" alt="コメントになっている処理を有効化" loading="lazy"></p>
+<p>次のコマンドを入力すると Cloud Functions にAPIをデプロイすることが出来ます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firebase deploy</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-113.png" alt="firebase deploy" loading="lazy"></p>
+<p>デプロイには3分ほどかかりました。</p>
+<p>無事にデプロイが完了すると Function URL が表示されるので、そのURLをブラウザにコピペすると Cloud Functions の API を実行することが出来ます。</p>
+<p><img src="image-114.png" alt="Cloud Functions API 実行" loading="lazy"></p>
+<h2 id="JavaScript-から呼び出し"><a href="#JavaScript-から呼び出し" class="headerlink" title="JavaScript から呼び出し"></a>JavaScript から呼び出し</h2><p>APIの動作確認ができたら、最後に JavaScript から呼び出しをしてみましょう。</p>
+<p>適当なディレクトリーに新規で「index.html」ファイルを作成して、次のコードを貼り付けます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;ja&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;button id=&quot;ajaxButton&quot; type=&quot;button&quot;&gt;Cloud FunctionsのAPIを実行&lt;/button&gt;</span><br><span class="line">    &lt;script&gt;</span><br><span class="line">        (function () &#123;</span><br><span class="line">            var httpRequest;</span><br><span class="line">            document.getElementById(&quot;ajaxButton&quot;).addEventListener(&#x27;click&#x27;, makeRequest);</span><br><span class="line"></span><br><span class="line">            function makeRequest() &#123;</span><br><span class="line">                httpRequest = new XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">                if (!httpRequest) &#123;</span><br><span class="line">                    alert(&#x27;中断 :( XMLHTTP インスタンスを生成できませんでした&#x27;);</span><br><span class="line">                    return false;</span><br><span class="line">                &#125;</span><br><span class="line">                httpRequest.onreadystatechange = alertContents;</span><br><span class="line">                httpRequest.open(&#x27;GET&#x27;, &#x27;https://us-central1-functions-api-a8011.cloudfunctions.net/helloWorld&#x27;);</span><br><span class="line">                httpRequest.send();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            function alertContents() &#123;</span><br><span class="line">                if (httpRequest.readyState === XMLHttpRequest.DONE) &#123;</span><br><span class="line">                    if (httpRequest.status === 200) &#123;</span><br><span class="line">                        alert(httpRequest.responseText);</span><br><span class="line">                    &#125; else &#123;</span><br><span class="line">                        alert(&#x27;リクエストに問題が発生しました&#x27;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)();</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>httpRequest.open関数の URL は自分のAPIに置き換えて下さいね。</p>
+<p>貼り付けたら保存して、ダブルクリックで実行します。</p>
+<p><img src="image-115.png" alt="index.html実行" loading="lazy"></p>
+<p>実行してブラウザ内のAPI実行ボタンを押すと、APIから取得した結果が表示されます。</p>
+<p><img src="image-116.png" alt="エラーアラート" loading="lazy"></p>
+<p>エラーになってしまったので F12キーで DevTools を開き、原因を探していきましょう。</p>
+<p>DevTools のネットワークタブを開いてから、再度API実行ボタンを押すとコンソールにエラー内容が表示されます。</p>
+<p><img src="image-117.png" alt="Access to XMLHttpRequest at &#39;https://us-central1-functions-api-a8011.cloudfunctions.net/helloWorld&#39; from origin &#39;null&#39; has been blocked by CORS policy: No &#39;Access-Control-Allow-Origin&#39; header is present on the requested resource." loading="lazy"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to XMLHttpRequest at &#x27;https://us-central1-functions-api-a8011.cloudfunctions.net/helloWorld&#x27; from origin &#x27;null&#x27; has been blocked by CORS policy: No &#x27;Access-Control-Allow-Origin&#x27; header is present on the requested resource.</span><br></pre></td></tr></table></figure>
+
+<p>ふむふむなるほど。今回はCORSポリシーに違反しているので、エラーにされていることが分かりました。</p>
+<h3 id="CORSポリシー違反の解決"><a href="#CORSポリシー違反の解決" class="headerlink" title="CORSポリシー違反の解決"></a>CORSポリシー違反の解決</h3><p>CORSエラーの場合は、APIがクロスドメインを許可していないため起こるので、クロスドメインを許可する設定を与えてあげれば問題解決です。</p>
+<p>functionsフォルダーの「index.js」を開いて、次の1行を追記します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>こんな感じになればOK</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">exports.helloWorld = functions.https.onRequest((request, response) =&gt; &#123;</span><br><span class="line">  functions.logger.info(&quot;Hello logs!&quot;, &#123;structuredData: true&#125;);</span><br><span class="line">  response.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);</span><br><span class="line">  response.send(&quot;Hello from Firebase!&quot;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-118.png" alt="Access-Control-Allow-Origin" loading="lazy"></p>
+<p>修正して保存したら、再度デプロイをして動作確認をします。</p>
+<p>アラートで「Hello from Firebase!」と表示されれば大成功です！！！</p>
+<p><img src="image-119.png" alt="Hello from Firebase!" loading="lazy"></p>
+<p>以上、お疲れさまでした。よきAPIライフをお送りください。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/warakko-kamakura/" title="うさぎの紹介">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        うさぎの紹介
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/brython/" title="Html で Python を動かす">
+
+    <p class="title-text">
+      
+        Html で Python を動かす
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

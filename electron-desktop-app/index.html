@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Electron でデスクトップアプリを作る | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="JavaScript で デスクトップアプリ が簡単に作れる Electron を試してみたいと思います。 準備Node.js がインストールされている前提で進めていきます。 12345node -v# v12.18.1npm -v# 6.14.5  Electronアプリ を作るElectron は Node.js によってパッケージ管理されているため、新規フォルダを作って プロジェクト を作成">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron でデスクトップアプリを作る">
+<meta property="og:url" content="https://noitaro.github.io/electron-desktop-app/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="JavaScript で デスクトップアプリ が簡単に作れる Electron を試してみたいと思います。 準備Node.js がインストールされている前提で進めていきます。 12345node -v# v12.18.1npm -v# 6.14.5  Electronアプリ を作るElectron は Node.js によってパッケージ管理されているため、新規フォルダを作って プロジェクト を作成">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001976.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001971.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001980.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001972-1.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001973.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001974.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001975.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001977.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001978.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001981.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001979.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001995.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001996.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001998.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS001999.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS002000.png">
+<meta property="og:image" content="https://noitaro.github.io/electron-desktop-app/WS002001.png">
+<meta property="article:published_time" content="2020-09-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.023Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="electron">
+<meta property="article:tag" content="node-js">
+<meta property="article:tag" content="javascript">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/electron-desktop-app/WS001976.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-electron-desktop-app" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Electron でデスクトップアプリを作る
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2020-09-08T00:00:00.000Z" itemprop="datePublished">2020-09-08</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            990 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>JavaScript で デスクトップアプリ が簡単に作れる Electron を試してみたいと思います。</p>
+<h2 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://nodejs.org/">Node.js</a> がインストールされている前提で進めていきます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line"># v12.18.1</span><br><span class="line"></span><br><span class="line">npm -v</span><br><span class="line"># 6.14.5</span><br></pre></td></tr></table></figure>
+
+<h2 id="Electronアプリ-を作る"><a href="#Electronアプリ-を作る" class="headerlink" title="Electronアプリ を作る"></a>Electronアプリ を作る</h2><p>Electron は Node.js によってパッケージ管理されているため、新規フォルダを作って プロジェクト を作成する必要があります。</p>
+<h3 id="npmパッケージ-を作成"><a href="#npmパッケージ-を作成" class="headerlink" title="npmパッケージ を作成"></a>npmパッケージ を作成</h3><p>新規フォルダ内で下記コマンドを実行し「package.json」を作成します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+
+<p>今回は「Hello-world」というアプリフォルダ名で作業して行きます。</p>
+<p>初期化時の設定は下記の通りです。</p>
+<ul>
+<li>package name: hello-world（初期値）</li>
+<li>version: 1.0.0（初期値）</li>
+<li>description: 未入力</li>
+<li>entry point: main.js</li>
+<li>test command: 未入力</li>
+<li>git repository: 未入力</li>
+<li>keywords: 未入力</li>
+<li>author: 未入力</li>
+<li>license: ISC（初期値）</li>
+</ul>
+<p>変更点は entry point だけですね。index.js はメイン画面で使うので Electron では main.js に変更しました。</p>
+<p><img src="WS001976.png" alt="npm init 実行" loading="lazy"></p>
+<p>新規フォルダ内に「package.json」が作られました。</p>
+<p><img src="WS001971.png" alt="package.json 作成" loading="lazy"></p>
+<h4 id="package-json-を修正"><a href="#package-json-を修正" class="headerlink" title="package.json を修正"></a>package.json を修正</h4><p>「package.json」を作ったばかりですが、内容を一部修正します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>の部分を下記に修正します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">  &quot;start&quot;: &quot;electron .&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<p>これを忘れると Electron の実行が出来ませんので忘れずに修正しましょう。</p>
+<p><img src="WS001980.png" alt="package.json 修正" loading="lazy"></p>
+<h3 id="Electron-をインストール"><a href="#Electron-をインストール" class="headerlink" title="Electron をインストール"></a>Electron をインストール</h3><p>次に Electronパッケージ をインストールします。</p>
+<p>アプリフォルダ内で下記コマンドを実行し Electron をインストールします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS001972-1.png" alt="npm install electron 実行" loading="lazy"></p>
+<p>アプリフォルダ内に「node_modules」フォルダと「package-lock.json」ファイルが作成されます。</p>
+<p><img src="WS001973.png" alt="node_modules と package-lock.json 追加" loading="lazy"></p>
+<h3 id="Electron用-JavaScript-の作成"><a href="#Electron用-JavaScript-の作成" class="headerlink" title="Electron用 JavaScript の作成"></a>Electron用 JavaScript の作成</h3><p>まず初めに Electron を制御するための JavaScript を作成します。</p>
+<p>アプリフォルダ内に「main.js」ファイルを新規作成します。</p>
+<p><img src="WS001974.png" alt="main.js 作成" loading="lazy"></p>
+<p>「main.js」に下記をコピペします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const &#123; app, BrowserWindow &#125; = require(&#x27;electron&#x27;);</span><br><span class="line">function createWindow () &#123;</span><br><span class="line">  const win = new BrowserWindow(&#123;</span><br><span class="line">    width: 800,</span><br><span class="line">    height: 600,</span><br><span class="line">    webPreferences: &#123;</span><br><span class="line">      nodeIntegration: true</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  win.loadFile(&#x27;index.html&#x27;);</span><br><span class="line">  // win.setMenu(null);</span><br><span class="line">  // win.webContents.openDevTools();</span><br><span class="line">&#125;</span><br><span class="line">app.whenReady().then(createWindow);</span><br></pre></td></tr></table></figure>
+
+<p>これで Electronアプリ の起動準備が出来ました。</p>
+<p><img src="WS001975.png" alt="main.js 修正" loading="lazy"></p>
+<p>次に Electronアプリ内に表示する画面を作ります。</p>
+<p>先程 index.html を読み込むように書いたので「index.html」を作ります。</p>
+<p><img src="WS001977.png" alt="index.html 作成" loading="lazy"></p>
+<p>「index.html」に下記をコピペします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</span><br><span class="line">    &lt;title&gt;Hello World!&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Hello World!&lt;/h1&gt;</span><br><span class="line">    We are using node &lt;script&gt;document.write(process.versions.node)&lt;/script&gt;,</span><br><span class="line">    Chrome &lt;script&gt;document.write(process.versions.chrome)&lt;/script&gt;,</span><br><span class="line">    and Electron &lt;script&gt;document.write(process.versions.electron)&lt;/script&gt;.</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS001978.png" alt="index.html 修正" loading="lazy"></p>
+<h3 id="アプリの実行"><a href="#アプリの実行" class="headerlink" title="アプリの実行"></a>アプリの実行</h3><p>ここまで出来れば Electronアプリ を実行することが出来ます。</p>
+<p>コマンドプロンプトに下記を入力して Electronアプリ を実行してみます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run test</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS001981.png" alt="Electronアプリ を実行" loading="lazy"></p>
+<h4 id="エラーが出る場合は？"><a href="#エラーが出る場合は？" class="headerlink" title="エラーが出る場合は？"></a>エラーが出る場合は？</h4><p>D:\Electron\Hello-world&gt;npm run start<br>npm ERR! missing script: start</p>
+<p><img src="WS001979.png" alt="npm ERR! missing script: start" loading="lazy"></p>
+<p>「スクリプトの start なんて無いぜ」と言ってます。</p>
+<p>「package.json」の scripts 修正忘れていませんか？ 少し記事をさかのぼって違いを探してみましょう。</p>
+<h2 id="デバッグを簡単にする"><a href="#デバッグを簡単にする" class="headerlink" title="デバッグを簡単にする"></a>デバッグを簡単にする</h2><p>このままでもいいですが、実行するたびに「npm start」を入力するのは手間だと思います。</p>
+<p>なので <a target="_blank" rel="external nofollow noopener noreferrer" href="https://code.visualstudio.com/docs/editor/debugging#_launch-configurations">デバッグ実行の構成</a> を作ります。</p>
+<p>VS Code の 実行アイコンを押して「launch.json ファイルを作成します」をクリック。</p>
+<p><img src="WS001995.png" alt="launch.json ファイルを作成します" loading="lazy"></p>
+<p>「Node.js」を選択。</p>
+<p><img src="WS001996.png" alt="構成の選択" loading="lazy"></p>
+<p>「構成の追加」を押して「Run “npm start” in a debug terminal」を選択したら設定完了です。</p>
+<p><img src="WS001998.png" alt="Run &quot;npm start&quot; in a debug terminal" loading="lazy"></p>
+<p>launch.json を保存してから デバッグ実行の構成を「Run npm start」に変えます。</p>
+<p><img src="WS001999.png" alt="Run npm start" loading="lazy"></p>
+<p>最後に「F5キー」を押すか デバックの開始 を押せば Electronアプリを実行できます。</p>
+<p><img src="WS002000.png" alt="デバックの開始" loading="lazy"></p>
+<p>「停止」ボタンを押せば終わらせることが出来ます。</p>
+<p><img src="WS002001.png" alt="停止" loading="lazy"></p>
+<h2 id="終わりに"><a href="#終わりに" class="headerlink" title="終わりに"></a>終わりに</h2><p>一番簡単な Electronアプリ が完成しました。</p>
+<p>次回は、Electronアプリ をパッケージングして 配布できるようにします。</p>
+<p>あとは、もう少し凝ったことをやってみたいと思っています。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.electronjs.org/docs">https://www.electronjs.org/docs</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/electron-show-open-dialog/" title="Electron でファイルを読み込む">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Electron でファイルを読み込む
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/generator-hexo-theme/" title="Hexo のテーマを自作する">
+
+    <p class="title-text">
+      
+        Hexo のテーマを自作する
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

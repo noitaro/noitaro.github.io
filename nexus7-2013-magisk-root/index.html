@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Nexus7(2013) に Magisk を入れて Root化する | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="今回は、TWRPを使わないでアンドロイドを Root化する方法を紹介します。 対象 Bootloaderアンロック済み boot.img 取得済み  この条件さえ揃っていれば、どんな端末でも Root化出来ます。揃う事は滅多に無いんですけどね。 私が知っている物だと、Rakuten Mini や Pixel シリーズぐらいです。 手順今回は端末メインで作業して行こうと思います。PCはチョロっとだけ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nexus7(2013) に Magisk を入れて Root化する">
+<meta property="og:url" content="https://noitaro.github.io/nexus7-2013-magisk-root/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="今回は、TWRPを使わないでアンドロイドを Root化する方法を紹介します。 対象 Bootloaderアンロック済み boot.img 取得済み  この条件さえ揃っていれば、どんな端末でも Root化出来ます。揃う事は滅多に無いんですけどね。 私が知っている物だと、Rakuten Mini や Pixel シリーズぐらいです。 手順今回は端末メインで作業して行こうと思います。PCはチョロっとだけ">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200610_Chrome.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200705_Chrome.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200817_Trebuchet.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200834_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200850_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200859_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8_%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%A9.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200723_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8_%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%A9.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200737_%E8%A8%AD%E5%AE%9A.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201116_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201502_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201521_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201533_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200933_Trebuchet.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200950_Magisk.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201126_Magisk.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201549_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-201633_Magisk.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-203558_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002386.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/PXL_20210220_032531611_2.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002385.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-210141_Magisk.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002377.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002387.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002378-1.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002379.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002380.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002381.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002382-1.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/WS002384.png">
+<meta property="article:published_time" content="2021-02-28T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.351Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="magisk">
+<meta property="article:tag" content="rooted">
+<meta property="article:tag" content="nexus7-2013">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/nexus7-2013-magisk-root/Screenshot_20210227-200610_Chrome.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-nexus7-2013-magisk-root" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Nexus7(2013) に Magisk を入れて Root化する
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2021-02-28T00:00:00.000Z" itemprop="datePublished">2021-02-28</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            953 words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>今回は、TWRPを使わないでアンドロイドを Root化する方法を紹介します。</p>
+<h2 id="対象"><a href="#対象" class="headerlink" title="対象"></a>対象</h2><ul>
+<li>Bootloaderアンロック済み</li>
+<li>boot.img 取得済み</li>
+</ul>
+<p>この条件さえ揃っていれば、どんな端末でも Root化出来ます。揃う事は滅多に無いんですけどね。</p>
+<p>私が知っている物だと、Rakuten Mini や Pixel シリーズぐらいです。</p>
+<h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><p>今回は端末メインで作業して行こうと思います。PCはチョロっとだけ使います。</p>
+<h3 id="Magisk"><a href="#Magisk" class="headerlink" title="Magisk"></a>Magisk</h3><p>まず、Magiskを手に入れます。「Magisk」と検索し <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/topjohnwu/Magisk/releases">GitHubページ</a> へ行きます。</p>
+<p><img src="Screenshot_20210227-200610_Chrome.png" alt="Magisk GitHubページ " loading="lazy"></p>
+<p>最新版の「Magisk-v22.0.apk」をダウンロードします。</p>
+<p><img src="Screenshot_20210227-200705_Chrome.png" alt="Magisk-v22.0.apk をダウンロード" loading="lazy"></p>
+<p>ダウンロードが出来たら「ファイル」アプリを開いて、</p>
+<p><img src="Screenshot_20210227-200817_Trebuchet.png" alt="ファイルアプリを起動" loading="lazy"></p>
+<p>左のメニューから「ダウンロード」ディレクトリへ行って、</p>
+<p><img src="Screenshot_20210227-200834_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="ダウンロード ディレクトリへ移動" loading="lazy"></p>
+<p>「Magisk-v22.0.apk」があるのでタップし、</p>
+<p><img src="Screenshot_20210227-200850_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="Magisk-v22.0.apk を選択" loading="lazy"></p>
+<p>Magiskをインストールします。</p>
+<p><img src="Screenshot_20210227-200859_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8_%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%A9.png" alt="Magiskをインストール" loading="lazy"></p>
+<h4 id="「不明なアプリをインストールすることはできません。」と言われたら？"><a href="#「不明なアプリをインストールすることはできません。」と言われたら？" class="headerlink" title="「不明なアプリをインストールすることはできません。」と言われたら？"></a>「不明なアプリをインストールすることはできません。」と言われたら？</h4><p><img src="Screenshot_20210227-200723_%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8_%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%A9.png" alt="不明なアプリをインストールすることはできません。" loading="lazy"></p>
+<p>Chromeの設定を変えます。「この提供元のアプリを許可」を有効にする事でAPKをインストールする事ができるようになります。</p>
+<p><img src="Screenshot_20210227-200737_%E8%A8%AD%E5%AE%9A.png" alt="この提供元のアプリを許可 を有効" loading="lazy"></p>
+<h3 id="boot-img-に-Magiskパッチを当てる"><a href="#boot-img-に-Magiskパッチを当てる" class="headerlink" title="boot.img に Magiskパッチを当てる"></a>boot.img に Magiskパッチを当てる</h3><p>Magisk のインストールが出来たら、boot.img に Magiskパッチを当てて行きます。</p>
+<p>boot.img に Magiskパッチを当てて Flash(焼く)すれば Root化出来るようになります。</p>
+<h4 id="lineage-18-1-20210207-UNOFFICIAL-flo-zip-から-boot-img-を取り出す"><a href="#lineage-18-1-20210207-UNOFFICIAL-flo-zip-から-boot-img-を取り出す" class="headerlink" title="lineage-18.1-20210207-UNOFFICIAL-flo.zip から boot.img を取り出す"></a>lineage-18.1-20210207-UNOFFICIAL-flo.zip から boot.img を取り出す</h4><p>ファイルアプリから Nexus 7 Rootディレクトリ内の「lineage-18.1-20210207-UNOFFICIAL-flo.zip」をタップし、</p>
+<p><img src="Screenshot_20210227-201116_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="lineage-18.1-20210207-UNOFFICIAL-flo.zip を選択" loading="lazy"></p>
+<p>boot.img を選択し、</p>
+<p><img src="Screenshot_20210227-201502_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="boot.img を選択" loading="lazy"></p>
+<p>「次の場所に解凍」を選択し、</p>
+<p><img src="Screenshot_20210227-201521_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="次の場所に解凍 を選択" loading="lazy"></p>
+<p>Nexus 7 Rootディレクトリに解凍します。</p>
+<p><img src="Screenshot_20210227-201533_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="Rootディレクトリに解凍" loading="lazy"></p>
+<h4 id="boot-img-に-Magiskパッチを当てる-1"><a href="#boot-img-に-Magiskパッチを当てる-1" class="headerlink" title="boot.img に Magiskパッチを当てる"></a>boot.img に Magiskパッチを当てる</h4><p>Magiskアプリを起動させて、</p>
+<p><img src="Screenshot_20210227-200933_Trebuchet.png" alt="Magiskアプリを起動" loading="lazy"></p>
+<p>Magiskのインストールをタップします。</p>
+<p><img src="Screenshot_20210227-200950_Magisk.png" alt="Magiskのインストール" loading="lazy"></p>
+<p>「バッチするファイルの選択」を選び、</p>
+<p><img src="Screenshot_20210227-201126_Magisk.png" alt="バッチするファイルの選択" loading="lazy"></p>
+<p>先程解凍しておいた「boot.img」を選んで バッチ適応を初めます。</p>
+<p><img src="Screenshot_20210227-201549_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="boot.img を選択" loading="lazy"></p>
+<p>インストール完了っと出れば成功です。</p>
+<p><img src="Screenshot_20210227-201633_Magisk.png" alt="インストール完了" loading="lazy"></p>
+<p>Downloadディレクトリに「パッチ済みのboot.img」が出力されています。ファイル名は「magisk_patched_jEfxA.img」で、末尾は毎回変わりそうです。</p>
+<p><img src="Screenshot_20210227-203558_%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB.png" alt="magisk_patched_jEfxA.img" loading="lazy"></p>
+<h3 id="Root化"><a href="#Root化" class="headerlink" title="Root化"></a>Root化</h3><p>まず、Magiskパッチを当てたboot.imgをPCにコピーします。画像はコピー後。</p>
+<p><img src="WS002386.png" alt="magisk_patched_jEfxA.img" loading="lazy"></p>
+<p>次に Nexus7(2013) を fastboot モードにします。手順は電源が切れている状態で、「電源ボタン＋音量下ボタン」を長押し。</p>
+<p><img src="PXL_20210220_032531611_2.png" alt="fastboot モード" loading="lazy"></p>
+<p>PCと端末をUSBケーブルで繋いで、下記コマンドを打ってboot.imgを書き込むと Root化完了です。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash boot D:\Nexus\magisk_patched_jEfxA.img</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002385.png" alt="fastboot flash boot" loading="lazy"></p>
+<p>楽天Miniと同じ手順ですね。</p>
+<p>Magiskがインストール済に変わっていれば、成功です。</p>
+<p><img src="Screenshot_20210227-210141_Magisk.png" alt="Magiskインストール済" loading="lazy"></p>
+<h4 id="fastboot-モードで端末が認識されない場合は？"><a href="#fastboot-モードで端末が認識されない場合は？" class="headerlink" title="fastboot モードで端末が認識されない場合は？"></a>fastboot モードで端末が認識されない場合は？</h4><p>fastboot モードの端末をPCと接続しても、認識されない事があります。</p>
+<p>デバイスマネージャーを見て、Androidに警告マークが付いていると認識されていない事になっています。</p>
+<p><img src="WS002377.png" alt="ほかのデバイス" loading="lazy"></p>
+<p>その場合はドライバを当てると、正しく認識するようになって、コマンドが通るようになります。</p>
+<p>ドライバは<a target="_blank" rel="external nofollow noopener noreferrer" href="https://developer.android.com/studio/run/win-usb?hl=ja">こちら</a>からダウンロード出来ます。</p>
+<p><img src="WS002387.png" alt="こちらをクリックして Google USB ドライバの ZIP ファイル（ZIP）をダウンロード" loading="lazy"></p>
+<p>ドライバの更新で「コンピューターを参照してドライバーを検索」を選択して、展開しておいた「usb_driver」をインストールすればOK</p>
+<p><img src="WS002378-1.png" alt="コンピューターを参照してドライバーを検索」" loading="lazy"></p>
+<p><img src="WS002379.png" alt="フォルダの参照" loading="lazy"></p>
+<p><img src="WS002380.png" alt="コンピューター上のドライバーを参照します。" loading="lazy"></p>
+<p><img src="WS002381.png" alt="このデバイスソフトウェアをインストールしますか？" loading="lazy"></p>
+<p><img src="WS002382-1.png" alt="ドライバーが正常に更新されました。" loading="lazy"></p>
+<p>「Android Bootloader Interface」で認識されるようになります。</p>
+<p><img src="WS002384.png" alt="Android Bootloader Interface" loading="lazy"></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/wpf-webview2-devtools/" title="WPF WebView2 で DevTools を開く">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        WPF WebView2 で DevTools を開く
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/wpf-multiple-execution-prohibited/" title="WPF アプリケーションの多重起動を禁止する">
+
+    <p class="title-text">
+      
+        WPF アプリケーションの多重起動を禁止する
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

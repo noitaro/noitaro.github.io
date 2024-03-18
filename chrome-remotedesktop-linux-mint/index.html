@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Chrome リモート デスクトップ を使って Linux Mint に接続する | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="Chrome リモート デスクトップ を使って Linux Mint に接続する個人的メモです。 前提 Linux Mint をインストール済みであること。  Chrome ブラウザ をインストール するLinux Mint で Chromeブラウザダウンロードページ を開いて「Chrome をダウンロード」ボタンを押下。  「64 ビット .deb (Debian&#x2F;Ubuntu 用)」">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chrome リモート デスクトップ を使って Linux Mint に接続する">
+<meta property="og:url" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="Chrome リモート デスクトップ を使って Linux Mint に接続する個人的メモです。 前提 Linux Mint をインストール済みであること。  Chrome ブラウザ をインストール するLinux Mint で Chromeブラウザダウンロードページ を開いて「Chrome をダウンロード」ボタンを押下。  「64 ビット .deb (Debian&#x2F;Ubuntu 用)」">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-14-37-56.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-14-43-14.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-15-24.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-17-55-1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-19-34.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-25-29.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-26-01.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002245.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-15-40-42.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-06-45.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-08-40.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-13-51.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-16-11.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-19-01-2.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-24-40.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-26-24.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-33-27.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-35-46.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-39-08.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-40-37.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-43-28.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-43-56.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-44-07.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-18-45-18.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002247-1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002249.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-19-05-40.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-19-09-24.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002251.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002252.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002253.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-19-46-41.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002254.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/WS002255.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-19-55-37.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-20-03-14.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-20-08-14.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-20-12-43.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-20-16-43.png">
+<meta property="article:published_time" content="2020-12-29T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:40.859Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="chrome">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/chrome-remotedesktop-linux-mint/Screenshot-at-2020-12-29-14-37-56.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-chrome-remotedesktop-linux-mint" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Chrome リモート デスクトップ を使って Linux Mint に接続する
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2020-12-29T00:00:00.000Z" itemprop="datePublished">2020-12-29</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.3k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>Chrome リモート デスクトップ を使って Linux Mint に接続する個人的メモです。</p>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="http://linuxmint-jp.net/">Linux Mint</a> をインストール済みであること。</li>
+</ul>
+<h2 id="Chrome-ブラウザ-をインストール-する"><a href="#Chrome-ブラウザ-をインストール-する" class="headerlink" title="Chrome ブラウザ をインストール する"></a>Chrome ブラウザ をインストール する</h2><p>Linux Mint で <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.google.com/intl/ja_jp/chrome/">Chromeブラウザダウンロードページ</a> を開いて「Chrome をダウンロード」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-14-37-56.png" alt="Chrome をダウンロード" loading="lazy"></p>
+<p>「64 ビット .deb (Debian&#x2F;Ubuntu 用)」にチェックを入れて「同意してインストール」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-14-43-14.png" alt="64 ビット .deb (Debian/Ubuntu 用)" loading="lazy"></p>
+<p>「GDebi パッケージインストーラー」を選んだ状態で「OK」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-15-15-24.png" alt="GDebi パッケージインストーラー" loading="lazy"></p>
+<p>Google Chrome の「パッケージをインストール」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-15-17-55-1.png" alt="パッケージをインストール" loading="lazy"></p>
+<p>ユーザのパスワードを入れて「認証する」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-15-19-34.png" alt="パスワードを入れて「認証する」ボタンを押下" loading="lazy"></p>
+<p>追加ソフトウェアのインストールが必要な場合があります。その場合は「続行」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-15-25-29.png" alt="追加ソフトウェアのインストール" loading="lazy"></p>
+<p>こんな画面が出れば、Google Chrome のインストール完了。</p>
+<p><img src="Screenshot-at-2020-12-29-15-26-01.png" alt="Google Chrome のインストール完了" loading="lazy"></p>
+<p>起動方法は、左下のメニューから「全てのアプリケーション &gt; インターネット &gt; Google Chrome」の順番に選択して、起動させる事が出来ます。</p>
+<p><img src="WS002245.png" alt="全てのアプリケーション &gt; インターネット &gt; Google Chrome の順番に選択" loading="lazy"></p>
+<p>初回起動時「Google Chrome を既定のブラウザにする」にチェックを入れて「OK」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-15-40-42.png" alt="Google Chrome を既定のブラウザにする にチェック" loading="lazy"></p>
+<h2 id="Chrome-リモート-デスクトップ-をインストール-する"><a href="#Chrome-リモート-デスクトップ-をインストール-する" class="headerlink" title="Chrome リモート デスクトップ をインストール する"></a>Chrome リモート デスクトップ をインストール する</h2><p>続いて Chrome の リモート デスクトップ をインストールします。</p>
+<p>先程インストールした Chrome で「<a target="_blank" rel="external nofollow noopener noreferrer" href="https://remotedesktop.google.com/">https://remotedesktop.google.com/</a>」を開く。</p>
+<p>「リモート アクセス」をクリック。</p>
+<p><img src="Screenshot-at-2020-12-29-18-06-45.png" alt="リモート アクセス" loading="lazy"></p>
+<p>Google にログインしていない場合はログインをする。</p>
+<p><img src="Screenshot-at-2020-12-29-18-08-40.png" alt="Google にログイン" loading="lazy"></p>
+<p>ログイン後、リモートアクセスの設定から ダウンロードボタンを押して、Chrome リモート デスクトップ をダウンロードする。</p>
+<p><img src="Screenshot-at-2020-12-29-18-13-51.png" alt="Chrome リモート デスクトップ をダウンロード" loading="lazy"></p>
+<p>Chrome リモート デスクトップ ツールのダウンロード中に、Chrome ウェブストア の 拡張機能「Chrome Remote Desktop」が表示されるので「Chrome に追加」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-16-11.png" alt="Chrome Remote Desktop" loading="lazy"></p>
+<p>権限の確認が出るので「拡張機能を追加」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-19-01-2.png" alt="拡張機能を追加ボタンを押下" loading="lazy"></p>
+<p>拡張機能「Chrome Remote Desktop」のインストールが終わったら元の画面に戻り、</p>
+<p>「リモートアクセスの設定」のボタンが変わっているので「同意してインストール」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-24-40.png" alt="同意してインストールボタンを押下" loading="lazy"></p>
+<p>「ダウンロードしたファイルを開く」か確認が出るので「はい」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-26-24.png" alt="ダウンロードしたファイルを開く" loading="lazy"></p>
+<p>Google Chrome Remote Desktop の「パッケージをインストール」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-33-27.png" alt="パッケージをインストール" loading="lazy"></p>
+<p>ユーザのパスワードを入れて「認証する」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-35-46.png" alt="認証する" loading="lazy"></p>
+<p>追加ソフトウェアのインストールが必要な場合があります。その場合は「続行」ボタンを押下。</p>
+<p><img src="Screenshot-at-2020-12-29-18-39-08.png" alt="追加ソフトウェアのインストール" loading="lazy"></p>
+<p>こんな画面が出れば、Google Chrome Remote Desktop のインストール完了。</p>
+<p><img src="Screenshot-at-2020-12-29-18-40-37.png" alt="Google Chrome Remote Desktop インストール完了" loading="lazy"></p>
+<p>元のブラウザに戻って、表示用の名前を入力して、</p>
+<p><img src="Screenshot-at-2020-12-29-18-43-28.png" alt="表示用の名前を入力" loading="lazy"></p>
+<p>リモート接続時に入力する PIN を入力して、</p>
+<p><img src="Screenshot-at-2020-12-29-18-43-56.png" alt="PIN を入力" loading="lazy"></p>
+<p>ユーザのパスワードを入れて「認証する」ボタンを押下して、</p>
+<p><img src="Screenshot-at-2020-12-29-18-44-07.png" alt="認証する" loading="lazy"></p>
+<p>こんな画面になれば完了。</p>
+<p><img src="Screenshot-at-2020-12-29-18-45-18.png" alt="Windows や タブレットから リモート接続することが出来る" loading="lazy"></p>
+<p>Windows や タブレットから リモート接続することが出来るようになりました。</p>
+<h2 id="Chrome-リモート-デスクトップ-の設定を変更する"><a href="#Chrome-リモート-デスクトップ-の設定を変更する" class="headerlink" title="Chrome リモート デスクトップ の設定を変更する"></a>Chrome リモート デスクトップ の設定を変更する</h2><p>このままでもいいのですが、少し設定を変えると使い勝手が格段に向上します。</p>
+<p>今のままでリモート接続をすると、新規に仮想デスクトップが立ち上がってしまいます。</p>
+<p><img src="WS002247-1.png" alt="新規に仮想デスクトップが立ち上がる" loading="lazy"></p>
+<p>こんな感じで リモート接続をすると、まっさらになってしまいます。</p>
+<p><img src="WS002249.png" loading="lazy"></p>
+<p>なので、少し設定を変えてあげます。</p>
+<h3 id="Chrome-Remote-Desktop-を停止させる"><a href="#Chrome-Remote-Desktop-を停止させる" class="headerlink" title="Chrome Remote Desktop を停止させる"></a>Chrome Remote Desktop を停止させる</h3><p>修正する前に、Chrome Remote Desktop を停止させます。</p>
+<p>ターミナルに下記コマンドを入力すると Chrome Remote Desktop を停止させることが出来ます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/google/chrome-remote-desktop/chrome-remote-desktop --stop</span><br></pre></td></tr></table></figure>
+
+<p><img src="Screenshot-at-2020-12-29-19-05-40.png" alt="Chrome Remote Desktop を停止" loading="lazy"></p>
+<h3 id="chrome-remote-desktop-ファイルを修正する"><a href="#chrome-remote-desktop-ファイルを修正する" class="headerlink" title="chrome-remote-desktop ファイルを修正する"></a>chrome-remote-desktop ファイルを修正する</h3><p>ファイルマネージャから「ファイルシステム &gt; opt &gt; google &gt; chrome-remote-desktop」のディレクトリまで移動して、</p>
+<p><img src="Screenshot-at-2020-12-29-19-09-24.png" alt="ファイルシステム &gt; opt &gt; google &gt; chrome-remote-desktop" loading="lazy"></p>
+<p>ファイル &gt; Open as Administrator を選択して、ファイルマネージャを管理者権限に変更します。</p>
+<p><img src="WS002251.png" alt="ファイル &gt; Open as Administrator" loading="lazy"></p>
+<p>管理者権限にしないと、ファイルを編集することが出来ないのです。</p>
+<p>警告画面が出るので「OK」ボタンを押下して,</p>
+<p><img src="WS002252.png" alt="警告画面が出るので「OK」ボタンを押下" loading="lazy"></p>
+<p>ユーザのパスワードを入れて「認証する」ボタンを押下すると、</p>
+<p><img src="WS002253.png" loading="lazy"></p>
+<p>管理者権限のファイルマネージャが開きます。</p>
+<p>ファイルマネージャ に管理者権限があると「スーパーユーザ」と表示されます。</p>
+<p><img src="Screenshot-at-2020-12-29-19-46-41.png" alt="スーパーユーザと表示される" loading="lazy"></p>
+<p>「chrome-remote-desktop」ファイルを選択して、右クリックから「開く」を押下。</p>
+<p><img src="WS002254.png" alt="chrome-remote-desktopを開く" loading="lazy"></p>
+<p>「表示する」を押下して、テキストエディタで開きます。</p>
+<p><img src="WS002255.png" alt="表示する" loading="lazy"></p>
+<h4 id="108行目"><a href="#108行目" class="headerlink" title="108行目"></a>108行目</h4><p>「chrome-remote-desktop」ファイルを3箇所修正して行きます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">FIRST_X_DISPLAY_NUMBER = 20</span><br><span class="line">を</span><br><span class="line">FIRST_X_DISPLAY_NUMBER = 0</span><br></pre></td></tr></table></figure>
+
+<p><img src="Screenshot-at-2020-12-29-19-55-37.png" alt="FIRST_X_DISPLAY_NUMBER" loading="lazy"></p>
+<h4 id="451、452行目"><a href="#451、452行目" class="headerlink" title="451、452行目"></a>451、452行目</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">while os.path.exists(X_LOCK_FILE_TEMPLATE % display):</span><br><span class="line">display += 1</span><br><span class="line">をコメントアウト</span><br></pre></td></tr></table></figure>
+
+<p><img src="Screenshot-at-2020-12-29-20-03-14.png" alt="コメントアウト" loading="lazy"></p>
+<h4 id="750、751行目"><a href="#750、751行目" class="headerlink" title="750、751行目"></a>750、751行目</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">def launch_session(self, x_args):</span><br><span class="line">  self._init_child_env()</span><br><span class="line">  self._setup_pulseaudio()</span><br><span class="line">  self._setup_gnubby()</span><br><span class="line">  self._launch_x_server(x_args)</span><br><span class="line">  self._launch_x_session()</span><br><span class="line">を</span><br><span class="line">def launch_session(self, x_args):</span><br><span class="line">  self._init_child_env()</span><br><span class="line">  self._setup_pulseaudio()</span><br><span class="line">  self._setup_gnubby()</span><br><span class="line">#  self._launch_x_server(x_args) ← コメントアウト</span><br><span class="line">#  self._launch_x_session() ← コメントアウト</span><br><span class="line">  display = self.get_unused_display_number() ← 行追加</span><br><span class="line">  self.child_env[&quot;DISPLAY&quot;] = &quot;:%d&quot; % display ← 行追加</span><br></pre></td></tr></table></figure>
+
+<p><img src="Screenshot-at-2020-12-29-20-08-14.png" alt="行追加" loading="lazy"></p>
+<p>3箇所の修正が終わったら、保存をして完了。</p>
+<p><img src="Screenshot-at-2020-12-29-20-12-43.png" alt="保存をして完了" loading="lazy"></p>
+<h3 id="Chrome-Remote-Desktop-を起動させる"><a href="#Chrome-Remote-Desktop-を起動させる" class="headerlink" title="Chrome Remote Desktop を起動させる"></a>Chrome Remote Desktop を起動させる</h3><p>再度 Chrome Remote Desktop を起動させます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ /opt/google/chrome-remote-desktop/chrome-remote-desktop --start</span><br></pre></td></tr></table></figure>
+
+<p><img src="Screenshot-at-2020-12-29-20-16-43.png" alt="Chrome Remote Desktop を起動" loading="lazy"></p>
+<p>これで、リモート接続をしても新規の仮想デスクトップは立ち上がらずに、今ログインしているユーザを引き継ぐことが出来ます。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://almighty.hatenablog.jp/entry/2020/07/27/165831">https://almighty.hatenablog.jp/entry/2020/07/27/165831</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/unity-wasd-control/" title="【Unity】カメラを WASDキー で動かせるようにする">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        【Unity】カメラを WASDキー で動かせるようにする
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/unity-webgl-internal/" title="【Unity】ブラウザと相互連携を実装する">
+
+    <p class="title-text">
+      
+        【Unity】ブラウザと相互連携を実装する
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Python Web Server について | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="PythonのWebフレームワークPythonはWeb開発のための多くのフレームワークを提供しています。以下はその中の主要なものをいくつか紹介します。 1. Djangohttps:&#x2F;&#x2F;www.djangoproject.com&#x2F;  大規模なWebアプリケーションの開発に適したフルスタックフレームワーク。”バッテリー同梱”の哲学に基づき、多くの機能が最初から組み込まれています。  2. Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Web Server について">
+<meta property="og:url" content="https://noitaro.github.io/python-web-server/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="PythonのWebフレームワークPythonはWeb開発のための多くのフレームワークを提供しています。以下はその中の主要なものをいくつか紹介します。 1. Djangohttps:&#x2F;&#x2F;www.djangoproject.com&#x2F;  大規模なWebアプリケーションの開発に適したフルスタックフレームワーク。”バッテリー同梱”の哲学に基づき、多くの機能が最初から組み込まれています。  2. Flask">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_150146.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_150824.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_151628.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_151718.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_152327.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_152932.png">
+<meta property="og:image" content="https://noitaro.github.io/python-web-server/2023-07-19_153249.png">
+<meta property="article:published_time" content="2023-07-19T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.499Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="django">
+<meta property="article:tag" content="flask">
+<meta property="article:tag" content="fastapi">
+<meta property="article:tag" content="pyramid">
+<meta property="article:tag" content="cherrypy">
+<meta property="article:tag" content="tornado">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/python-web-server/2023-07-19_150146.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-python-web-server" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Python Web Server について
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-07-19T00:00:00.000Z" itemprop="datePublished">2023-07-19</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.5k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <h2 id="PythonのWebフレームワーク"><a href="#PythonのWebフレームワーク" class="headerlink" title="PythonのWebフレームワーク"></a>PythonのWebフレームワーク</h2><p>PythonはWeb開発のための多くのフレームワークを提供しています。以下はその中の主要なものをいくつか紹介します。</p>
+<h3 id="1-Django"><a href="#1-Django" class="headerlink" title="1. Django"></a>1. Django</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.djangoproject.com/">https://www.djangoproject.com/</a></p>
+<ul>
+<li>大規模なWebアプリケーションの開発に適したフルスタックフレームワーク。”バッテリー同梱”の哲学に基づき、多くの機能が最初から組み込まれています。</li>
+</ul>
+<h3 id="2-Flask"><a href="#2-Flask" class="headerlink" title="2. Flask"></a>2. Flask</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://flask.palletsprojects.com/">https://flask.palletsprojects.com/</a></p>
+<ul>
+<li>マイクロフレームワークとして知られ、シンプルで拡張性が高い。小規模から中規模のアプリケーション開発に適しています。</li>
+</ul>
+<h3 id="3-FastAPI"><a href="#3-FastAPI" class="headerlink" title="3. FastAPI"></a>3. FastAPI</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://fastapi.tiangolo.com/">https://fastapi.tiangolo.com/</a></p>
+<ul>
+<li>高性能で現代的なフレームワーク。Pythonの型ヒントを使用し、非同期処理をネイティブサポートしています。</li>
+</ul>
+<h3 id="4-Pyramid"><a href="#4-Pyramid" class="headerlink" title="4. Pyramid"></a>4. Pyramid</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://trypyramid.com/">https://trypyramid.com/</a></p>
+<ul>
+<li>柔軟性とモジュラリティを重視したフレームワーク。Flaskと同様にマイクロフレームワークとして始めることができ、必要に応じて機能を追加していくことができます。</li>
+</ul>
+<h3 id="5-CherryPy"><a href="#5-CherryPy" class="headerlink" title="5. CherryPy"></a>5. CherryPy</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cherrypy.dev/">https://cherrypy.dev/</a></p>
+<ul>
+<li>Pythonのオブジェクト指向プログラムをWebアプリケーション開発に適用することを目的としたフレームワーク。HTTP&#x2F;1.1準拠のWebサーバを持っています。</li>
+</ul>
+<h3 id="6-Tornado"><a href="#6-Tornado" class="headerlink" title="6. Tornado"></a>6. Tornado</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tornadoweb.org/">https://www.tornadoweb.org/</a></p>
+<ul>
+<li>高性能な非同期WebサーバとWebアプリケーションフレームワークを一体化したもの。リアルタイムWebサービスの開発に特に適しています。</li>
+</ul>
+<p>これらのフレームワークは、それぞれ独自の特性や利点を持っているため、プロジェクトの要件や好みに合わせて選択すると良いでしょう。</p>
+<h2 id="1-Django-ジャンゴ-について"><a href="#1-Django-ジャンゴ-について" class="headerlink" title="1. Django (ジャンゴ) について"></a>1. Django (ジャンゴ) について</h2><p>DjangoはPythonで書かれた、高度に再利用可能なコンポーネントを持つフルスタックのWebフレームワークです。*”Django makes it easier to build web applications quickly and with less code”* とのフレーズで知られています。</p>
+<h3 id="特徴"><a href="#特徴" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>MTVアーキテクチャ</strong><br>  DjangoはMVCアーキテクチャに似ていますが、Djangoの場合はMTV（Model-Template-View）として知られています。</p>
+<ul>
+<li>Model: データベースとのインタラクションを担当する部分。</li>
+<li>Template: ユーザーに表示される部分、HTMLを生成する部分。</li>
+<li>View: アプリケーションのロジックを持つ部分。</li>
+</ul>
+</li>
+<li><p><strong>DRY原則</strong><br>  “Don’t Repeat Yourself”（繰り返しを避ける）を実践して、コードの再利用を促進します。</p>
+</li>
+<li><p><strong>バッテリー同梱</strong><br>  Djangoには「バッテリー同梱」という哲学があり、多くの機能（認証、セキュリティ、フォーム、管理パネルなど）がデフォルトで含まれています。</p>
+</li>
+<li><p><strong>安全性</strong><br>  Djangoは、多くの一般的なセキュリティ問題（XSS、CSRF、SQLインジェクションなど）を考慮し、これらの問題から保護する機能を提供します。</p>
+</li>
+<li><p><strong>データベースのマイグレーション</strong><br>  簡単にデータベースの変更やアップデートを行うためのツールが組み込まれています。</p>
+</li>
+</ul>
+<h3 id="開始方法"><a href="#開始方法" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>Djangoをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install django</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>新しいプロジェクトを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject projectname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>開発サーバーを起動する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd projectname</span><br><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+<p> これにより、デフォルトで <code>http://127.0.0.1:8000/</code> にローカルサーバーが起動します。</p>
+</li>
+</ol>
+<p><img src="2023-07-19_150146.png" loading="lazy"></p>
+<p>Djangoは非常に包括的で強力なフレームワークなので、詳細な情報やチュートリアルは公式ドキュメントや関連書籍を参照することをおすすめします。</p>
+<h2 id="2-Flask-フラスク-について"><a href="#2-Flask-フラスク-について" class="headerlink" title="2. Flask (フラスク) について"></a>2. Flask (フラスク) について</h2><p>FlaskはPythonで書かれた軽量なWebフレームワークです。単純さと拡張性を重視しており、小さなアプリケーションから大規模なプロジェクトまで対応可能です。</p>
+<h3 id="特徴-1"><a href="#特徴-1" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>軽量</strong>: Flaskは「マイクロ」フレームワークとして設計されており、必要最低限の機能のみが含まれています。しかし、多くの拡張が提供されており、必要に応じて機能を追加できます。</p>
+</li>
+<li><p><strong>簡単なルーティング</strong>: URLルートを関数にマッピングすることが非常に簡単です。</p>
+</li>
+<li><p><strong>開発サーバーとデバッガ</strong>: 組み込みの開発サーバーとデバッガを提供しています。</p>
+</li>
+<li><p><strong>Jinja2テンプレート</strong>: FlaskはJinja2テンプレートエンジンを使用しており、動的コンテンツのレンダリングが簡単になります。</p>
+</li>
+<li><p><strong>RESTful要求のサポート</strong>: RESTful要求の送信やデータの取得が容易です。</p>
+</li>
+<li><p><strong>セキュア</strong>: 保護機能（データの安全な保存、セッションなど）が提供されています。</p>
+</li>
+</ul>
+<h3 id="開始方法-1"><a href="#開始方法-1" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>Flaskをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install Flask</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>簡単なアプリケーションを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from flask import Flask</span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line">@app.route(&#x27;/&#x27;)</span><br><span class="line">def hello_world():</span><br><span class="line">    return &#x27;Hello, World!&#x27;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>アプリケーションを実行する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask --app main.py run</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>上記の手順で、開発サーバーが起動し、<code>http://127.0.0.1:5000/</code> にアクセスすると “Hello, World!” が表示されます。<br><img src="2023-07-19_150824.png" loading="lazy"></p>
+<p>公式ドキュメントやチュートリアルはFlaskのウェブサイトで提供されており、初心者から上級者までの情報が豊富に用意されています。</p>
+<h2 id="3-FastAPI-ファーストAPI-について"><a href="#3-FastAPI-ファーストAPI-について" class="headerlink" title="3. FastAPI (ファーストAPI) について"></a>3. FastAPI (ファーストAPI) について</h2><p>FastAPIは、Python 3.6以降のバージョンでのみ動作する、現代的で、高速(高性能)なWebフレームワークです。FastAPIは標準のPython型ヒントを使用してAPIを構築することを特徴としています。</p>
+<h3 id="特徴-2"><a href="#特徴-2" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>型ヒント</strong>: Pythonの型ヒントを利用してパラメータのバリデーション、シリアライゼーション、ドキュメント作成を自動化します。</p>
+</li>
+<li><p><strong>高性能</strong>: NodeJSやGoと同等の性能を持ちながら、Pythonの簡潔さと易しさを維持しています。</p>
+</li>
+<li><p><strong>自動ドキュメント</strong>: FastAPIを使用してAPIを構築すると、自動的にSwagger UIとReDocの2つのインタラクティブなAPIドキュメントが生成されます。</p>
+</li>
+<li><p><strong>OAuth2とJWTの統合</strong>: セキュリティと認証の仕組みを簡単に導入することができます。</p>
+</li>
+<li><p><strong>非同期処理</strong>: <code>async</code>&#x2F;<code>await</code>を使用した非同期処理をネイティブサポートしています。これにより、非常に高速なAPIを簡単に構築できます。</p>
+</li>
+</ul>
+<h3 id="開始方法-2"><a href="#開始方法-2" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>FastAPIをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install fastapi[all]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>簡単なアプリケーションを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">from fastapi import FastAPI</span><br><span class="line"></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line">@app.get(&quot;/&quot;)</span><br><span class="line">def read_root():</span><br><span class="line">    return &#123;&quot;Hello&quot;: &quot;World&quot;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>アプリケーションを実行する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uvicorn main:app --reload</span><br></pre></td></tr></table></figure>
+
+<p> 上記の手順で、開発サーバーが起動し、<code>http://127.0.0.1:8000/</code> にアクセスすると “Hello, World!” のJSONレスポンスが得られます。</p>
+</li>
+</ol>
+<p><img src="2023-07-19_151628.png" loading="lazy"></p>
+<p>また、<code>http://127.0.0.1:8000/docs</code>にアクセスすると、自動生成されたSwagger UIのドキュメントが表示されます。<br><img src="2023-07-19_151718.png" loading="lazy"></p>
+<p>FastAPIは非常に包括的で強力なフレームワークであり、その詳細な情報やチュートリアルは公式ドキュメントを参照することをおすすめします。</p>
+<h2 id="4-Pyramid-ピラミッド-について"><a href="#4-Pyramid-ピラミッド-について" class="headerlink" title="4. Pyramid (ピラミッド) について"></a>4. Pyramid (ピラミッド) について</h2><p>PyramidはPythonで書かれたWebアプリケーションフレームワークで、柔軟性とモジュラリティを特長としています。</p>
+<h3 id="特徴-3"><a href="#特徴-3" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>スケーラビリティ</strong>: Pyramidは「最小限のフレームワーク」として始めることができ、必要に応じて拡張することができます。</p>
+</li>
+<li><p><strong>柔軟性</strong>: Pyramidは、あなたの要件に応じて必要なコンポーネントを選択して使うことができます。</p>
+</li>
+<li><p><strong>URLジェネレーション</strong>: Webアプリケーション内のページへのリンクを動的に生成できます。</p>
+</li>
+<li><p><strong>拡張性</strong>: 多くのプラグインやアドオンが利用可能で、独自の機能やミドルウェアを追加することも容易です。</p>
+</li>
+<li><p><strong>セキュリティ</strong>: CSRF、クロスサイトスクリプティング、SQLインジェクションなどの一般的なWeb脅威からの保護機能が組み込まれています。</p>
+</li>
+</ul>
+<h3 id="開始方法-3"><a href="#開始方法-3" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>Pyramidをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pyramid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>簡単なアプリケーションを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from wsgiref.simple_server import make_server</span><br><span class="line">from pyramid.config import Configurator</span><br><span class="line">from pyramid.response import Response</span><br><span class="line"></span><br><span class="line">def hello_world(request):</span><br><span class="line">    return Response(&#x27;Hello World!&#x27;)</span><br><span class="line"></span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">    with Configurator() as config:</span><br><span class="line">        config.add_route(&#x27;hello&#x27;, &#x27;/&#x27;)</span><br><span class="line">        config.add_view(hello_world, route_name=&#x27;hello&#x27;)</span><br><span class="line">        app = config.make_wsgi_app()</span><br><span class="line">    server = make_server(&#x27;0.0.0.0&#x27;, 6543, app)</span><br><span class="line">    server.serve_forever()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>アプリケーションを実行する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+
+<p> 上記の手順で、開発サーバーが起動し、<code>http://localhost:6543/</code> にアクセスすると “Hello World!” が表示されます。</p>
+</li>
+</ol>
+<p><img src="2023-07-19_152327.png" loading="lazy"></p>
+<p>公式ドキュメントは非常に詳細で、新しいユーザーから経験豊富な開発者まで役立つ情報が提供されています。Pyramidのコミュニティも活発で、多くのリソースやサポートが提供されています。</p>
+<h2 id="5-CherryPy-チェリーパイ-について"><a href="#5-CherryPy-チェリーパイ-について" class="headerlink" title="5. CherryPy (チェリーパイ) について"></a>5. CherryPy (チェリーパイ) について</h2><p>CherryPyは、Pythonのオブジェクト指向プログラミングをWebアプリケーション開発に適用することを目的としたフレームワークです。HTTP&#x2F;1.1準拠のWebサーバも組み込まれており、単体で動作させることが可能です。</p>
+<h3 id="特徴-4"><a href="#特徴-4" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>シンプルなAPI</strong>: CherryPyはPythonicなアプローチを採用しており、簡単に理解しやすいAPIを提供しています。</p>
+</li>
+<li><p><strong>組み込みサーバ</strong>: 独自の組み込みHTTPサーバを持っており、別途サーバソフトウェアをセットアップする必要がありません。</p>
+</li>
+<li><p><strong>フレキシブルなプラグインアーキテクチャ</strong>: CherryPyは多くのプラグインをサポートしており、簡単に追加や変更が可能です。</p>
+</li>
+<li><p><strong>マルチスレッドサーバ</strong>: マルチスレッドのWebサーバが組み込まれており、複数のリクエストを同時に処理することができます。</p>
+</li>
+</ul>
+<h3 id="開始方法-4"><a href="#開始方法-4" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>CherryPyをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install cherrypy</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>簡単なアプリケーションを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import cherrypy</span><br><span class="line"></span><br><span class="line">class HelloWorld:</span><br><span class="line">    @cherrypy.expose</span><br><span class="line">    def index(self):</span><br><span class="line">        return &quot;Hello World!&quot;</span><br><span class="line"></span><br><span class="line">cherrypy.quickstart(HelloWorld())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>アプリケーションを実行する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+
+<p> スクリプトを実行すると、CherryPyのサーバが起動し、<code>http://127.0.0.1:8080/</code> にアクセスすることで “Hello World!” が表示されます。</p>
+</li>
+</ol>
+<p><img src="2023-07-19_152932.png" loading="lazy"></p>
+<p>CherryPyは長い歴史を持つフレームワークであり、簡潔さと強力さを兼ね備えています。詳細な情報やチュートリアルは公式ドキュメントを参照することをおすすめします。</p>
+<h2 id="6-Tornado-トルネード-について"><a href="#6-Tornado-トルネード-について" class="headerlink" title="6. Tornado (トルネード) について"></a>6. Tornado (トルネード) について</h2><p>Tornadoは、高性能な非同期WebサーバおよびWebアプリケーションフレームワークとして知られています。リアルタイムWebサービスの開発に特に適しており、数千の同時接続をサポートしています。</p>
+<h3 id="特徴-5"><a href="#特徴-5" class="headerlink" title="特徴"></a>特徴</h3><ul>
+<li><p><strong>非同期I&#x2F;O</strong>: Tornadoは非同期I&#x2F;Oをネイティブサポートしており、高い同時接続数を持つアプリケーションでも高いパフォーマンスを維持します。</p>
+</li>
+<li><p><strong>リアルタイムサービス</strong>: WebSocketsやlong pollingなどのリアルタイムの通信技術をサポートしています。</p>
+</li>
+<li><p><strong>組み込みのHTTPサーバ</strong>: Tornadoは独自の高性能HTTPサーバを持っており、追加の設定やデプロイメントが不要です。</p>
+</li>
+<li><p><strong>サードパーティのサポート</strong>: 多くのサードパーティのライブラリやフレームワークとの統合が容易です。</p>
+</li>
+</ul>
+<h3 id="開始方法-5"><a href="#開始方法-5" class="headerlink" title="開始方法"></a>開始方法</h3><ol>
+<li><p><strong>Tornadoをインストールする。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install tornado</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>簡単なアプリケーションを作成する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import tornado.ioloop</span><br><span class="line">import tornado.web</span><br><span class="line"></span><br><span class="line">class MainHandler(tornado.web.RequestHandler):</span><br><span class="line">    def get(self):</span><br><span class="line">        self.write(&quot;Hello, Tornado!&quot;)</span><br><span class="line"></span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app = tornado.web.Application([(r&quot;/&quot;, MainHandler)])</span><br><span class="line">    app.listen(8888)</span><br><span class="line">    tornado.ioloop.IOLoop.current().start()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>アプリケーションを実行する。</strong>  </p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main.py</span><br></pre></td></tr></table></figure>
+
+<p> スクリプトを実行すると、Tornadoのサーバが起動し、<code>http://127.0.0.1:8888/</code> にアクセスすることで “Hello, Tornado!” が表示されます。</p>
+</li>
+</ol>
+<p><img src="2023-07-19_153249.png" loading="lazy"></p>
+<p>Tornadoは非同期のWebアプリケーションの開発に特化しており、高い性能要件を持つプロジェクトにおすすめです。詳細な情報やチュートリアルは公式ドキュメントを参照してください。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/adapter-vs-wrapper/" title="アダプター と ラッパー の違い">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        アダプター と ラッパー の違い
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/langchain-embedding/" title="【Langchain】Embedding 自作モデルの作成、PKL保存、回答">
+
+    <p class="title-text">
+      
+        【Langchain】Embedding 自作モデルの作成、PKL保存、回答
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

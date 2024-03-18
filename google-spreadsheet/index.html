@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>【C#】Google スプレッドシートのセル操作 | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="忘れないよう備忘録です。 環境 Windows 11 Home 21H2 Visual Studio Community 2022 .NET 6.0 Google.Apis.Sheets.v4 1.57.0.2727  今回はトップレベルステートメントを使わないでやってみます。6.0 からの新機能！  チェックを外すとMainメソッドがなくなります。  NuGetGoogle.Apis.Sheet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【C#】Google スプレッドシートのセル操作">
+<meta property="og:url" content="https://noitaro.github.io/google-spreadsheet/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="忘れないよう備忘録です。 環境 Windows 11 Home 21H2 Visual Studio Community 2022 .NET 6.0 Google.Apis.Sheets.v4 1.57.0.2727  今回はトップレベルステートメントを使わないでやってみます。6.0 からの新機能！  チェックを外すとMainメソッドがなくなります。  NuGetGoogle.Apis.Sheet">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-415.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-416.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-417.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-435.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-436.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-418.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-419.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-420.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-421.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-422.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-423.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-425.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-426.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-427.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-428.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-429.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-430.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-431.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-437.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-438.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-441.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-442.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-444.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-443.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-439.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-440.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-432.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-433.png">
+<meta property="og:image" content="https://noitaro.github.io/google-spreadsheet/image-434.png">
+<meta property="article:published_time" content="2022-08-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.111Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="google">
+<meta property="article:tag" content="visual-studio">
+<meta property="article:tag" content="c-sharp">
+<meta property="article:tag" content="gcp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/google-spreadsheet/image-415.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-google-spreadsheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        【C#】Google スプレッドシートのセル操作
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-08-07T00:00:00.000Z" itemprop="datePublished">2022-08-07</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.4k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>忘れないよう備忘録です。</p>
+<h2 id="環境"><a href="#環境" class="headerlink" title="環境"></a>環境</h2><ul>
+<li>Windows 11 Home 21H2</li>
+<li>Visual Studio Community 2022</li>
+<li>.NET 6.0</li>
+<li>Google.Apis.Sheets.v4 1.57.0.2727</li>
+</ul>
+<p>今回はトップレベルステートメントを使わないでやってみます。6.0 からの新機能！</p>
+<p><img src="image-415.png" alt="最上位レベルのステートメントを使用しない" loading="lazy"></p>
+<p>チェックを外すとMainメソッドがなくなります。</p>
+<p><img src="image-416.png" alt="Mainメソッド無し" loading="lazy"></p>
+<h3 id="NuGet"><a href="#NuGet" class="headerlink" title="NuGet"></a>NuGet</h3><p>Google.Apis.Sheets.v4 1.57.0.2727</p>
+<p><img src="image-417.png" alt="Google.Apis.Sheets.v4" loading="lazy"></p>
+<h3 id="Google-スプレッドシート"><a href="#Google-スプレッドシート" class="headerlink" title="Google スプレッドシート"></a>Google スプレッドシート</h3><p>分かりやすいように、つぎのようなデータを準備しました。</p>
+<p><img src="image-435.png" alt="Google スプレッドシート" loading="lazy"></p>
+<p>後に出てくる「spreadsheetId」はURL部にあるのをコピペします。</p>
+<p><img src="image-436.png" alt="spreadsheetId" loading="lazy"></p>
+<h2 id="Google-Cloud-Platform"><a href="#Google-Cloud-Platform" class="headerlink" title="Google Cloud Platform"></a>Google Cloud Platform</h2><p>Google スプレッドシート を操作するためには認証情報が必要です。今回はJSONファイルを .NETプロジェクトに読み込ませます。</p>
+<h3 id="プロジェクト作成"><a href="#プロジェクト作成" class="headerlink" title="プロジェクト作成"></a>プロジェクト作成</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://console.cloud.google.com/">GCPコンソール</a> を開いて新しいプロジェクトを作成します。</p>
+<p><img src="image-418.png" alt="プロジェクト作成" loading="lazy"></p>
+<h3 id="ライブラリ追加"><a href="#ライブラリ追加" class="headerlink" title="ライブラリ追加"></a>ライブラリ追加</h3><p>「APIとサービス」&gt;「ライブラリ」を選択し、次の2つのライブラリを有効化します。</p>
+<p><img src="image-419.png" alt="ライブラリを選択" loading="lazy"></p>
+<h4 id="Google-Drive-API"><a href="#Google-Drive-API" class="headerlink" title="Google Drive API"></a>Google Drive API</h4><p><img src="image-420.png" alt="Google Drive API" loading="lazy"></p>
+<h4 id="Google-Sheets-API"><a href="#Google-Sheets-API" class="headerlink" title="Google Sheets API"></a>Google Sheets API</h4><p><img src="image-421.png" alt="Google Sheets API" loading="lazy"></p>
+<h3 id="サービスアカウント作成"><a href="#サービスアカウント作成" class="headerlink" title="サービスアカウント作成"></a>サービスアカウント作成</h3><p>「APIとサービス」&gt;「認証情報」を選択し、サービスアカウントを作成します。</p>
+<p><img src="image-422.png" alt="認証情報を選択" loading="lazy"></p>
+<p>「CREATE CREDENTIALS」&gt;「サービスアカウント」を選択し、</p>
+<p><img src="image-423.png" alt="サービスアカウントを選択" loading="lazy"></p>
+<p>適当なサービスアカウントIDを入力して、サービスアカウントを作成します。</p>
+<p><img src="image-425.png" alt="サービスアカウントIDを入力" loading="lazy"></p>
+<h3 id="認証情報作成"><a href="#認証情報作成" class="headerlink" title="認証情報作成"></a>認証情報作成</h3><p>「認証情報」画面に戻ったら、今作ったサービスアカウントを選択し、</p>
+<p><img src="image-426.png" alt="サービスアカウントを選択" loading="lazy"></p>
+<p>キータブの「新しい鍵を作成」で認証情報を作成します。</p>
+<p><img src="image-427.png" alt="新しい鍵を作成" loading="lazy"></p>
+<p>JSON型式で作成します。</p>
+<p><img src="image-428.png" alt="JSON型式" loading="lazy"></p>
+<p>.NETプロジェクトフォルダー内に、JSON型式の認証ファイルを保存します。</p>
+<p><img src="image-429.png" alt="JSON型式の認証ファイルを保存" loading="lazy"></p>
+<h2 id="NETプロジェクトの設定"><a href="#NETプロジェクトの設定" class="headerlink" title=".NETプロジェクトの設定"></a>.NETプロジェクトの設定</h2><p>認証ファイルを.NETプロジェクトで読み込むように設定します。</p>
+<p>ソリューションエクスプローラーから、認証ファイルのプロパティを選択し、</p>
+<p><img src="image-430.png" alt="ソリューションエクスプローラー &gt; プロパティ" loading="lazy"></p>
+<p>プロパティの「出力ディレクトリにコピー」を「新しい場合はコピーする」に変更。</p>
+<p><img src="image-431.png" alt="新しい場合はコピーする" loading="lazy"></p>
+<h2 id="取得"><a href="#取得" class="headerlink" title="取得"></a>取得</h2><h3 id="単一セルの取得"><a href="#単一セルの取得" class="headerlink" title="単一セルの取得"></a>単一セルの取得</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line">var range = &quot;シート1!B2&quot;;</span><br><span class="line"></span><br><span class="line">var request = sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);</span><br><span class="line">var response = request.Execute();</span><br><span class="line">var values = response.Values;</span><br><span class="line"></span><br><span class="line">foreach (var item in values)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(string.Join(&quot;, &quot;, item));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 取得結果</span><br><span class="line">// b2</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-437.png" loading="lazy"></p>
+<h3 id="範囲セルの取得"><a href="#範囲セルの取得" class="headerlink" title="範囲セルの取得"></a>範囲セルの取得</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line">var range = &quot;シート1!B2:E4&quot;;</span><br><span class="line"></span><br><span class="line">var request = sheetsService.Spreadsheets.Values.Get(spreadsheetId, range);</span><br><span class="line">var response = request.Execute();</span><br><span class="line">var values = response.Values;</span><br><span class="line"></span><br><span class="line">foreach (var item in values)</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(string.Join(&quot;, &quot;, item));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 取得結果</span><br><span class="line">// b2, c2, d2, e2</span><br><span class="line">// b3, c3, d3, e3</span><br><span class="line">// b4, c4, d4, e4</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-438.png" loading="lazy"></p>
+<h3 id="複数セルの同時取得-ROWS"><a href="#複数セルの同時取得-ROWS" class="headerlink" title="複数セルの同時取得 (ROWS)"></a>複数セルの同時取得 (ROWS)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Util;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var request = sheetsService.Spreadsheets.Values.BatchGet(spreadsheetId);</span><br><span class="line">request.Ranges = new Repeatable&lt;string&gt;(new[] &#123; &quot;シート1!B2&quot;, &quot;シート1!B4:C4&quot;, &quot;シート1!B6:D6&quot; &#125;);</span><br><span class="line">request.MajorDimension = SpreadsheetsResource.ValuesResource.BatchGetRequest.MajorDimensionEnum.ROWS;</span><br><span class="line"></span><br><span class="line">var response = request.Execute();</span><br><span class="line">var valueRanges = response.ValueRanges;</span><br><span class="line"></span><br><span class="line">foreach (var valueRange in valueRanges)</span><br><span class="line">&#123;</span><br><span class="line">    foreach (var item in valueRange.Values)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(string.Join(&quot;, &quot;, item));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 取得結果</span><br><span class="line">// b2</span><br><span class="line">// b4, c4</span><br><span class="line">// b6, c6, d6</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-441.png" loading="lazy"></p>
+<h3 id="複数セルの同時取得-COLUMNS"><a href="#複数セルの同時取得-COLUMNS" class="headerlink" title="複数セルの同時取得 (COLUMNS)"></a>複数セルの同時取得 (COLUMNS)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Util;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var request = sheetsService.Spreadsheets.Values.BatchGet(spreadsheetId);</span><br><span class="line">request.Ranges = new Repeatable&lt;string&gt;(new[] &#123; &quot;シート1!B2&quot;, &quot;シート1!D2:D3&quot;, &quot;シート1!F2:F4&quot; &#125;);</span><br><span class="line">request.MajorDimension = SpreadsheetsResource.ValuesResource.BatchGetRequest.MajorDimensionEnum.COLUMNS;</span><br><span class="line"></span><br><span class="line">var response = request.Execute();</span><br><span class="line">var valueRanges = response.ValueRanges;</span><br><span class="line"></span><br><span class="line">foreach (var valueRange in valueRanges)</span><br><span class="line">&#123;</span><br><span class="line">    foreach (var item in valueRange.Values)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(string.Join(&quot;, &quot;, item));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 取得結果</span><br><span class="line">// b2</span><br><span class="line">// d2, d3</span><br><span class="line">// f2, f3, f4</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-442.png" loading="lazy"></p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><h3 id="単一セルの更新"><a href="#単一セルの更新" class="headerlink" title="単一セルの更新"></a>単一セルの更新</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Sheets.v4.Data;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var body = new ValueRange() &#123; Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_b2&quot; &#125; &#125; &#125;;</span><br><span class="line">var request = sheetsService.Spreadsheets.Values.Update(body, spreadsheetId, &quot;シート1!B2&quot;);</span><br><span class="line">request.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;</span><br><span class="line">request.Execute();</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-444.png" loading="lazy"></p>
+<h3 id="範囲セルの更新"><a href="#範囲セルの更新" class="headerlink" title="範囲セルの更新"></a>範囲セルの更新</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Sheets.v4.Data;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var body = new ValueRange();</span><br><span class="line">body.Values = new List&lt;IList&lt;object&gt;&gt;()</span><br><span class="line">&#123;</span><br><span class="line">    new List&lt;object&gt;() &#123; &quot;new_b2&quot;, &quot;new_c2&quot;, &quot;new_d2&quot;, &quot;new_e2&quot; &#125;,</span><br><span class="line">    new List&lt;object&gt;() &#123; &quot;new_b3&quot;, &quot;new_c3&quot;, &quot;new_d3&quot;, &quot;new_e3&quot; &#125;,</span><br><span class="line">    new List&lt;object&gt;() &#123; &quot;new_b4&quot;, &quot;new_c4&quot;, &quot;new_d4&quot;, &quot;new_e4&quot; &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var request = sheetsService.Spreadsheets.Values.Update(body, spreadsheetId, &quot;シート1!B2:E4&quot;);</span><br><span class="line">request.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;</span><br><span class="line">request.Execute();</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-443.png" loading="lazy"></p>
+<h3 id="複数セルの同時更新-ROWS"><a href="#複数セルの同時更新-ROWS" class="headerlink" title="複数セルの同時更新 (ROWS)"></a>複数セルの同時更新 (ROWS)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Sheets.v4.Data;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var valueRanges = new List&lt;ValueRange&gt;();</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;ROWS&quot;, Range = &quot;シート1!B2&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_b2&quot; &#125; &#125;, &#125;);</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;ROWS&quot;, Range = &quot;シート1!B4:C4&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_b4&quot;, &quot;new_c4&quot; &#125; &#125;, &#125;);</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;ROWS&quot;, Range = &quot;シート1!B6:D6&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_b6&quot;, &quot;new_c6&quot;, &quot;new_d6&quot; &#125; &#125;, &#125;);</span><br><span class="line"></span><br><span class="line">var body = new BatchUpdateValuesRequest() &#123; Data = valueRanges, ValueInputOption = &quot;USER_ENTERED&quot; &#125;;</span><br><span class="line">var request = sheetsService.Spreadsheets.Values.BatchUpdate(body, spreadsheetId);</span><br><span class="line">request.Execute();</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-439.png" loading="lazy"></p>
+<h3 id="複数セルの同時更新-COLUMNS"><a href="#複数セルの同時更新-COLUMNS" class="headerlink" title="複数セルの同時更新 (COLUMNS)"></a>複数セルの同時更新 (COLUMNS)</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">using Google.Apis.Auth.OAuth2;</span><br><span class="line">using Google.Apis.Services;</span><br><span class="line">using Google.Apis.Sheets.v4;</span><br><span class="line">using Google.Apis.Sheets.v4.Data;</span><br><span class="line"></span><br><span class="line">using var fileStream = new FileStream(&quot;./disco-technique-358701-49da36e0a747.json&quot;, FileMode.Open, FileAccess.Read);</span><br><span class="line">var googleCredential = GoogleCredential.FromStream(fileStream).CreateScoped(SheetsService.Scope.Spreadsheets);</span><br><span class="line">var sheetsService = new SheetsService(new BaseClientService.Initializer() &#123; HttpClientInitializer = googleCredential &#125;);</span><br><span class="line"></span><br><span class="line">var spreadsheetId = &quot;1xYoHhSbH9IO9fwmMZykAaez0h4l5zPaommA7mOYLtj4&quot;;</span><br><span class="line"></span><br><span class="line">var valueRanges = new List&lt;ValueRange&gt;();</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;COLUMNS&quot;, Range = &quot;シート1!B2&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_b2&quot; &#125; &#125;, &#125;);</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;COLUMNS&quot;, Range = &quot;シート1!D2:D3&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_d2&quot;, &quot;new_d3&quot; &#125; &#125;, &#125;);</span><br><span class="line">valueRanges.Add(new ValueRange() &#123; MajorDimension = &quot;COLUMNS&quot;, Range = &quot;シート1!F2:F4&quot;, Values = new List&lt;IList&lt;object&gt;&gt;() &#123; new List&lt;object&gt;() &#123; &quot;new_f2&quot;, &quot;new_f3&quot;, &quot;new_f4&quot; &#125; &#125;, &#125;);</span><br><span class="line"></span><br><span class="line">var body = new BatchUpdateValuesRequest() &#123; Data = valueRanges, ValueInputOption = &quot;USER_ENTERED&quot; &#125;;</span><br><span class="line">var request = sheetsService.Spreadsheets.Values.BatchUpdate(body, spreadsheetId);</span><br><span class="line">request.Execute();</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-440.png" loading="lazy"></p>
+<h2 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h2><p>複数セルの同時取得や複数セルの同時更新で処理を作っておけば、単一セルでも範囲セルでも使えます。上位互換！</p>
+<h3 id="困った点"><a href="#困った点" class="headerlink" title="困った点"></a>困った点</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Google.GoogleApiException: &#x27;The service sheets has thrown an exception. HttpStatusCode is Forbidden. The caller does not have permission&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-432.png" alt="GoogleApiException" loading="lazy"></p>
+<p>Google スプレッドシート にアクセス権限が設定されていないためでした。</p>
+<p>スプレッドシート の ファイル &gt; 共有 &gt; 他のユーザーと共有</p>
+<p><img src="image-433.png" alt="ファイル &gt; 共有 &gt; 他のユーザーと共有" loading="lazy"></p>
+<p>ユーザー追加でサービスアカウントのアドレスをコピペして、アクセス権限を編集者にして共有。</p>
+<p><img src="image-434.png" alt="アクセス権限を編集者にして共有" loading="lazy"></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/trello-card/" title="【C#】Trello カード操作いろいろ">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        【C#】Trello カード操作いろいろ
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/use-cookie-authentication/" title="ASP.NETCoreIdentityなしでCookie認証を使用する">
+
+    <p class="title-text">
+      
+        ASP.NETCoreIdentityなしでCookie認証を使用する
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

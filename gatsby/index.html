@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>WordPress から Gatsby へ移行 | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="いろいろ思うことがあって WordPress から Gatsby へ移行しました。 Gatsby プロジェクトの作成今回は gatsby-starter-blog を使います。 Gatsby Starter Blog とは？“Gatsby Starter Blog”は、Gatsby.js を使用してブログを作成するためのスターターテンプレートです。 Gatsby.js は、React ベースの静的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WordPress から Gatsby へ移行">
+<meta property="og:url" content="https://noitaro.github.io/gatsby/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="いろいろ思うことがあって WordPress から Gatsby へ移行しました。 Gatsby プロジェクトの作成今回は gatsby-starter-blog を使います。 Gatsby Starter Blog とは？“Gatsby Starter Blog”は、Gatsby.js を使用してブログを作成するためのスターターテンプレートです。 Gatsby.js は、React ベースの静的">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_111303.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_112727.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_113027.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/image-846.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_120332.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/image-847.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_121653.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_124641.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_125937.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_132819.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_132835.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_144744.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_145039.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_145205.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_145944.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_150042.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_150410.png">
+<meta property="og:image" content="https://noitaro.github.io/gatsby/2023-07-14_151037.png">
+<meta property="article:published_time" content="2023-07-14T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.059Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="vscode">
+<meta property="article:tag" content="react">
+<meta property="article:tag" content="github">
+<meta property="article:tag" content="gatsby">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/gatsby/2023-07-14_111303.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-gatsby" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        WordPress から Gatsby へ移行
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2023-07-14T00:00:00.000Z" itemprop="datePublished">2023-07-14</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.4k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>いろいろ思うことがあって WordPress から Gatsby へ移行しました。</p>
+<h2 id="Gatsby-プロジェクトの作成"><a href="#Gatsby-プロジェクトの作成" class="headerlink" title="Gatsby プロジェクトの作成"></a>Gatsby プロジェクトの作成</h2><p>今回は <a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/starters/gatsbyjs/gatsby-starter-blog">gatsby-starter-blog</a> を使います。</p>
+<h3 id="Gatsby-Starter-Blog-とは？"><a href="#Gatsby-Starter-Blog-とは？" class="headerlink" title="Gatsby Starter Blog とは？"></a>Gatsby Starter Blog とは？</h3><p>“Gatsby Starter Blog”は、Gatsby.js を使用してブログを作成するためのスターターテンプレートです。</p>
+<p>Gatsby.js は、React ベースの静的サイトジェネレーターで、データを GraphQL を介して取得します。</p>
+<p>“Gatsby Starter Blog”は、ブログ投稿やページネーション、タグなど、ブログに必要な機能を兼ね備えており、Markdown 記法でブログを作成することができます。</p>
+<p>あとカスタマイズも容易で、Gatsbyのプラグインを使って、SEO や、Google Analytics など、さまざまな機能を簡単に追加することができます。</p>
+<p>適当なフォルダーで次のコマンドを実行する。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx gatsby new gatsby-starter-blog https://github.com/gatsbyjs/gatsby-starter-blog</span><br></pre></td></tr></table></figure>
+
+<p><img src="2023-07-14_111303.png" loading="lazy"></p>
+<p>続いて次のコマンドでデバッグ実行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd gatsby-starter-blog</span><br><span class="line">npm run develop</span><br></pre></td></tr></table></figure>
+
+<p><img src="2023-07-14_112727.png" loading="lazy"></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="http://localhost:8000/">http://localhost:8000/</a> で開く</p>
+<p><img src="2023-07-14_113027.png" loading="lazy"></p>
+<p>あとは、これをカスタマイズしてく。</p>
+<h2 id="WordPress-からエクスポート"><a href="#WordPress-からエクスポート" class="headerlink" title="WordPress からエクスポート"></a>WordPress からエクスポート</h2><p>WordPress のエクスポート機能を使って、XMLファイルをダウンロードする。</p>
+<p><code>ダッシュボード &gt; ツール &gt; エクスポート</code> の順で選択。</p>
+<p>エクスポートする内容は <code>すべてのコンテンツ</code> を選択し、エクスポートファイルをダウンロードする。</p>
+<p><img src="image-846.png" loading="lazy"></p>
+<p>XMLファイルがダウンロードできる。</p>
+<p><img src="2023-07-14_120332.png" loading="lazy"></p>
+<h2 id="インポート"><a href="#インポート" class="headerlink" title="インポート"></a>インポート</h2><p>インポートには <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/lonekorean/wordpress-export-to-markdown">wordpress-export-to-markdown</a> プラグインを使う。</p>
+<h3 id="wordpress-export-to-markdown-とは？"><a href="#wordpress-export-to-markdown-とは？" class="headerlink" title="wordpress-export-to-markdown とは？"></a>wordpress-export-to-markdown とは？</h3><p>wordpress-export-to-markdown は、WordPress の記事を Markdown 形式でエクスポートするためのプラグインです。</p>
+<p>WordPress は PHP のコンテンツ管理システムであり、記事を HTML 形式で保存しています。</p>
+<p>wordpress-export-to-markdown を使用すると、WordPress の記事を Markdown 形式でエクスポートできます。</p>
+<p>これにより、エクスポートされたファイルを他のプラットフォームやブログシステムにインポートする際に、Markdown 形式を利用できます。</p>
+<p>次のコマンドを実行すると、WordPress から記事や画像を Markdown 形式でダウンロードしてくれる。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx wordpress-export-to-markdown</span><br></pre></td></tr></table></figure>
+
+<p>ウィザードにしたがってオプションを設定する。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Starting wizard...</span><br><span class="line">? Path to WordPress export file? WordPress.2023-07-14.xml</span><br><span class="line">? Path to output folder? gatsby-starter-blog/content/blog</span><br><span class="line">? Create year folders? No</span><br><span class="line">? Create month folders? No</span><br><span class="line">? Create a folder for each post? Yes</span><br><span class="line">? Prefix post folders/files with date? No</span><br><span class="line">? Save images attached to posts? Yes</span><br><span class="line">? Save images scraped from post body content? Yes</span><br><span class="line">? Include custom post types and pages? No</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-847.png" loading="lazy"></p>
+<p><code>./content/blog</code> に記事の数だけフォルダーと Markdownファイル が作られる。</p>
+<p><img src="2023-07-14_121653.png" loading="lazy"></p>
+<h2 id="カスタマイズ"><a href="#カスタマイズ" class="headerlink" title="カスタマイズ"></a>カスタマイズ</h2><p><code>gatsby-starter-blog</code> は最小限の機能しか備わっていないので、ここからは自分好みにカスタマイズしていく。</p>
+<h3 id="gatsby-plugin-sitemap"><a href="#gatsby-plugin-sitemap" class="headerlink" title="gatsby-plugin-sitemap"></a>gatsby-plugin-sitemap</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/plugins/gatsby-plugin-sitemap/">gatsby-plugin-sitemap</a></p>
+<p>ビルド時にサイトマップを出力してくれるようになります。</p>
+<p>google search console に登録するときに必要なため導入した。</p>
+<p><img src="2023-07-14_124641.png" loading="lazy"></p>
+<h3 id="gatsby-remark-external-links"><a href="#gatsby-remark-external-links" class="headerlink" title="gatsby-remark-external-links"></a>gatsby-remark-external-links</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/plugins/gatsby-remark-external-links/">gatsby-remark-external-links</a></p>
+<p>外部リンクを開くときに「新しいタブで開く」ようになります。</p>
+<h3 id="gatsby-remark-autolink-headers"><a href="#gatsby-remark-autolink-headers" class="headerlink" title="gatsby-remark-autolink-headers"></a>gatsby-remark-autolink-headers</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/plugins/gatsby-remark-autolink-headers/">gatsby-remark-autolink-headers</a></p>
+<p>目次を自動で作ってくれます。</p>
+<p><code>./src/templates/blog-post.js</code> の <code>section</code> の前にコードを入れると目次が出力されます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;toc-002&quot; dangerouslySetInnerHTML=&#123;&#123; __html: post.tableOfContents &#125;&#125; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="2023-07-14_125937.png" loading="lazy"></p>
+<p>スタイルが何も当たっていないので、<code>./src/style.css</code> にスタイルを追記するとそれらしく見やすくなる。</p>
+<h3 id="gatsby-remark-images-medium-zoom"><a href="#gatsby-remark-images-medium-zoom" class="headerlink" title="gatsby-remark-images-medium-zoom"></a>gatsby-remark-images-medium-zoom</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/plugins/gatsby-remark-images-medium-zoom/">gatsby-remark-images-medium-zoom</a></p>
+<p>画像をクリックしたときに、ズーム表示してくれるようになります。</p>
+<h3 id="ページネーション"><a href="#ページネーション" class="headerlink" title="ページネーション"></a>ページネーション</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.gatsbyjs.com/plugins/gatsby-awesome-pagination/">gatsby-awesome-pagination</a></p>
+<p>プロジェクトルートにある <code>./gatsby-config.js</code> に次のコードを追記する。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const &#123; paginate &#125; = require(`gatsby-awesome-pagination`)</span><br></pre></td></tr></table></figure>
+
+<p><img src="2023-07-14_132819.png" loading="lazy"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">exports.createPages = async (&#123; graphql, actions, reporter &#125;) =&gt; &#123;</span><br><span class="line">  ~~~ 既存処理 ~~~</span><br><span class="line">  </span><br><span class="line">  ↓↓↓ 追記 ↓↓↓</span><br><span class="line">  // Create your paginated pages</span><br><span class="line">  paginate(&#123;</span><br><span class="line">    createPage, // The Gatsby `createPage` function</span><br><span class="line">    items: posts, // An array of objects</span><br><span class="line">    itemsPerPage: 10, // How many items you want per page</span><br><span class="line">    pathPrefix: (&#123; pageNumber &#125;) =&gt; (pageNumber === 0 ? &#x27;/&#x27; : &#x27;/page&#x27;), // Creates pages like `/blog`, `/blog/2`, etc</span><br><span class="line">    component: path.resolve(&#x27;./src/templates/index.js&#x27;), // Just like `createPage()`</span><br><span class="line">  &#125;)</span><br><span class="line">  ↑↑↑ 追記 ↑↑↑</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="2023-07-14_132835.png" loading="lazy"></p>
+<p>上記修正をすると <code>./src/templates/index.js</code> で ページネーションコンテキスト が使えるようになる。</p>
+<h4 id="pageQuery-に-skip-と-limit-を追加"><a href="#pageQuery-に-skip-と-limit-を追加" class="headerlink" title="pageQuery に skip と limit を追加"></a><code>pageQuery</code> に <code>skip</code> と <code>limit</code> を追加</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">export const pageQuery = graphql`</span><br><span class="line">  query ($skip: Int!, $limit: Int!) &#123;</span><br><span class="line">    site &#123;</span><br><span class="line">      siteMetadata &#123;</span><br><span class="line">        title</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    allMarkdownRemark(sort: &#123; frontmatter: &#123; date: DESC &#125; &#125; skip: $skip limit: $limit) &#123;</span><br><span class="line">      nodes &#123;</span><br><span class="line">        excerpt</span><br><span class="line">        fields &#123;</span><br><span class="line">          slug</span><br><span class="line">        &#125;</span><br><span class="line">        frontmatter &#123;</span><br><span class="line">          date(formatString: &quot;YYYY/MM/DD&quot;)</span><br><span class="line">          title</span><br><span class="line">          description</span><br><span class="line">          tags</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+<p><img src="2023-07-14_144744.png" loading="lazy"></p>
+<h4 id="BlogIndex-の引数に-を追加"><a href="#BlogIndex-の引数に-を追加" class="headerlink" title="BlogIndex の引数に &#96;&#96; を追加"></a><code>BlogIndex</code> の引数に &#96;&#96; を追加</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const BlogIndex = (&#123; data, location, pageContext &#125;) =&gt; &#123;</span><br><span class="line">  ~~~ 既存処理 ~~~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="2023-07-14_145039.png" loading="lazy"></p>
+<h4 id="ページネーションを追加"><a href="#ページネーションを追加" class="headerlink" title="ページネーションを追加"></a>ページネーションを追加</h4><p>ページの最後にページネーションを追加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &#123;pageContext.previousPagePath ? &lt;Link to=&#123;pageContext.previousPagePath&#125;&gt;Previous&lt;/Link&gt; : null&#125;</span><br><span class="line">  &#123;pageContext.nextPagePath ? &lt;Link to=&#123;pageContext.nextPagePath&#125;&gt;Next&lt;/Link&gt; : null&#125;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="2023-07-14_145205.png" loading="lazy"></p>
+<h3 id="サイト内検索"><a href="#サイト内検索" class="headerlink" title="サイト内検索"></a>サイト内検索</h3><h4 id="検索コンポーネントを作成"><a href="#検索コンポーネントを作成" class="headerlink" title="検索コンポーネントを作成"></a>検索コンポーネントを作成</h4><p><code>./src/components/search.tsx</code> を作成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component, useEffect, useState &#125; from &quot;react&quot;</span><br><span class="line">import &#123; Paper, IconButton, InputBase &#125; from &quot;@mui/material&quot;</span><br><span class="line">import SearchIcon from &#x27;@mui/icons-material/Search&#x27;;</span><br><span class="line">import &#123; navigate &#125; from &quot;gatsby&quot;;</span><br><span class="line">import &#123; useLocation &#125; from &quot;@reach/router&quot;</span><br><span class="line"></span><br><span class="line">// Search component</span><br><span class="line">const Search = () =&gt; &#123;</span><br><span class="line">  const location = useLocation();</span><br><span class="line"></span><br><span class="line">  const [searchValue, setSearchvalue] = useState(&quot;&quot;);</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    const query = new URLSearchParams(location.search);</span><br><span class="line">    const search: string = query.get(&#x27;s&#x27;) ?? &quot;&quot;;</span><br><span class="line">    setSearchvalue(search);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  const clickedSearch = () =&gt; &#123;</span><br><span class="line">    navigate(`/search/?s=$&#123;searchValue&#125;`);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;Paper sx=&#123;&#123; p: &#x27;2px 4px&#x27;, display: &#x27;flex&#x27;, alignItems: &#x27;center&#x27;, width: 400 &#125;&#125; elevation=&#123;0&#125; &gt;</span><br><span class="line">      &lt;InputBase sx=&#123;&#123; ml: 1, flex: 1 &#125;&#125; placeholder=&quot;サイト内を検索&quot; value=&#123;searchValue&#125; onChange=&#123;(event) =&gt; &#123; setSearchvalue(event.target.value); &#125;&#125; /&gt;</span><br><span class="line">      &lt;IconButton type=&quot;button&quot; sx=&#123;&#123; p: &#x27;10px&#x27; &#125;&#125; onClick=&#123;clickedSearch&#125;&gt;</span><br><span class="line">        &lt;SearchIcon /&gt;</span><br><span class="line">      &lt;/IconButton&gt;</span><br><span class="line">    &lt;/Paper&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Search;</span><br></pre></td></tr></table></figure>
+
+<p>これを <code>./src/components/layout.js</code> の <code>header</code> と <code>main</code> の間に追加</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div className=&quot;global-wrapper&quot; data-is-root-path=&#123;isRootPath&#125;&gt;</span><br><span class="line">  &lt;header className=&quot;global-header&quot;&gt;&#123;header&#125;&lt;/header&gt;</span><br><span class="line">  &lt;Search /&gt;</span><br><span class="line">  &lt;main&gt;&#123;children&#125;&lt;/main&gt;</span><br><span class="line">  &lt;footer&gt;</span><br><span class="line">    © &#123;new Date().getFullYear()&#125;, Built with</span><br><span class="line">    &#123;` `&#125;</span><br><span class="line">    &lt;a href=&quot;https://www.gatsbyjs.com&quot;&gt;Gatsby&lt;/a&gt;</span><br><span class="line">  &lt;/footer&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="2023-07-14_145944.png" loading="lazy"><br><img src="2023-07-14_150042.png" loading="lazy"></p>
+<h4 id="検索結果ページを作成"><a href="#検索結果ページを作成" class="headerlink" title="検索結果ページを作成"></a>検索結果ページを作成</h4><p><code>./src/pages/search.tsx</code> を作成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useEffect, useState &#125; from &#x27;react&#x27;</span><br><span class="line">import &#123; graphql, useStaticQuery &#125; from &#x27;gatsby&#x27;</span><br><span class="line">import &#123; useLocation &#125; from &quot;@reach/router&quot;</span><br><span class="line">import BlogIndex from &#x27;../templates&#x27;</span><br><span class="line"></span><br><span class="line">const SearchPage = () =&gt; &#123;</span><br><span class="line">  const location = useLocation();</span><br><span class="line"></span><br><span class="line">  const pageQuery: any = useStaticQuery(graphql`</span><br><span class="line">  query &#123;</span><br><span class="line">    site &#123;</span><br><span class="line">      siteMetadata &#123;</span><br><span class="line">        title</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    allMarkdownRemark(sort: &#123; frontmatter: &#123; date: DESC &#125; &#125;) &#123;</span><br><span class="line">      nodes &#123;</span><br><span class="line">        excerpt</span><br><span class="line">        fields &#123;</span><br><span class="line">          slug</span><br><span class="line">        &#125;</span><br><span class="line">        frontmatter &#123;</span><br><span class="line">          date(formatString: &quot;YYYY/MM/DD&quot;)</span><br><span class="line">          title</span><br><span class="line">          description</span><br><span class="line">          tags</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">`)</span><br><span class="line"></span><br><span class="line">  const [data, setData] = useState(pageQuery);</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    const query = new URLSearchParams(location.search);</span><br><span class="line">    const search: string = query.get(&#x27;s&#x27;) ?? &quot;&quot;;</span><br><span class="line">    if (search == &quot;&quot;) &#123;</span><br><span class="line">      setData(&#123; ...&#123; site: pageQuery.site &#125;, ...&#123; allMarkdownRemark: &#123; nodes: [] &#125; &#125; &#125;);</span><br><span class="line">      return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    const posts = pageQuery.allMarkdownRemark.nodes.map((x: any) =&gt; &#123;</span><br><span class="line">      const target = Object.assign(&#123; excerpt: x.excerpt &#125;, x.fields, x.frontmatter);</span><br><span class="line">      const key = `$&#123;target.title.toLowerCase()&#125; $&#123;target.tags?.join(&quot; &quot;).toLowerCase()&#125; $&#123;target.date.toLowerCase()&#125; $&#123;target.description?.toLowerCase()&#125;`</span><br><span class="line">      return &#123; ...x, ...&#123; key: key &#125; &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    const filtered = posts.filter((e: any) =&gt; &#123;</span><br><span class="line">      return e.key.indexOf(search) !== -1;</span><br><span class="line">    &#125;)</span><br><span class="line">    setData(&#123; ...&#123; site: pageQuery.site &#125;, ...&#123; allMarkdownRemark: &#123; nodes: filtered &#125; &#125; &#125;);</span><br><span class="line">  &#125;, [location]);</span><br><span class="line"></span><br><span class="line">  return (</span><br><span class="line">    &lt;BlogIndex data=&#123;data&#125; location=&#123;location&#125; /&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default SearchPage</span><br></pre></td></tr></table></figure>
+
+<p>右上の検索すると、URLパラメーター で検索ページに遷移して、記事が抽出される。<br><img src="2023-07-14_150410.png" loading="lazy"></p>
+<h3 id="タグ一覧"><a href="#タグ一覧" class="headerlink" title="タグ一覧"></a>タグ一覧</h3><h4 id="タグ一覧ページを作成"><a href="#タグ一覧ページを作成" class="headerlink" title="タグ一覧ページを作成"></a>タグ一覧ページを作成</h4><p><code>./src/pages/tag.tsx</code> を作成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useEffect, useState &#125; from &#x27;react&#x27;</span><br><span class="line">import Layout from &#x27;../components/layout&#x27;</span><br><span class="line">import &#123; graphql, useStaticQuery, Link &#125; from &#x27;gatsby&#x27;</span><br><span class="line">import &#123; useLocation &#125; from &quot;@reach/router&quot;</span><br><span class="line"></span><br><span class="line">const TagPage = () =&gt; &#123;</span><br><span class="line">  const location = useLocation();</span><br><span class="line"></span><br><span class="line">  const pageQuery: any = useStaticQuery(graphql`</span><br><span class="line">    query &#123;</span><br><span class="line">      site &#123;</span><br><span class="line">        siteMetadata &#123;</span><br><span class="line">          title</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      allMarkdownRemark &#123;</span><br><span class="line">        group (field: &#123;frontmatter: &#123;tags: SELECT&#125;&#125;) &#123;</span><br><span class="line">          tag: fieldValue</span><br><span class="line">          totalCount</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  `)</span><br><span class="line"></span><br><span class="line">  const [siteTitle, setSiteTitle] = useState(pageQuery.site.siteMetadata.title);</span><br><span class="line">  const [group, setGroup] = useState(pageQuery.allMarkdownRemark.group as []);</span><br><span class="line">  </span><br><span class="line">  return (</span><br><span class="line">    &lt;Layout location=&#123;location&#125; title=&#123;siteTitle&#125;&gt;</span><br><span class="line">      &lt;h1&gt;タグ&lt;/h1&gt;</span><br><span class="line">      &lt;Stack direction=&quot;row&quot; spacing=&#123;2&#125; useFlexGap flexWrap=&quot;wrap&quot;&gt;</span><br><span class="line">        &#123;group.slice().sort((a: any, b: any) =&gt; (a.totalCount - b.totalCount)*-1).map((item: any) =&gt; (</span><br><span class="line">          &lt;Button key=&#123;item.tag&#125; component=&#123;Link&#125; variant=&quot;outlined&quot; size=&quot;small&quot; to=&#123;`/tag/$&#123;item.tag&#125;/`&#125; startIcon=&#123;&lt;LocalOfferIcon /&gt;&#125;&gt;&#123;item.tag&#125;(&#123;item.totalCount&#125;)&lt;/Button&gt;</span><br><span class="line">        ))&#125;</span><br><span class="line">      &lt;/Stack&gt;</span><br><span class="line">    &lt;/Layout&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default TagPage</span><br></pre></td></tr></table></figure>
+
+<p>このページを開くとタグ一覧が表示される。<br><img src="2023-07-14_151037.png" loading="lazy"></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/langchain-embedding/" title="【Langchain】Embedding 自作モデルの作成、PKL保存、回答">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        【Langchain】Embedding 自作モデルの作成、PKL保存、回答
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/python-discord-bot/" title="【Python】Discord BOT を作る">
+
+    <p class="title-text">
+      
+        【Python】Discord BOT を作る
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

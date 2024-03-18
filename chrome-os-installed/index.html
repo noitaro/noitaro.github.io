@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Chrome OS をインストールして Google Play を使う方法 | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="タンスの肥やしの中に N3510 ベアボーンPC が眠っていたので、何か有効活用が出来ないか調べていたところ Chrome OS がインストール出来るとのことだったので実際にやってみました。 amzn.toAmazon | 東雲社（しののめしゃ）Pentium N3510ベアボーンPC 1.83GHZ デュアルコア ４スレッド（４GB DDR3L RAM+64G SSD+WiFi） window1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chrome OS をインストールして Google Play を使う方法">
+<meta property="og:url" content="https://noitaro.github.io/chrome-os-installed/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="タンスの肥やしの中に N3510 ベアボーンPC が眠っていたので、何か有効活用が出来ないか調べていたところ Chrome OS がインストール出来るとのことだったので実際にやってみました。 amzn.toAmazon | 東雲社（しののめしゃ）Pentium N3510ベアボーンPC 1.83GHZ デュアルコア ４スレッド（４GB DDR3L RAM+64G SSD+WiFi） window1">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="http://favicon.hatena.ne.jp/?url=https://amzn.to/47YUPra">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001894.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001895.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001896.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001897.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001898.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001899.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001903.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001904-1024x420.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001905.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001909.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001907.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001908.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001910.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001912.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001913.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001914.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001915.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001916.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001917.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001919.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001921.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/WS001922.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Bay-Trail.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Advanced-CSM-Configuration_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Advanced-CSM-Support-Disabled_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Advanced-CSM-Support-Enabled_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Security-Secure-Boot-menu_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Security-Secure-Boot-Disabled_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Save-and-Exit-Save-Changes-and-Exit_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Bay-Trail.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/boot-the-selected-OS_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Linux-Mint-desktop.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Connection-Established_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Computer.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/FileSystem-media_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/cdrom_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Chrome-OS_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Open-in-Terminal_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/sudo-sh-install-sh_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/type-yes-to-continue_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/ChromeOS-installed_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Quit_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Shut-Down_1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/please-remove-the-installation-medium-then-press-ENTER.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/English_1-1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Choose-your-language-and-keyboard_1-1.png">
+<meta property="og:image" content="https://noitaro.github.io/chrome-os-installed/Google-Play.png">
+<meta property="article:published_time" content="2020-08-23T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:40.843Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="google">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://favicon.hatena.ne.jp/?url=https://amzn.to/47YUPra">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-chrome-os-installed" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Chrome OS をインストールして Google Play を使う方法
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2020-08-23T00:00:00.000Z" itemprop="datePublished">2020-08-23</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.4k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/google/" rel="tag">google</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>タンスの肥やしの中に <a target="_blank" rel="external nofollow noopener noreferrer" href="https://amzn.to/47YUPra">N3510 ベアボーンPC</a> が眠っていたので、何か有効活用が出来ないか調べていたところ Chrome OS がインストール出来るとのことだったので実際にやってみました。</p>
+<div class="blog-card"><div class="hbc-link-wrap"><a class="hbc-link" target="_blank" rel="external nofollow noopener noreferrer" href="https://amzn.to/47YUPra"><div class="hbc-card"><div class="hbc-info"><img class="hbc-favicon" src="http://favicon.hatena.ne.jp/?url=https://amzn.to/47YUPra"><div class="hbc-site-name">amzn.to</div></div><div class="hbc-contents"><div class="hbc-text"><div class="hbc-title">Amazon | 東雲社（しののめしゃ）Pentium N3510ベアボーンPC 1.83GHZ デュアルコア ４スレッド（４GB DDR3L RAM+64G SSD+WiFi） window10 小型 ファンレス アルミ ブラック | 東 雲社（しののめしゃ） | ベアボーンPC 通販</div><div class="hbc-url">https://amzn.to/47YUPra</div></div></div></div></a></div></div>
+
+<h2 id="初めに"><a href="#初めに" class="headerlink" title="初めに"></a>初めに</h2><h3 id="Chrome-OS（クローム・オーエス）とは？"><a href="#Chrome-OS（クローム・オーエス）とは？" class="headerlink" title="Chrome OS（クローム・オーエス）とは？"></a>Chrome OS（クローム・オーエス）とは？</h3><p>Chrome OS（クローム・オーエス）とは、Linux をベースに Google が開発した OS（オペレーティングシステム）です。</p>
+<p>Google Chrome ブラウザー に似たデザインで、主にウェブ閲覧とウェブアプリケーションを扱います。</p>
+<p>また、Google Play がインストールされており Android アプリが動作することが他の Linux系 OS と違います。</p>
+<h2 id="必須条件"><a href="#必須条件" class="headerlink" title="必須条件"></a>必須条件</h2><ul>
+<li>Intel 系CPU を搭載している PC（UEFI をサポートしていることが必須）</li>
+<li>Nvidia グラフィックカード非搭載</li>
+</ul>
+<p>タンスの肥やしになっていた <a target="_blank" rel="external nofollow noopener noreferrer" href="https://amzn.to/47YUPra">N3510 アボーンPC</a> がちょうど条件をクリアしていました。ラッキー</p>
+<p>あと、インストールに 8GB 以上の USBメモリ が必要です。</p>
+<h2 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h2><p>必要なものを揃えます。</p>
+<h3 id="Linux-Mint-MATE-isoイメージ"><a href="#Linux-Mint-MATE-isoイメージ" class="headerlink" title="Linux Mint MATE isoイメージ"></a>Linux Mint MATE isoイメージ</h3><p>Chrome OS をインストールするために一時的に使います。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.linuxmint.com/download.php">Linux Mint MATE</a></p>
+<p>上記サイトから「MATE」を選択し、</p>
+<p><img src="WS001894.png" alt="Linux Mint MATE を選択" loading="lazy"></p>
+<p>「EvoWise CDN」を選択するとダウンロードできます。</p>
+<p><img src="WS001895.png" alt="EvoWise CDN を選択" loading="lazy"></p>
+<h3 id="Rufus"><a href="#Rufus" class="headerlink" title="Rufus"></a>Rufus</h3><p>Linux Mint を USBメモリ に入れる時に使います。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://rufus.ie/">Rufus</a></p>
+<p>今回はインストールせずに使える Portable版 をダウンロードします。</p>
+<p><img src="WS001896.png" alt="Rufus ポータブル ダウンロード" loading="lazy"></p>
+<h3 id="Chrome-OS-recovery-image"><a href="#Chrome-OS-recovery-image" class="headerlink" title="Chrome OS recovery image"></a>Chrome OS recovery image</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://cros-updates-serving.appspot.com/">こちら</a> から 公式のChrome OS リカバリイメージ をダウンロードします。</p>
+<p>まず、上記サイトを開き Ctrl + Fキー で「rammus」を検索します。</p>
+<p>そして、最新版のリカバリイメージをダウンロードします。現在の最新版は「83」だったので 83 クリックしてリカバリイメージをダウンロードしました。</p>
+<p><img src="WS001897.png" alt="rammus 83 ダウンロード" loading="lazy"></p>
+<p>また、AMD CPU の場合は「grunt」版をダウンロードすると動くかも知れません。</p>
+<p>Intel CPU でも 第4世代以降は「rammus」で、第3世代以前は「samus」になります。</p>
+<h3 id="Brunch-framework"><a href="#Brunch-framework" class="headerlink" title="Brunch framework"></a>Brunch framework</h3><p>公式のChrome OS リカバリイメージ を 汎用 Chrome OS に変換してくれます。超重要で今回の要です。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sebanc/brunch/releases">Brunch framework Releases</a></p>
+<p>Chrome OS リカバリイメージと同じバージョンをダウンロードします。</p>
+<p><img src="WS001898.png" alt="Brunch framework Releases" loading="lazy"></p>
+<p>今回は Chrome OS リカバリイメージ が「83」だったので「r83」をダウンロードしました。</p>
+<h3 id="Chrome-OS-インストール-スクリプト"><a href="#Chrome-OS-インストール-スクリプト" class="headerlink" title="Chrome OS インストール スクリプト"></a>Chrome OS インストール スクリプト</h3><p>Linux コマンドを入力しないでも Chrome OS をインストール出来る スクリプト をダウンロードします。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/shrikant2002/ChromeOS/blob/master/install.sh">Chrome OS インストール スクリプト</a></p>
+<p>「Raw」を右クリックし「名前を付けてリンク先を保存」を選択するとスクリプトを保存することが出来ます。</p>
+<p><img src="WS001899.png" alt="名前を付けてリンク先を保存" loading="lazy"></p>
+<p><img src="WS001903.png" alt="名前を付けてリンク先を保存" loading="lazy"></p>
+<h3 id="7-Zip"><a href="#7-Zip" class="headerlink" title="7-Zip"></a>7-Zip</h3><p>tar.gz形式 で圧縮されたファイルを展開する時に使います。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://sevenzip.osdn.jp/">7-Zip</a></p>
+<p>ダウンロードしてインストールまで済ませておきましょう。</p>
+<p><img src="WS001904-1024x420.png" alt="7-Zip ダウンロード" loading="lazy"></p>
+<h2 id="Chrome-OS-をインストールする"><a href="#Chrome-OS-をインストールする" class="headerlink" title="Chrome OS をインストールする"></a>Chrome OS をインストールする</h2><p>インストール手順を簡単に説明します。</p>
+<p>Linux Mint を起動し、そこから PC に Chrome OS をインストールします。HDD内のデータは全て削除されるので、必要なデータは移動させておきましょう。では、初めます。</p>
+<h3 id="インストール-USB-を作成"><a href="#インストール-USB-を作成" class="headerlink" title="インストール USB を作成"></a>インストール USB を作成</h3><p>まず初めに インストール USB を作成します。</p>
+<h4 id="「Linux-Mint」を書き込む"><a href="#「Linux-Mint」を書き込む" class="headerlink" title="「Linux Mint」を書き込む"></a>「Linux Mint」を書き込む</h4><p>USBメモリ を PC に挿して Rufus を起動します。</p>
+<p>「選択」ボタンを押してダウンロードしておいた「linuxmint-20-mate-64bit.iso」を選択します。次に「スタート」ボタンを押して USBメモリ に Linux Mint を書き込みます。</p>
+<p><img src="WS001905.png" alt="Rufus 使い方" loading="lazy"></p>
+<p>また、USBメモリ内のデータは全て削除されるので、必要なデータは移動させておきましょう。</p>
+<p>いくつかのダイアログが出ますが、気にせず進めます。</p>
+<p><img src="WS001909.png" alt="警告ダイアログ" loading="lazy"></p>
+<p><img src="WS001907.png" alt="警告ダイアログ" loading="lazy"></p>
+<p><img src="WS001908.png" alt="警告ダイアログ" loading="lazy"></p>
+<p>書き込みが終わったら「閉じる」ボタンを押して Rufus を終了させます。</p>
+<p>次に 今書き込んだ USBメモリ のフォルダを開いて、その中に「Chrome OS」という名前の新規フォルダを作ります。</p>
+<p><img src="WS001910.png" alt="「Chrome OS」という名前の新規フォルダを作る" loading="lazy"></p>
+<p>で、その「Chrome OS」フォルダに必要なファイルを詰め込んで行きます。</p>
+<h4 id="「Chrome-OS-インストール-スクリプト」を入れる"><a href="#「Chrome-OS-インストール-スクリプト」を入れる" class="headerlink" title="「Chrome OS インストール スクリプト」を入れる"></a>「Chrome OS インストール スクリプト」を入れる</h4><p>Chrome OS インストール スクリプト である「install.sh」ファイルを「Chrome OS」フォルダにコピーします。</p>
+<p><img src="WS001912.png" alt="「Chrome OS」フォルダにコピー" loading="lazy"></p>
+<h4 id="「Brunch-framework」を入れる"><a href="#「Brunch-framework」を入れる" class="headerlink" title="「Brunch framework」を入れる"></a>「Brunch framework」を入れる</h4><p>まず、ダウンロードしておいた「brunch_r83_k4.19_stable_20200708.tar.gz」を 7-Zip で展開します。</p>
+<p><img src="WS001913.png" alt="7-Zip で展開" loading="lazy"></p>
+<p>で、展開したフォルダ内にある「brunch_r83_k4.19_stable_20200708.tar」を再度 7-Zip で展開します。</p>
+<p><img src="WS001914.png" alt="7-Zip で展開" loading="lazy"></p>
+<p>展開して出てきたファイルを「Chrome OS」フォルダにコピーします。</p>
+<p><img src="WS001915.png" alt="「Chrome OS」フォルダにコピー" loading="lazy"></p>
+<p><img src="WS001916.png" alt="「Chrome OS」フォルダにコピー" loading="lazy"></p>
+<h4 id="「Chrome-OS-recovery-image」を入れる"><a href="#「Chrome-OS-recovery-image」を入れる" class="headerlink" title="「Chrome OS recovery image」を入れる"></a>「Chrome OS recovery image」を入れる</h4><p>まず「chromeos_13020.87.0_rammus_recovery_stable-channel_mp-v2.bin.zip」を展開します。</p>
+<p><img src="WS001917.png" alt="zip ファイルを展開" loading="lazy"></p>
+<p>展開して出てきた「chromeos_13020.87.0_rammus_recovery_stable-channel_mp-v2.bin」ファイルを「rammus_recovery.bin」にリネームします。</p>
+<p><img src="WS001919.png" alt="「rammus_recovery.bin」にリネーム" loading="lazy"></p>
+<p>また別のリカバリーイメージをダウンロードした場合は、その名前にリネームして下さい。</p>
+<p>リネームした「rammus_recovery.bin」ファイルを「Chrome OS」フォルダにコピーします。</p>
+<p><img src="WS001921.png" alt="「rammus_recovery.bin」ファイルを「Chrome OS」フォルダにコピー" loading="lazy"></p>
+<p>これで インストール USB の作成は完了です。</p>
+<p>「Chrome OS」フォルダ内に 6つのファイルがあれば OK です。</p>
+<p><img src="WS001922.png" alt="Chrome OS フォルダ内に 6つのファイル" loading="lazy"></p>
+<h3 id="BIOS-設定を変更"><a href="#BIOS-設定を変更" class="headerlink" title="BIOS 設定を変更"></a>BIOS 設定を変更</h3><p>次に、インストールする PC の BIOS の設定を変更します。</p>
+<p>今回は <a target="_blank" rel="external nofollow noopener noreferrer" href="https://amzn.to/47YUPra">N3510 ベアボーンPC</a> を使って説明するので、設定出来る項目とかが若干違うかもしれませんが適材適所で臨機応変して下さい。</p>
+<p>まず PC の電源を入れてすぐ Deleteキー か ESCキー を押しっぱなしにして BIOS 画面に入ります。</p>
+<p><img src="Bay-Trail.png" alt="Bay-Trail" loading="lazy"></p>
+<h4 id="CSM-Support-を-Disabled-無効-に変更する"><a href="#CSM-Support-を-Disabled-無効-に変更する" class="headerlink" title="CSM Support を Disabled(無効) に変更する"></a>CSM Support を Disabled(無効) に変更する</h4><p>左右キーで「Advanced」を選んで、上下キーで「CSM Configuration」を選んで エンターキーで 詳細設定をします。</p>
+<p><img src="Advanced-CSM-Configuration_1.png" alt="CSM Configuration" loading="lazy"></p>
+<p>「CSM Support」を「Disabled(無効)」に変更します。</p>
+<p><img src="Advanced-CSM-Support-Disabled_1.png" alt="CSM Support Disabled" loading="lazy"></p>
+<p>もし CSM Support が Enabled(有効) から Disabled(無効) に変更出来ない場合は、下記項目を UEFI に変更すると CSM Support を Disabled(無効) に変更出来ます。</p>
+<ul>
+<li>Boot option filter → UEFI only</li>
+<li>Storage → UEFI</li>
+<li>Video → UEFI</li>
+<li>Other PCI Devices → UEFI</li>
+</ul>
+<p><img src="Advanced-CSM-Support-Enabled_1.png" alt="CSM Support Disabled" loading="lazy"></p>
+<h4 id="Secure-Boot-を-Disabled-無効-に変更する"><a href="#Secure-Boot-を-Disabled-無効-に変更する" class="headerlink" title="Secure Boot を Disabled(無効) に変更する"></a>Secure Boot を Disabled(無効) に変更する</h4><p>ESCキー を何回か押すと最初の画面まで戻ることが出来ます。</p>
+<p>左右キーで「Security」を選んで、上下キーで「Secure Boot menu」を選んで エンターキーで 詳細設定をします。</p>
+<p><img src="Security-Secure-Boot-menu_1.png" alt="Secure Boot menu" loading="lazy"></p>
+<p>「Secure Boot」を「Disabled(無効)」に変更します。</p>
+<p><img src="Security-Secure-Boot-Disabled_1.png" alt="Secure Boot Disabled" loading="lazy"></p>
+<p>変更が終わったら 最初の画面まで戻ります。</p>
+<p>「Save &amp; Exit」を選んで「Save Changes and Exit」を選べば、設定が保存されて BIOS 画面が終了します。</p>
+<p><img src="Save-and-Exit-Save-Changes-and-Exit_1.png" alt="Save Changes and Exit" loading="lazy"></p>
+<h3 id="Chrome-OS-をインストール"><a href="#Chrome-OS-をインストール" class="headerlink" title="Chrome OS をインストール"></a>Chrome OS をインストール</h3><p>次に Chrome OS をインストール するため、USBメモリから Linux Mint を起動させます。</p>
+<p>作成しておいた インストール USB を PC に挿して、電源を入れます。</p>
+<p>USBメモリ から起動させるため F11キー を押しっぱなしにします。</p>
+<p><img src="Bay-Trail.png" alt="Bay-Trail" loading="lazy"></p>
+<p>一番上の「Start Linux Mint 20 MATE 64-bit」起動モードを選択した状態で エンタキー を押します。</p>
+<p><img src="boot-the-selected-OS_1.png" alt="Start Linux Mint 20 MATE 64-bit" loading="lazy"></p>
+<p>しばらくすると Linux Mint が起動します。</p>
+<p><img src="Linux-Mint-desktop.png" alt="Linux Mint" loading="lazy"></p>
+<p>Linux Mint が起動したら、右下のネットワークアイコンをクリックして Wi-Fi または イーサネット に接続します。</p>
+<p>今回は、LANケーブル を接続してあったので自動的にネットワークと繋がりました。</p>
+<p><img src="Connection-Established_1.png" alt="Connection-Established" loading="lazy"></p>
+<p>その後、デスクトップの「Computer」をダブルクリックで開きます。</p>
+<p><img src="Computer.png" alt="Computer を開く" loading="lazy"></p>
+<p>左の「File System」タブを選択してから「media」フォルダをダブルクリックで開きます。</p>
+<p><img src="FileSystem-media_1.png" alt="File System &gt; mediaフォルダを開く" loading="lazy"></p>
+<p>次に「cdrom」フォルダをダブルクリックで開きます。</p>
+<p><img src="cdrom_1.png" alt="cdrom フォルダを開く" loading="lazy"></p>
+<p>最後に「Chrome OS」フォルダをダブルクリックで開きます。</p>
+<p><img src="Chrome-OS_1.png" alt="Chrome OS フォルダを開く" loading="lazy"></p>
+<p>何も無いところを選択してから、右クリックで「Open in Terminal」を選択し ターミナル(端末) を開きます。</p>
+<p><img src="Open-in-Terminal_1.png" alt="Open in Terminal を選択" loading="lazy"></p>
+<p>開いた ターミナル(端末) に下記コマンド を入力して エンタキー を押します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh install.sh</span><br></pre></td></tr></table></figure>
+
+<p><img src="sudo-sh-install-sh_1.png" alt="sudo sh install.sh" loading="lazy"></p>
+<p>そうすると必要なファイルを自動でダウンロードするので、しばらく待ちます。</p>
+<p>ダウンロードが完了すると、インストールを続行するかどうか尋ねられます。</p>
+<p>「yes」と入力し エンタキー を押すと、HDD が初期化されて Chorome OS がインストールされます。</p>
+<p><img src="type-yes-to-continue_1.png" alt="type-yes-to-continue" loading="lazy"></p>
+<p>しばらくまって「ChromeOS installed.」と表示されれば Chrome OS のインストールは完了です。</p>
+<p><img src="ChromeOS-installed_1.png" alt="ChromeOS installed." loading="lazy"></p>
+<p>インストールが完了したら、左下隅にある Linux Mint のスタートメニューを開き「Quit」を選択します。</p>
+<p><img src="Quit_1.png" alt="メニューを開き「Quit」を選択" loading="lazy"></p>
+<p>「Shut Down」を選択して PC の電源を切ります。</p>
+<p><img src="Shut-Down_1.png" alt="Shut down this system now?" loading="lazy"></p>
+<p>最後に USBメモリ を抜いてから エンタキー を押せば電源が切れます。</p>
+<p><img src="please-remove-the-installation-medium-then-press-ENTER.png" alt="please-remove-the-installation-medium-then-press-ENTER" loading="lazy"></p>
+<h3 id="Chrome-OS-を起動"><a href="#Chrome-OS-を起動" class="headerlink" title="Chrome OS を起動"></a>Chrome OS を起動</h3><p>USBメモリ を抜いてから PC の電源を入れると、Chrome OS が起動します。</p>
+<p>初回だけは起動に時間がかかります。</p>
+<p>無事に起動したら、初回設定を進めて行きます。</p>
+<p>左下の 言語設定 から 言語とキーボードの選択が出来ます。</p>
+<p><img src="English_1-1.png" alt="言語とキーボードの選択" loading="lazy"></p>
+<p><img src="Choose-your-language-and-keyboard_1-1.png" alt="言語とキーボードの選択" loading="lazy"></p>
+<p>後は Googleアカウント にログインしたり、プライバシーポリシーに同意したりして設定を進めて行けば、デスクトップ画面が表示されます。</p>
+<p>Chrome OS なので もちろん Google Play も使えます。</p>
+<p><img src="Google-Play.png" alt="Chrome-OS-Google-Play" loading="lazy"></p>
+<p>以上で終了です。長々とお付き合い下さり、どうもありがとうございました。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://beebom.com/how-install-chrome-os-on-pc/">https://beebom.com/how-install-chrome-os-on-pc/</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/sebanc/brunch">https://github.com/sebanc/brunch</a></p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/docker-sql-server/" title="Docker で SQL Server 2019 を動かす">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Docker で SQL Server 2019 を動かす
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/tensorflow-post-result/" title="【Python】TensorFlow の計算結果を POST で返す">
+
+    <p class="title-text">
+      
+        【Python】TensorFlow の計算結果を POST で返す
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

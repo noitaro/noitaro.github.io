@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>Nexus7(2013) に LineageOS 19.0 を入れる | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="今年もこの季節がやってきました。 Android 12 が発表されて早半年。Nexus7(2013) に対応したので、今年もサクッと導入してみたいと思います。 はじめにLineageOS 19.0 は、Android 12 ベースのカスタムROMのことです。 Nexus7(2013) は、Google製の Androidタブレットで、発売当時は Android 4.3 が搭載されていました。公式で">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nexus7(2013) に LineageOS 19.0 を入れる">
+<meta property="og:url" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="今年もこの季節がやってきました。 Android 12 が発表されて早半年。Nexus7(2013) に対応したので、今年もサクッと導入してみたいと思います。 はじめにLineageOS 19.0 は、Android 12 ベースのカスタムROMのことです。 Nexus7(2013) は、Google製の Androidタブレットで、発売当時は Android 4.3 が搭載されていました。公式で">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002888.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002889.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002910.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002911.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002891.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002893.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002896.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002897.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002898.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/PXL_20210220_032531611_2.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002899.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002377.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002907.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_52_5947upper_Mount.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_56_4819upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_52_5947upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002900.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_52_5947upper_Install.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_00_1706upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_00_3510upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_01_1165upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_26_3716upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002908.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_52_5947upper_Wipe.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_57_4100upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_58_1217upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_58_2883upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_58_4321upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002912.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/12_52_5947upper_Install.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/14_28_4786upper_lineage.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_09_1187upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/14_28_4786upper_bitgapps.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/14_29_1266upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/14_30_2904upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/14_32_3102upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_48_1318upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/13_48_2784upper.png">
+<meta property="og:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/Screenshot_20211226-141239_Trebuchet.png">
+<meta property="article:published_time" content="2021-12-26T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.343Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="twrp">
+<meta property="article:tag" content="gapps">
+<meta property="article:tag" content="lineageos">
+<meta property="article:tag" content="nexus7-2013">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/nexus7-2013-lineageos-19-0/WS002888.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-nexus7-2013-lineageos-19-0" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        Nexus7(2013) に LineageOS 19.0 を入れる
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2021-12-26T00:00:00.000Z" itemprop="datePublished">2021-12-26</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            1.7k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>今年もこの季節がやってきました。</p>
+<p>Android 12 が発表されて早半年。Nexus7(2013) に対応したので、今年もサクッと導入してみたいと思います。</p>
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>LineageOS 19.0 は、Android 12 ベースのカスタムROMのことです。</p>
+<p>Nexus7(2013) は、Google製の Androidタブレットで、発売当時は Android 4.3 が搭載されていました。公式では Android6.0.1 が最後のアップデートになってしまったのですが、有志の方々があの手この手を使って Android 12 (LineageOS 19.0) までアップデートできるようにして下さいました。</p>
+<p>ホントありがとうございます。</p>
+<h3 id="環境"><a href="#環境" class="headerlink" title="環境"></a>環境</h3><ul>
+<li>Windows 10 Home 21H1</li>
+</ul>
+<h2 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h2><p>まず必要なファイルをかき集めます。</p>
+<h3 id="LineageOS-19-0"><a href="#LineageOS-19-0" class="headerlink" title="LineageOS 19.0"></a>LineageOS 19.0</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://forum.xda-developers.com/t/rom-flo-deb-unofficial-lineageos-18-1-19-0-2021-12-12.3569067/">[ROM][flo|deb][UNOFFICIAL][LineageOS 18.1&#x2F;19.0] -&gt; 2021-12-12 | XDA Forums</a></p>
+<p>こちらから「lineage-19.0-20211212-UNOFFICIAL-flo.zip」か「lineage-19.0-20211212-UNOFFICIAL-deb.zip」をダウンロードします。</p>
+<p>お手持ちの Nexus7(2013) が Wi-Fiモデルの場合は「flo」、LTEモデルの場合は「deb」をダウンロードして下さい。</p>
+<p><img src="WS002888.png" alt="LineageOS 19.0 のダウンロード" loading="lazy"></p>
+<p>私が持ってる Nexus7(2013) は Wi-Fiモデル なので「lineage-19.0-20211212-UNOFFICIAL-flo.zip」をダウンロードしました。</p>
+<p><img src="WS002889.png" alt="「lineage-19.0-20211212-UNOFFICIAL-flo.zip」をダウンロード" loading="lazy"></p>
+<h3 id="BiTGApps"><a href="#BiTGApps" class="headerlink" title="BiTGApps"></a>BiTGApps</h3><p>Google Play も使いたいので <a target="_blank" rel="external nofollow noopener noreferrer" href="https://bitgapps.github.io/">BiTGApps</a> もダウンロードします。</p>
+<p>Nexus7(2013) は ARM版 に対応しています。</p>
+<p><img src="WS002910.png" alt="ARMをクリック" loading="lazy"></p>
+<p>「Files」をクリックしてから「BiTGApps-arm-12.0.0-R44_signed.zip」をダウンロードします。</p>
+<p><img src="WS002911.png" alt="「BiTGApps-arm-12.0.0-R44_signed.zip」をダウンロード" loading="lazy"></p>
+<h3 id="パーティションサイズ変更スクリプト"><a href="#パーティションサイズ変更スクリプト" class="headerlink" title="パーティションサイズ変更スクリプト"></a>パーティションサイズ変更スクリプト</h3><p>LineageOS 19.0 のシステム容量は 1275MB なので、Nexus7(2013) にインストールするためにシステムパーティションを拡張する必要があります。</p>
+<p>今回のスクリプトで システムパーティションを1380MB、キャッシュパーティションを20MBに変更させます。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://forum.xda-developers.com/t/rom-flo-deb-unofficial-lineageos-18-1-19-0-2021-12-12.3569067/">こちら</a> の「sysrepart_1380_20.zip」をクリックし、</p>
+<p><img src="WS002891.png" alt="「sysrepart_1380_20.zip」をクリック" loading="lazy"></p>
+<p>Googleドライブから「sysrepart_1380_20.zip」をダウンロードします。</p>
+<p><img src="WS002893.png" alt="「sysrepart_1380_20.zip」をダウンロード" loading="lazy"></p>
+<h3 id="TWRP"><a href="#TWRP" class="headerlink" title="TWRP"></a>TWRP</h3><p>久しぶりに カスタムROM を入れようとしたら TWRP が起動しなかったので、ついでにやっちゃいます。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://forum.xda-developers.com/t/rom-flo-deb-unofficial-lineageos-18-1-19-0-2021-12-12.3569067/">こちら</a> の Download をクリックし、</p>
+<p><img src="WS002896.png" alt="TWRPのDownload" loading="lazy"></p>
+<p>自分の端末に合った TWRP をダウンロードします。私の Nexus7(2013) は Wi-Fiモデル なので「twrp-3.5.2_9-0-flo_followmsi.img」をダウンロードしました。</p>
+<p><img src="WS002897.png" alt="「twrp-3.5.2_9-0-flo_followmsi.img」をダウンロード" loading="lazy"></p>
+<h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><p>必要なファイルが揃ったので、早速作業に取り掛かります。</p>
+<h3 id="TWRP-1"><a href="#TWRP-1" class="headerlink" title="TWRP"></a>TWRP</h3><p>TWRP が起動しなかったので、まず TWRP のインストールからします。起動する方は飛ばしてもらって大丈夫です。</p>
+<p>まず FASTBOOTモードで起動させます。</p>
+<p>電源が切れている状態で「電源ボタン＋音量下ボタン」を長押しするか、PCと端末をUSBケーブルで繋いで下記コマンドを入力することで FASTBOOTモード を起動させることができます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot bootloader</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002898.png" alt="FASTBOOTモードを起動" loading="lazy"></p>
+<p>しばらく待つとこんな画面になります。</p>
+<p><img src="PXL_20210220_032531611_2.png" alt="fastboot モード" loading="lazy"></p>
+<p>この画面で下記コマンドを入れると TWRP をインストールすることができます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fastboot flash recovery D:\Nexus7\twrp-3.5.2_9-0-flo_followmsi.img</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002899.png" alt="TWRP をインストール" loading="lazy"></p>
+<h4 id="FASTBOOTモードで端末が認識されない場合は？"><a href="#FASTBOOTモードで端末が認識されない場合は？" class="headerlink" title="FASTBOOTモードで端末が認識されない場合は？"></a>FASTBOOTモードで端末が認識されない場合は？</h4><p>デバイスマネージャーで Android に警告マークが付いていると FASTBOOTモード が認識できていません。</p>
+<p><img src="WS002377.png" alt="ほかのデバイス" loading="lazy"></p>
+<p><a href="https://noitaro.github.io/nexus7-2013-magisk-root/">こちら記事</a> を参考にしてドライバーをインストールして下さい。</p>
+<h3 id="システムパーティションの拡張"><a href="#システムパーティションの拡張" class="headerlink" title="システムパーティションの拡張"></a>システムパーティションの拡張</h3><p>システムパーティションを拡張させます。</p>
+<p>ちなみに今の状態はこんな感じ、システム830MBですかね。これじゃあ入らないわ。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell df -h</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002907.png" alt="今のパーティション状態" loading="lazy"></p>
+<p>まず TWRP を起動させ、TWRPメニューの「Mount」をタップします。</p>
+<p><img src="12_52_5947upper_Mount.png" alt="「Mount」をタップ" loading="lazy"></p>
+<p>マウントしていないパーティションがあったらマウントさせます。</p>
+<p><img src="12_56_4819upper.png" alt="パーティションのマウント" loading="lazy"></p>
+<p>マウントが出来たらホームボタンを押して TWRPメニュー画面に戻っておきましょう。</p>
+<p><img src="12_52_5947upper.png" alt="TWRPメニュー画面" loading="lazy"></p>
+<p>そして下記コマンドで端末に「sysrepart_1380_20.zip」を転送します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb push D:\Nexus7\sysrepart_1380_20.zip /sdcard/</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002900.png" alt="ファイルの転送" loading="lazy"></p>
+<p>スクリプトの転送が終わったら、TWRPメニューの「Install」をタップし、</p>
+<p><img src="12_52_5947upper_Install.png" alt="「Install」をタップ" loading="lazy"></p>
+<p>転送しておいた「sysrepart_1380_20.zip」をタップします。</p>
+<p><img src="13_00_1706upper.png" alt="「sysrepart_1380_20.zip」をタップ" loading="lazy"></p>
+<p>「Swipe to confirm Flash」を右にスワイプして、スクリプトを実行します。</p>
+<p><img src="13_00_3510upper.png" alt="「Swipe to confirm Flash」を右にスワイプ" loading="lazy"></p>
+<p>実行中はこんな感じで、下のバーが動いています。スクショだと分からないですが…</p>
+<p><img src="13_01_1165upper.png" alt="インストール中" loading="lazy"></p>
+<p>エラーなく終わればこんな表示になります。「Reboot System」をタップして一度再起動させます。</p>
+<p><img src="13_26_3716upper.png" alt="インストール成功" loading="lazy"></p>
+<p>再度コマンドで確認してみると、ちゃんと拡張されていることが分かります。</p>
+<p><img src="WS002908.png" alt="拡張後のパーティション状態" loading="lazy"></p>
+<p>もしエラーになってしまった場合は、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://developers.google.com/android/images#razor">Factory Image</a> で一度初期化した方がいいかもしれません。私も何回か失敗したので Factory Image で初期化したらうまくできました。</p>
+<p>Factory Image での初期化は <a href="https://noitaro.github.io/pixel-3a-factory-image/">こちらの記事</a> を参考にして下さい。</p>
+<h3 id="システムパーティションのフォーマット"><a href="#システムパーティションのフォーマット" class="headerlink" title="システムパーティションのフォーマット"></a>システムパーティションのフォーマット</h3><p>再起動後、TWRPメニュー画面になったら「Wipe」をタップし、</p>
+<p><img src="12_52_5947upper_Wipe.png" alt="「Wipe」をタップ" loading="lazy"></p>
+<p>「Format Data」をタップしてシステムパーティションをフォーマットします。余計なファイルが残っているとエラーになる可能性があるので、念のため…</p>
+<p><img src="12_57_4100upper.png" alt="「Format Data」をタップ" loading="lazy"></p>
+<p>キーボードで「yes」と入力するとフォーマットされます。</p>
+<p><img src="12_58_1217upper.png" alt="「yes」を入力" loading="lazy"></p>
+<p>フォーマット中はこんな感じ。</p>
+<p><img src="12_58_2883upper.png" alt="フォーマット中" loading="lazy"></p>
+<p>フォーマットが無事に終わったら、ホームボタンをタップしてTWRPメニュー画面に戻ります。</p>
+<p><img src="12_58_4321upper.png" alt="フォーマット成功" loading="lazy"></p>
+<h3 id="ファイルの転送"><a href="#ファイルの転送" class="headerlink" title="ファイルの転送"></a>ファイルの転送</h3><p>TWRPメニュー画面に戻ったら、下記コマンドを使って端末に「lineage-19.0-20211212-UNOFFICIAL-flo.zip」「BiTGApps-arm-12.0.0-R44_signed.zip」を転送します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb push D:\Nexus7\lineage-19.0-20211212-UNOFFICIAL-flo.zip /sdcard/</span><br><span class="line">adb push D:\Nexus7\BiTGApps-arm-12.0.0-R44_signed.zip /sdcard/</span><br></pre></td></tr></table></figure>
+
+<p><img src="WS002912.png" alt="端末にファイルを転送" loading="lazy"></p>
+<h3 id="インストール"><a href="#インストール" class="headerlink" title="インストール"></a>インストール</h3><p>ファイルの転送が終わったら、TWRPメニューの「Install」をタップします。</p>
+<p><img src="12_52_5947upper_Install.png" alt="「Install」をタップ" loading="lazy"></p>
+<p>インストールするファイルを順番に選択していきます。</p>
+<p>まず「lineage-19.0-20211212-UNOFFICIAL-flo.zip」を選択します。</p>
+<p><img src="14_28_4786upper_lineage.png" alt="「lineage-19.0-20211212-UNOFFICIAL-flo.zip」を選択" loading="lazy"></p>
+<p>BiTGApps も一緒にインストールしたいので「Add more Zips」をタップして一度前の画面に戻り、</p>
+<p><img src="13_09_1187upper.png" alt="「Add more Zips」をタップ" loading="lazy"></p>
+<p>続いて「BiTGApps-arm-12.0.0-R44_signed.zip」を選択します。</p>
+<p><img src="14_28_4786upper_bitgapps.png" alt="「BiTGApps-arm-12.0.0-R44_signed.zip」を選択" loading="lazy"></p>
+<p>最後に「Swipe to confirm Flash」を右にスワイプすると、インストールが開始されます。</p>
+<p><img src="14_29_1266upper.png" alt="インストール開始" loading="lazy"></p>
+<p>インストール中はこんな感じ。</p>
+<p><img src="14_30_2904upper.png" alt="インストール中" loading="lazy"></p>
+<p>インストールが無事に終わったら「Wipe Cache&#x2F;Dalvlk」をタップしてキャッシュを消します。</p>
+<p><img src="14_32_3102upper.png" alt="インストール成功" loading="lazy"></p>
+<h3 id="キャッシュの削除"><a href="#キャッシュの削除" class="headerlink" title="キャッシュの削除"></a>キャッシュの削除</h3><p>「Swipe to Wipe」を右にスワイプするとキャッシュが削除されます。</p>
+<p><img src="13_48_1318upper.png" alt="キャッシュ削除" loading="lazy"></p>
+<p>キャッシュが正常に消せたら「Reboot System」をタップしてシステムを再起動させます。</p>
+<p><img src="13_48_2784upper.png" alt="キャッシュ削除成功" loading="lazy"></p>
+<p>しばらくすると Android 12 (LineageOS 19.0) が起動します。</p>
+<h2 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h2><p>LineageOS 19.0 にアップデートしたのですが、違いがほとんど感じられませんでした。</p>
+<p>でも、UIが若干丸っこくなったかな。</p>
+<p>最新のタブレットと比べると、スクロールはカクつくし画面遷移も遅いです。</p>
+<p><img src="Screenshot_20211226-141239_Trebuchet.png" alt="LineageOS 19.0" loading="lazy"></p>
+<p>使えないこともないですが、私が持ってる Nexus7(2013) はバッテリーがほぼ死んでいるので、常に給電して デジタルサイネージ にするぐらいしかないですね。</p>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/windows-11-install/" title="Windows 11 のインストールと設定">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Windows 11 のインストールと設定
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/vue-split-pane/" title="【Vue】分割ペインコンポーネントを試す">
+
+    <p class="title-text">
+      
+        【Vue】分割ペインコンポーネントを試す
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>

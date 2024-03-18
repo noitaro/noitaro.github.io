@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+
+
+<html theme="dark" showbanner="true" hasbanner="true" lang="ja"> 
+<link href="/fontawesome/css/fontawesome.css" rel="stylesheet">
+<link href="/fontawesome/css/brands.css" rel="stylesheet">
+<link href="/fontawesome/css/solid.css" rel="stylesheet">
+<script src="/js/color.global.min.js"></script>
+<script src="/js/load-settings.js"></script>
+<head>
+  <meta charset="utf-8">
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-47KZC4SPRE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-47KZC4SPRE');
+</script>
+<!-- End Google Analytics -->
+
+
+  
+  
+
+  
+<!-- Start Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2715932618841414" crossorigin="anonymous"></script>
+<!-- End Google AdSense -->
+
+
+  
+  <title>TensorFlowで独自物体検出モデルを作成 | noitaro.github.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+  <link rel="preload" href="/css/fonts/MaterialSymbolsRounded.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+  <meta name="description" content="TensorFlowで独自の物体検出 (Object detection) モデルを作ります。 出来上がるまで1ヶ月ほど掛かりました。ホントエラーの連続で大変だった。 今回はポケGOのポケストップを検出するモデルを作って行きます。 最終目標はAndroidで動かすこと！ 環境 Windows 11 Home 21H2 Docker 20.10.12 TensorFlow 1.15.2 Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlowで独自物体検出モデルを作成">
+<meta property="og:url" content="https://noitaro.github.io/tensorflow-object-detection/">
+<meta property="og:site_name" content="noitaro.github.io">
+<meta property="og:description" content="TensorFlowで独自の物体検出 (Object detection) モデルを作ります。 出来上がるまで1ヶ月ほど掛かりました。ホントエラーの連続で大変だった。 今回はポケGOのポケストップを検出するモデルを作って行きます。 最終目標はAndroidで動かすこと！ 環境 Windows 11 Home 21H2 Docker 20.10.12 TensorFlow 1.15.2 Python">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-331.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-332.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-338.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-329.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-340.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-334.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-335.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-337.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-341.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-342.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-343.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-344.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-345.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-352.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-354.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-348.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-349.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-355.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-351.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-356.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-357.png">
+<meta property="og:image" content="https://noitaro.github.io/tensorflow-object-detection/image-359.png">
+<meta property="article:published_time" content="2022-06-04T00:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-18T02:41:41.671Z">
+<meta property="article:author" content="Noita">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="android-studio">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="docker">
+<meta property="article:tag" content="tensorflow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://noitaro.github.io/tensorflow-object-detection/image-331.png">
+  
+    <link rel="alternate" href="/atom.xml" title="noitaro.github.io" type="application/atom+xml">
+  
+  
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: light)" href="/images/favicon-light-192.png" sizes="192x192">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-32.png" sizes="32x32">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-128.png" sizes="128x128">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-180.png" sizes="180x180">
+    <link rel="icon" media="(prefers-color-scheme: dark)" href="/images/favicon-dark-192.png" sizes="192x192">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  
+  
+    
+<div id="banner" class>
+  <img src="/images/banner.png" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
+   
+  <div id="main-grid" class="shadow   ">
+    <div id="nav" class>
+      <navbar id="navbar">
+  <nav id="title-nav">
+    <a href="/">
+      <div id="vivia-logo">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+      <div>noitaro.github.io </div>
+    </a>
+  </nav>
+  <nav id="main-nav">
+    
+      <a class="main-nav-link" href="/">Home</a>
+    
+      <a class="main-nav-link" href="/archives">Archives</a>
+    
+      <a class="main-nav-link" href="/about">About</a>
+    
+      <a class="main-nav-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+  </nav>
+  <nav id="sub-nav">
+    <a id="theme-btn" class="nav-icon">
+      <span class="material-symbols-rounded light-mode-icon">wb_sunny</span>
+      <span class="material-symbols-rounded dark-mode-icon">dark_mode</span>
+    </a>
+    
+      <a id="nav-rss-link" class="nav-icon mobile-hide" href="/atom.xml" title="RSS Feed">
+        <span class="material-symbols-rounded rss">rss_feed</span>
+      </a>
+    
+    <a id="nav-search-btn" class="nav-icon" title="Search" style="display: none;">
+      <span class="material-symbols-rounded">search</span>
+    </a>
+    <div id="nav-menu-btn" class="nav-icon">
+      <span class="material-symbols-rounded">menu</span>
+    </div>
+  </nav>
+</navbar>
+<div id="nav-dropdown" class="hidden">
+  <div id="dropdown-link-list">
+    
+      <a class="nav-dropdown-link" href="/">Home</a>
+    
+      <a class="nav-dropdown-link" href="/archives">Archives</a>
+    
+      <a class="nav-dropdown-link" href="/about">About</a>
+    
+      <a class="nav-dropdown-link" href="/privacy-policy">PrivacyPolicy</a>
+    
+    
+      <a class="nav-dropdown-link" href="/atom.xml" title="RSS Feed">RSS</a>
+     
+    </div>
+</div>
+<script>
+  let dropdownBtn = document.getElementById("nav-menu-btn");
+  let dropdownEle = document.getElementById("nav-dropdown");
+  dropdownBtn.onclick = function() {
+    dropdownEle.classList.toggle("hidden");
+  }
+</script>
+    </div>
+    <div id="sidebar-wrapper">
+      <sidebar id="sidebar">
+  
+    <div class="widget-wrap">
+  <div class="info-card">
+    <div class="avatar">
+      
+        <image src="/images/avatar.png"></image>
+      
+      <div class="img-dim"></div>
+    </div>
+    <div class="info">
+      <div class="username">のい太 </div>
+      <div class="dot"></div>
+      <div class="subtitle">試行錯誤の連続 </div>
+      <div class="link-list">
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://x.com/so_noita" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        
+          <a class="link-btn" target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro" title="GitHub"><i class="fa-brands fa-github"></i></a>
+         
+      </div>  
+    </div>
+  </div>
+</div>
+
+  
+  <div class="sticky">
+    
+      
+<div class="widget-wrap">
+  <div class="widget">
+    <h3 class="widget-title">広告</h3>
+    <!-- sidebar_widgets -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2715932618841414" data-ad-slot="9582809495" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Archives</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024 ">
+          2024 
+          <div class="archive-count">5 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2023 ">
+          2023 
+          <div class="archive-count">36 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2022 ">
+          2022 
+          <div class="archive-count">53 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2021 ">
+          2021 
+          <div class="archive-count">52 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2020 ">
+          2020 
+          <div class="archive-count">81 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2019 ">
+          2019 
+          <div class="archive-count">85 </div>
+        </a>
+      
+        <a class="archive-link" href="/archives/2015 ">
+          2015 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">Tags</h3>
+      <ul class="widget-tag-list" itemprop="keywords"><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/3d-model/" rel="tag">3d-model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/adb/" rel="tag">adb</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai/" rel="tag">ai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ai-art/" rel="tag">ai-art</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/amazon-s3/" rel="tag">amazon-s3</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/analytics/" rel="tag">analytics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-auto-play/" rel="tag">android-auto-play</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/angular/" rel="tag">angular</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/api-gateway/" rel="tag">api-gateway</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/application/" rel="tag">application</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/asp-net/" rel="tag">asp-net</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/audacity/" rel="tag">audacity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/authentication/" rel="tag">authentication</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/automation/" rel="tag">automation</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aviutl/" rel="tag">aviutl</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/aws-lambda/" rel="tag">aws-lambda</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/axie-infinity/" rel="tag">axie-infinity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/azure/" rel="tag">azure</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/benchmark/" rel="tag">benchmark</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bevy/" rel="tag">bevy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bios/" rel="tag">bios</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blender/" rel="tag">blender</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/blockly/" rel="tag">blockly</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bluetooth/" rel="tag">bluetooth</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootloader/" rel="tag">bootloader</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bootstrap/" rel="tag">bootstrap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/bot/" rel="tag">bot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/build/" rel="tag">build</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/c-sharp/" rel="tag">c-sharp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/camera/" rel="tag">camera</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chat-gpt/" rel="tag">chat-gpt</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cheat/" rel="tag">cheat</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cherrypy/" rel="tag">cherrypy</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/chrome/" rel="tag">chrome</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/cocos-creator/" rel="tag">cocos-creator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/complete-food/" rel="tag">complete-food</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/darknet/" rel="tag">darknet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/discord/" rel="tag">discord</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/display/" rel="tag">display</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/django/" rel="tag">django</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/e-book/" rel="tag">e-book</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/earphone/" rel="tag">earphone</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/eel/" rel="tag">eel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/elecom/" rel="tag">elecom</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electron/" rel="tag">electron</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/electronics/" rel="tag">electronics</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/embedding/" rel="tag">embedding</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/emulator/" rel="tag">emulator</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/excel/" rel="tag">excel</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/exe/" rel="tag">exe</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/factory-image/" rel="tag">factory-image</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fastapi/" rel="tag">fastapi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/fire-tablet/" rel="tag">fire-tablet</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/firebase/" rel="tag">firebase</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flask/" rel="tag">flask</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/flutter/" rel="tag">flutter</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/free-software/" rel="tag">free-software</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/functions/" rel="tag">functions</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gadget/" rel="tag">gadget</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/game/" rel="tag">game</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/games/" rel="tag">games</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gapps/" rel="tag">gapps</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gatsby/" rel="tag">gatsby</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gba/" rel="tag">gba</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/gcp/" rel="tag">gcp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/godot/" rel="tag">godot</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/google/" rel="tag">google</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hekate/" rel="tag">hekate</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/heroku/" rel="tag">heroku</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hexo/" rel="tag">hexo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/huawei-p9/" rel="tag">huawei-p9</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/hugo/" rel="tag">hugo</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/instagram/" rel="tag">instagram</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/isometric/" rel="tag">isometric</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/java/" rel="tag">java</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/javascript/" rel="tag">javascript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/jquery/" rel="tag">jquery</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/json/" rel="tag">json</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/keyboard/" rel="tag">keyboard</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/kitchen-garden/" rel="tag">kitchen-garden</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/langchain/" rel="tag">langchain</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lineageos/" rel="tag">lineageos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/live2d/" rel="tag">live2d</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/lua/" rel="tag">lua</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/machine-learning/" rel="tag">machine-learning</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/magisk/" rel="tag">magisk</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/makefile/" rel="tag">makefile</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material/" rel="tag">material</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/material-design/" rel="tag">material-design</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/minecraft/" rel="tag">minecraft</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mixhost/" rel="tag">mixhost</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/mod/" rel="tag">mod</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/model/" rel="tag">model</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/msi/" rel="tag">msi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/netlify/" rel="tag">netlify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nexus7-2013/" rel="tag">nexus7-2013</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nintendo-switch/" rel="tag">nintendo-switch</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/node-js/" rel="tag">node-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/noita/" rel="tag">noita</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/nox/" rel="tag">nox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/obs/" rel="tag">obs</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/openai/" rel="tag">openai</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/opencv/" rel="tag">opencv</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/p5-js/" rel="tag">p5-js</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pc/" rel="tag">pc</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pdf/" rel="tag">pdf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pixel-3a/" rel="tag">pixel-3a</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/postgresql/" rel="tag">postgresql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/powershell/" rel="tag">powershell</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/puyo-quest/" rel="tag">puyo-quest</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/pyramid/" rel="tag">pyramid</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rabbit/" rel="tag">rabbit</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rakuten-mini/" rel="tag">rakuten-mini</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/random-notes/" rel="tag">random-notes</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/raspberry-pi/" rel="tag">raspberry-pi</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/react/" rel="tag">react</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/reverse-engineering/" rel="tag">reverse-engineering</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rooted/" rel="tag">rooted</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/rust/" rel="tag">rust</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/satisfactory/" rel="tag">satisfactory</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scanner/" rel="tag">scanner</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/scraping/" rel="tag">scraping</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sd-card/" rel="tag">sd-card</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sdkbox/" rel="tag">sdkbox</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/security/" rel="tag">security</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/selenium/" rel="tag">selenium</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/shape/" rel="tag">shape</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sql/" rel="tag">sql</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sqlserver/" rel="tag">sqlserver</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ssd/" rel="tag">ssd</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/sxos/" rel="tag">sxos</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tauri/" rel="tag">tauri</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/theme/" rel="tag">theme</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tiledmap/" rel="tag">tiledmap</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tool/" rel="tag">tool</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/tornado/" rel="tag">tornado</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/toys/" rel="tag">toys</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/twrp/" rel="tag">twrp</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/typescript/" rel="tag">typescript</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/umamusume/" rel="tag">umamusume</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/unity/" rel="tag">unity</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/video-editing/" rel="tag">video-editing</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/visual-studio/" rel="tag">visual-studio</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vite/" rel="tag">vite</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vr/" rel="tag">vr</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vue/" rel="tag">vue</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/vuetify/" rel="tag">vuetify</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webhook/" rel="tag">webhook</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webpack/" rel="tag">webpack</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/webview2/" rel="tag">webview2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/windows/" rel="tag">windows</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wordpress/" rel="tag">wordpress</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wpf/" rel="tag">wpf</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsa/" rel="tag">wsa</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/wsl2/" rel="tag">wsl2</a></li><li class="widget-tag-list-item"><a class="widget-tag-list-link" href="/tags/youtube/" rel="tag">youtube</a></li></ul>
+    </div>
+  </div>
+
+
+    
+  </div>
+</sidebar>
+    </div>
+    <div id="content-body">
+       
+
+<article id="post-tensorflow-object-detection" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 class="p-name article-title" itemprop="headline name">
+        TensorFlowで独自物体検出モデルを作成
+      </h1>
+    
+  
+</div>
+
+        <div class="meta-info-bar">
+          <div class="meta-info">
+  <time class="dt-published" datetime="2022-06-04T00:00:00.000Z" itemprop="datePublished">2022-06-04</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    Uncategorized 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            2.7k words 
+          </div>
+        </div>
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android/" rel="tag">android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/android-studio/" rel="tag">android-studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tensorflow/" rel="tag">tensorflow</a></li></ul>
+
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <p>TensorFlowで独自の物体検出 (Object detection) モデルを作ります。</p>
+<p>出来上がるまで1ヶ月ほど掛かりました。ホントエラーの連続で大変だった。</p>
+<p>今回はポケGOのポケストップを検出するモデルを作って行きます。</p>
+<p>最終目標はAndroidで動かすこと！</p>
+<h2 id="環境"><a href="#環境" class="headerlink" title="環境"></a>環境</h2><ul>
+<li>Windows 11 Home 21H2</li>
+<li>Docker 20.10.12</li>
+<li>TensorFlow 1.15.2</li>
+<li>Python 3.6.9</li>
+<li>LabelImg 1.8.1</li>
+</ul>
+<h2 id="準備"><a href="#準備" class="headerlink" title="準備"></a>準備</h2><h3 id="作業用フォルダー作成"><a href="#作業用フォルダー作成" class="headerlink" title="作業用フォルダー作成"></a>作業用フォルダー作成</h3><p>機械学習させるうえで、たくさんのファイルが必要になります。</p>
+<p>手に負えなくなる前にファイルを振り分けていきます。</p>
+<p>今回は「📂pokego」という作業用フォルダーを作成し、必要なフォルダーを数個作成しました。</p>
+<h4 id="ここまでのフォルダー構成"><a href="#ここまでのフォルダー構成" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">📂pokego</span><br><span class="line"> ┣📂Data</span><br><span class="line"> ┃ ┗📂JPEGImages</span><br><span class="line"> ┣📂OutputModel</span><br><span class="line"> ┣📂SaveModel</span><br><span class="line"> ┗📂VOC2012</span><br><span class="line">   ┣📂Annotations</span><br><span class="line">   ┗📂ImageSets</span><br><span class="line">     ┗📂Main</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dockerコンテナの作成"><a href="#Dockerコンテナの作成" class="headerlink" title="Dockerコンテナの作成"></a>Dockerコンテナの作成</h3><p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/models/tree/master/research/object_detection/dockerfiles/tf1">公式のDockerfile</a>で試したところ、ライブラリが足りなかったりビルドエラーで思うように使えなかったので、<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/tensorflow-object-detection/blob/main/Dockerfile">修正済みDockerfile</a> でDockerコンテナを作成します。</p>
+<p><img src="image-331.png" alt="Dockerfile" loading="lazy"></p>
+<p>「📂pokego」と同じ階層に保存したら、次のコマンドでDockerイメージ作成と、Dockerコンテナ作成をします。</p>
+<h4 id="Dockerイメージ作成"><a href="#Dockerイメージ作成" class="headerlink" title="Dockerイメージ作成"></a>Dockerイメージ作成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Dockerイメージ作成</span><br><span class="line">docker build -f Dockerfile -t od-1_15_2_gpu .</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-332.png" alt="Dockerイメージ作成コマンド" loading="lazy"></p>
+<h4 id="Dockerコンテナ作成"><a href="#Dockerコンテナ作成" class="headerlink" title="Dockerコンテナ作成"></a>Dockerコンテナ作成</h4><p>バインドマウントするパスは各自で変更してください。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Dockerコンテナ作成</span><br><span class="line">docker run -v D:\tensorflow\pokego:/home/tensorflow/models/research/pokego -p 10000:6006 -it od-1_15_2_gpu</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-338.png" alt="Dockerコンテナ作成コマンド" loading="lazy"></p>
+<h5 id="引数説明"><a href="#引数説明" class="headerlink" title="引数説明"></a>引数説明</h5><ul>
+<li>-v：ローカルの「📂pokego」フォルダーをバインドマウントして、Dockerコンテナ内から使えるようにしています。</li>
+<li>-p：後のTensorBoardで学習状況を確認するため、Dockerコンテナにポート番号を割り当てています。</li>
+</ul>
+<h4 id="ここまでのフォルダー構成-1"><a href="#ここまでのフォルダー構成-1" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line"> ┣📂Data</span><br><span class="line"> ┃ ┗📂JPEGImages</span><br><span class="line"> ┣📂OutputModel</span><br><span class="line"> ┣📂SaveModel</span><br><span class="line"> ┣📂VOC2012</span><br><span class="line"> ┃ ┣📂Annotations</span><br><span class="line"> ┃ ┗📂ImageSets</span><br><span class="line"> ┃   ┗📂Main</span><br><span class="line"> ┗📄Dockerfile ←🆕</span><br></pre></td></tr></table></figure>
+
+<h3 id="学習データの作成"><a href="#学習データの作成" class="headerlink" title="学習データの作成"></a>学習データの作成</h3><p>今回は「<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tzutalin/labelImg">LabelImg</a>」を使いました。PASCAL VOC型式で出力して TFRecord型式に変換する必要があります。</p>
+<p><img src="image-329.png" alt="ラベリング（アノテーション）" loading="lazy"></p>
+<p>使い方は <a href="https://noitaro.github.io/labelimg-annotation/">昔記事</a> にしたので割愛。注意する点は PASCAL VOC型式で保存すること。</p>
+<p>他にもTFRecord型式で出力できる「<a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/microsoft/VoTT">VoTT</a>」も試したのですが、モデル学習の過程でエラーが出て進めなかったです。</p>
+<p>ラベリング中は適当なフォルダーに保存していって、終わったらまとめて指定フォルダーに移動させると楽です。</p>
+<h4 id="指定フォルダーに移動"><a href="#指定フォルダーに移動" class="headerlink" title="指定フォルダーに移動"></a>指定フォルダーに移動</h4><ul>
+<li>画像データ：📂pokego &gt;📂Data &gt;📂JPEGImages</li>
+<li>VOCデータ：📂pokego &gt;📂VOC2012 &gt;📂Annotations</li>
+</ul>
+<h4 id="VOCデータの修正"><a href="#VOCデータの修正" class="headerlink" title="VOCデータの修正"></a>VOCデータの修正</h4><p>VOCデータを一括置換で修正します。</p>
+<ul>
+<li>folderの値を「Data」に置換</li>
+<li>pathの値からパス情報を削除</li>
+</ul>
+<p><img src="image-340.png" alt="VOCデータ修正" loading="lazy"></p>
+<h3 id="学習データの振り分け"><a href="#学習データの振り分け" class="headerlink" title="学習データの振り分け"></a>学習データの振り分け</h3><p>訓練データ (train_data)と検証データ (validation_data)に振り分けていきます。</p>
+<p>訓練80%、検証20%がよくある比率らしいので、そんな感じにします。</p>
+<p>「📂pokego &gt;📂VOC2012 &gt;📂ImageSets &gt;📂Main」に「📄aeroplane_train.txt」というテキストファイルを作り、学習データの80%分の画像ファイル名を振り分けます。</p>
+<p><img src="image-334.png" alt="学習データリスト" loading="lazy"></p>
+<p>同様に「📄aeroplane_val.txt」も作り、残りの20%分のファイル名を振り分けます。</p>
+<p><img src="image-335.png" alt="検証データリスト" loading="lazy"></p>
+<h3 id="TensorFlow用ラベルリストの作成"><a href="#TensorFlow用ラベルリストの作成" class="headerlink" title="TensorFlow用ラベルリストの作成"></a>TensorFlow用ラベルリストの作成</h3><p>ラベリングした時に名付けたラベル名をリストにしたファイルを作成します。</p>
+<p>「📂pokego」フォルダー内に「📄tf_label_map.pbtxt」というテキストファイルを作り、次のようにラベル名を入力していきます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">item &#123;</span><br><span class="line"> id: 1</span><br><span class="line"> name: &#x27;Ace&#x27;</span><br><span class="line">&#125;</span><br><span class="line">item &#123;</span><br><span class="line"> id: 2</span><br><span class="line"> name: &#x27;Seven&#x27;</span><br><span class="line">&#125;</span><br><span class="line">item &#123;</span><br><span class="line"> id: 3</span><br><span class="line"> name: &#x27;King&#x27;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>今回は1つしかラベルしていないので次のようになりました。</p>
+<p><img src="image-337.png" alt="TensorFlow用ラベルリスト" loading="lazy"></p>
+<h4 id="ここまでのフォルダー構成-2"><a href="#ここまでのフォルダー構成-2" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line">┣📂Data</span><br><span class="line">┃ ┗📂JPEGImages</span><br><span class="line">┃   ┣📄image_0001.jpg ←🆕</span><br><span class="line">┃   ┣📄image_0002.jpg ←🆕</span><br><span class="line">┃   ┃・・・</span><br><span class="line">┃   ┗📄image_0038.jpg ←🆕</span><br><span class="line">┣📂OutputModel</span><br><span class="line">┣📂SaveModel</span><br><span class="line">┣📂VOC2012</span><br><span class="line">┃ ┣📂Annotations</span><br><span class="line">┃ ┃ ┣📄image_0001.xml ←🆕</span><br><span class="line">┃ ┃ ┣📄image_0002.xml ←🆕</span><br><span class="line">┃ ┃ ┃・・・</span><br><span class="line">┃ ┃ ┗📄image_0038.xml ←🆕</span><br><span class="line">┃ ┗📂ImageSets</span><br><span class="line">┃   ┗📂Main</span><br><span class="line">┃     ┣📄aeroplane_train.txt ←🆕</span><br><span class="line">┃     ┗📄aeroplane_val.txt ←🆕</span><br><span class="line">┣📄Dockerfile</span><br><span class="line">┗📄tf_label_map.pbtxt ←🆕</span><br></pre></td></tr></table></figure>
+
+<h3 id="TFRecord型式に変換"><a href="#TFRecord型式に変換" class="headerlink" title="TFRecord型式に変換"></a>TFRecord型式に変換</h3><p>TensorFlow で機械学習するには、ラベリングした学習データをTFRecord型式に変換する必要があります。</p>
+<p>Dockerのターミナルに次のコマンドを入力すると、「📂pokego」フォルダー内に変換されたファイルが作られます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 訓練データの変換</span><br><span class="line">python object_detection/dataset_tools/create_pascal_tf_record.py \</span><br><span class="line">--label_map_path=./pokego/tf_label_map.pbtxt \</span><br><span class="line">--data_dir=./pokego --year=VOC2012 --set=train \</span><br><span class="line">--output_path=./pokego/pascal_train.record</span><br><span class="line"></span><br><span class="line"># 検証データの変換</span><br><span class="line">python object_detection/dataset_tools/create_pascal_tf_record.py \</span><br><span class="line">--label_map_path=./pokego/tf_label_map.pbtxt \</span><br><span class="line">--data_dir=./pokego --year=VOC2012 --set=val \</span><br><span class="line">--output_path=./pokego/pascal_val.record</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-341.png" alt="TFRecord型式に変換するコマンド" loading="lazy"></p>
+<h4 id="変換されたファイル"><a href="#変換されたファイル" class="headerlink" title="変換されたファイル"></a>変換されたファイル</h4><ul>
+<li>pascal_train.record</li>
+<li>pascal_val.record</li>
+</ul>
+<p><img src="image-342.png" alt="TFRecord型式に変換" loading="lazy"></p>
+<h4 id="ここまでのフォルダー構成-3"><a href="#ここまでのフォルダー構成-3" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line">┣📂Data</span><br><span class="line">┃ ┗📂JPEGImages</span><br><span class="line">┃   ┣📄image_0001.jpg</span><br><span class="line">┃   ┣📄image_0002.jpg</span><br><span class="line">┃   ┃・・・</span><br><span class="line">┃   ┗📄image_0038.jpg</span><br><span class="line">┣📂OutputModel</span><br><span class="line">┣📂SaveModel</span><br><span class="line">┣📂VOC2012</span><br><span class="line">┃ ┣📂Annotations</span><br><span class="line">┃ ┃ ┣📄image_0001.xml</span><br><span class="line">┃ ┃ ┣📄image_0002.xml</span><br><span class="line">┃ ┃ ┃・・・</span><br><span class="line">┃ ┃ ┗📄image_0038.xml</span><br><span class="line">┃ ┗📂ImageSets</span><br><span class="line">┃   ┗📂Main</span><br><span class="line">┃     ┣📄aeroplane_train.txt</span><br><span class="line">┃     ┗📄aeroplane_val.txt</span><br><span class="line">┣📄Dockerfile</span><br><span class="line">┣📄pascal_train.record ←🆕</span><br><span class="line">┣📄pascal_val.record ←🆕</span><br><span class="line">┗📄tf_label_map.pbtxt</span><br></pre></td></tr></table></figure>
+
+<h3 id="パイプラインデータの作成"><a href="#パイプラインデータの作成" class="headerlink" title="パイプラインデータの作成"></a>パイプラインデータの作成</h3><p>機械学習を始めるときに必要なデータをまとめて記載したパイプラインデータを作成します。</p>
+<p>今回はひな形を少し修正して、機械学習させていきます。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config">公式GitHub</a> から「📄ssd_mobilenet_v1_coco.config」をダウンロードして、次の箇所を修正します。</p>
+<ul>
+<li>9行目：num_classes: 1（学習するラベル数と同じにする）</li>
+<li>141行目：batch_size: 4（GPUに自信があれば大きくてもよい 2,4,8,16,32…）</li>
+<li>156行目：fine_tune_checkpoint: “”（空に）</li>
+<li>162行目：num_steps: 10000（学習してみて足りなければ増やせばよい）</li>
+<li>175行目：input_path: “.&#x2F;pokego&#x2F;pascal_train.record”</li>
+<li>177行目：label_map_path: “.&#x2F;pokego&#x2F;tf_label_map.pbtxt”</li>
+<li>189行目：input_path: “.&#x2F;pokego&#x2F;pascal_val.record”</li>
+<li>191行目：label_map_path: “.&#x2F;pokego&#x2F;tf_label_map.pbtxt”</li>
+</ul>
+<p>今回はホントにまっさらな状態から学習させました。途中からだとうまく学習できなかったためです。</p>
+<h4 id="ここまでのフォルダー構成-4"><a href="#ここまでのフォルダー構成-4" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line">┣📂Data</span><br><span class="line">┃ ┗📂JPEGImages</span><br><span class="line">┃   ┣📄image_0001.jpg</span><br><span class="line">┃   ┣📄image_0002.jpg</span><br><span class="line">┃   ┃・・・</span><br><span class="line">┃   ┗📄image_0038.jpg</span><br><span class="line">┣📂OutputModel</span><br><span class="line">┣📂SaveModel</span><br><span class="line">┣📂VOC2012</span><br><span class="line">┃ ┣📂Annotations</span><br><span class="line">┃ ┃ ┣📄image_0001.xml</span><br><span class="line">┃ ┃ ┣📄image_0002.xml</span><br><span class="line">┃ ┃ ┃・・・</span><br><span class="line">┃ ┃ ┗📄image_0038.xml</span><br><span class="line">┃ ┗📂ImageSets</span><br><span class="line">┃   ┗📂Main</span><br><span class="line">┃     ┣📄aeroplane_train.txt</span><br><span class="line">┃     ┗📄aeroplane_val.txt</span><br><span class="line">┣📄Dockerfile</span><br><span class="line">┣📄pascal_train.record</span><br><span class="line">┣📄pascal_val.record</span><br><span class="line">┣📄ssd_mobilenet_v1_coco.config ←🆕</span><br><span class="line">┗📄tf_label_map.pbtxt</span><br></pre></td></tr></table></figure>
+
+<h2 id="独自モデルの学習"><a href="#独自モデルの学習" class="headerlink" title="独自モデルの学習"></a>独自モデルの学習</h2><p>これで準備完了です。</p>
+<p>次のコマンドをDockerコンソールにコピペすると学習が始まります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python object_detection/model_main.py \</span><br><span class="line">--pipeline_config_path=&quot;./pokego/ssd_mobilenet_v1_coco.config&quot; \</span><br><span class="line">--model_dir=&quot;./pokego/SaveModel&quot; \</span><br><span class="line">--alsologtostderr</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-343.png" alt="学習開始のコマンド" loading="lazy"></p>
+<p>学習が始まると次のログが流れます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">INFO:tensorflow:Saving checkpoints for 0 into ./pokego/SaveModel/model.ckpt.</span><br><span class="line">I0601 12:18:31.965519 140684566607680 basic_session_run_hooks.py:606] Saving checkpoints for 0 into ./pokego/SaveModel/model.ckpt.</span><br><span class="line">INFO:tensorflow:loss = 15.334896, step = 1</span><br><span class="line">I0601 12:18:39.144777 140684566607680 basic_session_run_hooks.py:262] loss = 15.334896, step = 1</span><br><span class="line">INFO:tensorflow:global_step/sec: 2.3923</span><br><span class="line">I0601 12:19:20.944656 140684566607680 basic_session_run_hooks.py:692] global_step/sec: 2.3923</span><br><span class="line">INFO:tensorflow:loss = 8.772529, step = 101 (41.801 sec)</span><br><span class="line">I0601 12:19:20.945703 140684566607680 basic_session_run_hooks.py:260] loss = 8.772529, step = 101 (41.801 sec)</span><br><span class="line">INFO:tensorflow:global_step/sec: 2.542</span><br><span class="line">I0601 12:20:00.283499 140684566607680 basic_session_run_hooks.py:692] global_step/sec: 2.542</span><br><span class="line">INFO:tensorflow:loss = 6.0293255, step = 201 (39.339 sec)</span><br><span class="line">I0601 12:20:00.284253 140684566607680 basic_session_run_hooks.py:260] loss = 6.0293255, step = 201 (39.339 sec)</span><br><span class="line">INFO:tensorflow:global_step/sec: 2.16601</span><br><span class="line">I0601 12:20:46.451487 140684566607680 basic_session_run_hooks.py:692] global_step/sec: 2.16601</span><br><span class="line">INFO:tensorflow:loss = 5.0683546, step = 301 (46.169 sec)</span><br><span class="line">I0601 12:20:46.453217 140684566607680 basic_session_run_hooks.py:260] loss = 5.0683546, step = 301 (46.169 sec)</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-344.png" alt="学習中ログの確認" loading="lazy"></p>
+<p>このように100ステップ毎にログが出力され、ロスが徐々に下がっていれば正常に学習が進んでいる証拠です。</p>
+<h3 id="確認"><a href="#確認" class="headerlink" title="確認"></a>確認</h3><p>ある程度学習が進むと、定期的に検証処理が入り、「📂SaveModel」フォルダーに「📄model.ckpt」ファイルが作成されていきます。</p>
+<p><img src="image-345.png" alt="学習結果ファイル" loading="lazy"></p>
+<p>学習を中断させたいときは「Ctrl+C」で中断させることができます。最初と同じコマンドで再実行することもできます。</p>
+<h4 id="ここまでのフォルダー構成-5"><a href="#ここまでのフォルダー構成-5" class="headerlink" title="ここまでのフォルダー構成"></a>ここまでのフォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line">┣📂Data</span><br><span class="line">┃ ┗📂JPEGImages</span><br><span class="line">┃   ┣📄image_0001.jpg</span><br><span class="line">┃   ┣📄image_0002.jpg</span><br><span class="line">┃   ┃・・・</span><br><span class="line">┃   ┗📄image_0038.jpg</span><br><span class="line">┣📂OutputModel</span><br><span class="line">┣📂SaveModel</span><br><span class="line">┃ ┣📂eval_0 ←🆕</span><br><span class="line">┃ ┣📄checkpoint ←🆕</span><br><span class="line">┃ ┣📄graph.pbtxt ←🆕</span><br><span class="line">┃ ┣📄model.ckpt-0.data-00000-of-00001 ←🆕</span><br><span class="line">┃ ┣📄model.ckpt-0.index ←🆕</span><br><span class="line">┃ ┣📄model.ckpt-0.meta ←🆕</span><br><span class="line">┃ ┣📄model.ckpt-1436.data-00000-of-00001 ←🆕</span><br><span class="line">┃ ┣📄model.ckpt-1436.index ←🆕</span><br><span class="line">┃ ┗📄model.ckpt-1436.meta ←🆕</span><br><span class="line">┣📂VOC2012</span><br><span class="line">┃ ┣📂Annotations</span><br><span class="line">┃ ┃ ┣📄image_0001.xml</span><br><span class="line">┃ ┃ ┣📄image_0002.xml</span><br><span class="line">┃ ┃ ┃・・・</span><br><span class="line">┃ ┃ ┗📄image_0038.xml</span><br><span class="line">┃ ┗📂ImageSets</span><br><span class="line">┃   ┗📂Main</span><br><span class="line">┃     ┣📄aeroplane_train.txt</span><br><span class="line">┃     ┗📄aeroplane_val.txt</span><br><span class="line">┣📄Dockerfile</span><br><span class="line">┣📄pascal_train.record</span><br><span class="line">┣📄pascal_val.record</span><br><span class="line">┣📄ssd_mobilenet_v1_coco.config</span><br><span class="line">┗📄tf_label_map.pbtxt</span><br></pre></td></tr></table></figure>
+
+<p>後は、気が済むまで学習させて下さい。</p>
+<h2 id="学習結果の確認"><a href="#学習結果の確認" class="headerlink" title="学習結果の確認"></a>学習結果の確認</h2><p>どれぐらい学習したのか確認したくなると思います。</p>
+<p>次のコマンドをDockerコンソールに入力すると、tensorboard で確認することができるようになります。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorboard --port 6006 --logdir=&quot;./pokego/SaveModel&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="image-352.png" alt="TensorBoard起動コマンド" loading="lazy"></p>
+<p>TensorBoard を起動させると <a target="_blank" rel="external nofollow noopener noreferrer" href="http://localhost:10000/">http://localhost:10000</a> このURLから見ることができます。</p>
+<p><img src="image-354.png" alt="TensorBoard" loading="lazy"></p>
+<h2 id="TFLite型式に変換"><a href="#TFLite型式に変換" class="headerlink" title="TFLite型式に変換"></a>TFLite型式に変換</h2><p>Androidで物体検出（object etection）を実行させるには、学習モデルをTFLite型式に変換する必要があります。</p>
+<h3 id="中間データに変換"><a href="#中間データに変換" class="headerlink" title="中間データに変換"></a>中間データに変換</h3><p>次のコマンドで中間データに変換します。</p>
+<p>trained_checkpoint_prefix の「model.ckpt-1436」は保存されてる学習済みデータの中で一番大きい数値のモデルを使ってください。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">python object_detection/export_tflite_ssd_graph.py \</span><br><span class="line">--pipeline_config_path=&quot;./pokego/ssd_mobilenet_v1_coco.config&quot; \</span><br><span class="line">--trained_checkpoint_prefix=&quot;./pokego/SaveModel/model.ckpt-1436&quot; \</span><br><span class="line">--output_directory=&quot;./pokego/OutputModel&quot; \</span><br><span class="line">--add_postprocessing_op=true</span><br></pre></td></tr></table></figure>
+
+<p>このコマンドを実行すると「📂OutputModel」フォルダーに2つのファイルができあがります。</p>
+<ul>
+<li>📄tflite_graph.pb</li>
+<li>📄tflite_graph.pbtxt</li>
+</ul>
+<p><img src="image-348.png" alt="中間データ変換" loading="lazy"></p>
+<h3 id="TFLite型式に変換-1"><a href="#TFLite型式に変換-1" class="headerlink" title="TFLite型式に変換"></a>TFLite型式に変換</h3><p>そのまま続けてTFLite型式に変換します。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">tflite_convert \</span><br><span class="line">--output_file=&quot;./pokego/OutputModel/pokego.tflite&quot; \</span><br><span class="line">--graph_def_file=&quot;./pokego/OutputModel/tflite_graph.pb&quot; \</span><br><span class="line">--inference_type=QUANTIZED_UINT8 \</span><br><span class="line">--input_arrays=normalized_input_image_tensor \</span><br><span class="line">--input_shapes=1,300,300,3 \</span><br><span class="line">--output_arrays=&#x27;TFLite_Detection_PostProcess&#x27;,&#x27;TFLite_Detection_PostProcess:1&#x27;,&#x27;TFLite_Detection_PostProcess:2&#x27;,&#x27;TFLite_Detection_PostProcess:3&#x27; \</span><br><span class="line">--default_ranges_min=0 \</span><br><span class="line">--default_ranges_max=6 \</span><br><span class="line">--mean_values=128 \</span><br><span class="line">--std_dev_values=128 \</span><br><span class="line">--allow_custom_ops</span><br></pre></td></tr></table></figure>
+
+<p>TFLite型式のファイルが出来上がります。</p>
+<p><img src="image-349.png" alt="TFLite型式のファイル作成" loading="lazy"></p>
+<h3 id="メタデータの挿入"><a href="#メタデータの挿入" class="headerlink" title="メタデータの挿入"></a>メタデータの挿入</h3><p>最後にAndroidアプリで動かせるようにするため、メタデータを挿入します。</p>
+<h4 id="メタデータ用ラベルリスト作成"><a href="#メタデータ用ラベルリスト作成" class="headerlink" title="メタデータ用ラベルリスト作成"></a>メタデータ用ラベルリスト作成</h4><p>まず「📂pokego」フォルダーに「labels.txt」というテキストファイルを作成し、ラベルリストを作成します。</p>
+<p>こっちのラベルリストは1行に1ラベルずつ記載していきます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Ace</span><br><span class="line">Seven</span><br><span class="line">King</span><br></pre></td></tr></table></figure>
+
+<p>私の場合は1ラベルしかないので、次のようになりました。</p>
+<p><img src="image-355.png" alt="ラベル一覧作成" loading="lazy"></p>
+<h4 id="メタデータ挿入準備"><a href="#メタデータ挿入準備" class="headerlink" title="メタデータ挿入準備"></a>メタデータ挿入準備</h4><p>次に「📂pokego」フォルダーに「📄object_detector_Metadata_Writer.py」というPythonファイルを作成して、次のコードをコピペします。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from tflite_support.metadata_writers import object_detector</span><br><span class="line">from tflite_support.metadata_writers import writer_utils</span><br><span class="line"></span><br><span class="line">ObjectDetectorWriter = object_detector.MetadataWriter</span><br><span class="line">_MODEL_PATH = &quot;./pokego/OutputModel/pokego.tflite&quot;</span><br><span class="line">_LABEL_FILE = &quot;./pokego/labels.txt&quot;</span><br><span class="line">_SAVE_TO_PATH = &quot;./pokego/OutputModel/pokego_metadata.tflite&quot;</span><br><span class="line">_INPUT_NORM_MEAN = 127.5</span><br><span class="line">_INPUT_NORM_STD = 127.5</span><br><span class="line"></span><br><span class="line">writer = ObjectDetectorWriter.create_for_inference(writer_utils.load_file(_MODEL_PATH), [_INPUT_NORM_MEAN], [_INPUT_NORM_STD], [_LABEL_FILE])</span><br><span class="line">writer_utils.save_file(writer.populate(), _SAVE_TO_PATH)</span><br></pre></td></tr></table></figure>
+
+<p>次のコマンドをDockerコンソールで実行すると「📄pokego.tflite」にメタデータが挿入されます。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python ./pokego/object_detector_Metadata_Writer.py</span><br></pre></td></tr></table></figure>
+
+<p>「📄pokego_metadata.tflite」が作成されれば完成です。</p>
+<p><img src="image-351.png" alt="メタデータ挿入済み" loading="lazy"></p>
+<h4 id="最終フォルダー構成"><a href="#最終フォルダー構成" class="headerlink" title="最終フォルダー構成"></a>最終フォルダー構成</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">📂pokego</span><br><span class="line">┣📂Data</span><br><span class="line">┃ ┗📂JPEGImages</span><br><span class="line">┃   ┣📄image_0001.jpg</span><br><span class="line">┃   ┣📄image_0002.jpg</span><br><span class="line">┃   ┃・・・</span><br><span class="line">┃   ┗📄image_0038.jpg</span><br><span class="line">┣📂OutputModel</span><br><span class="line">┃ ┣📄pokego.tflite ←🆕</span><br><span class="line">┃ ┣📄pokego_metadata.tflite ←🆕👑</span><br><span class="line">┃ ┣📄tflite_graph.pb ←🆕</span><br><span class="line">┃ ┗📄tflite_graph.pbtxt ←🆕</span><br><span class="line">┣📂SaveModel</span><br><span class="line">┃ ┣📂eval_0</span><br><span class="line">┃ ┣📄checkpoint</span><br><span class="line">┃ ┣📄graph.pbtxt</span><br><span class="line">┃ ┣📄model.ckpt-0.data-00000-of-00001</span><br><span class="line">┃ ┣📄model.ckpt-0.index</span><br><span class="line">┃ ┣📄model.ckpt-0.meta</span><br><span class="line">┃ ┣📄model.ckpt-1436.data-00000-of-00001</span><br><span class="line">┃ ┣📄model.ckpt-1436.index</span><br><span class="line">┃ ┗📄model.ckpt-1436.meta</span><br><span class="line">┣📂VOC2012</span><br><span class="line">┃ ┣📂Annotations</span><br><span class="line">┃ ┃ ┣📄image_0001.xml</span><br><span class="line">┃ ┃ ┣📄image_0002.xml</span><br><span class="line">┃ ┃ ┃・・・</span><br><span class="line">┃ ┃ ┗📄image_0038.xml</span><br><span class="line">┃ ┗📂ImageSets</span><br><span class="line">┃   ┗📂Main</span><br><span class="line">┃     ┣📄aeroplane_train.txt</span><br><span class="line">┃     ┗📄aeroplane_val.txt</span><br><span class="line">┣📄Dockerfile</span><br><span class="line">┣📄labels.txt ←🆕</span><br><span class="line">┣📄object_detector_Metadata_Writer.py ←🆕</span><br><span class="line">┣📄pascal_train.record</span><br><span class="line">┣📄pascal_val.record</span><br><span class="line">┣📄ssd_mobilenet_v1_coco.config</span><br><span class="line">┗📄tf_label_map.pbtxt</span><br></pre></td></tr></table></figure>
+
+<h2 id="Androidで物体検出"><a href="#Androidで物体検出" class="headerlink" title="Androidで物体検出"></a>Androidで物体検出</h2><p>ホントこれがやりたかった。</p>
+<p><a href="https://noitaro.github.io/tensorflow-android-object-detection/">前回記事</a> の物体検出アプリに今回学習したモデルを入れて、動作確認します。</p>
+<p>assetsフォルダーにメタデータ挿入済みモデルとメタデータ用ラベルリストをコピペし、</p>
+<ul>
+<li>📄labels.txt</li>
+<li>📄pokego_metadata.tflite</li>
+</ul>
+<p><img src="image-356.png" alt="assetsフォルダー" loading="lazy"></p>
+<p>「📄DetectorActivity.java」の設定を修正します。</p>
+<ul>
+<li>TF_OD_API_MODEL_FILE &#x3D; “pokego_metadata.tflite”;</li>
+<li>TF_OD_API_LABELS_FILE &#x3D; “labels.txt”;</li>
+</ul>
+<p><img src="image-357.png" alt="DetectorActivity.java" loading="lazy"></p>
+<h3 id="確認-1"><a href="#確認-1" class="headerlink" title="確認"></a>確認</h3><p>実機で確認します。</p>
+<p><img src="image-359.png" alt="ポケストップ物体検出" loading="lazy"></p>
+<p>左上バグってますが、正しくポケストップが物体検出されています。</p>
+<p>テストなのでカメラで動作確認しましたが、今後の予定として、実機の画面に映ったポケストップを検出させて自動化できるアプリを考えています。</p>
+<h2 id="おわりに"><a href="#おわりに" class="headerlink" title="おわりに"></a>おわりに</h2><p>Dockerいいですね。簡単に環境が作れました。</p>
+<p>いろんなサイトを見て回ってやっとたどり着いた私なりの手順になります。Dockerイメージさえあれば、どんなPCでも機械学習ができるので、よければ参考にしてみて下さい。</p>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><p>今回作ったファイルを GitHub で公開します。学習用画像とラベリングデータを用意すればすぐに機械学習が始められると思います。</p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/noitaro/tensorflow-object-detection">https://github.com/noitaro/tensorflow-object-detection</a></p>
+<h3 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h3><ul>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tzutalin/labelImg">LabelImg</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://techzizou.com/training-an-ssd-model-for-a-custom-object-using-tensorflow-2-x/">Training a model for custom object detection (TF 2.x) on Google Colab</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://qiita.com/IchiLab/items/fd99bcd92670607f8f9b">【初心者向け】Tensorflow Object Detection API を使ってみた - Qiita</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tensorflow.org/lite/convert/cmdline">コンバータのコマンドラインリファレンス | TensorFlow Lite</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tensorflow.org/lite/models/convert/metadata_writer_tutorial">TensorFlow Lite Metadata Writer API</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/running_on_mobile_tensorflowlite.md">Running on mobile with TensorFlow Lite</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/models">TensorFlow Model Garden</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf1_training_and_evaluation.md">Training and Evaluation with TensorFlow 1</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tensorflow.org/lite/examples/object_detection/overview">Object detection | TensorFlow Lite</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector">Integrate object detectors | TensorFlow Lite</a></li>
+<li><a target="_blank" rel="external nofollow noopener noreferrer" href="https://www.tensorflow.org/lite/models/convert/metadata">TensorFlowLiteモデルへのメタデータの追加 | TensorFlow Lite</a></li>
+</ul>
+
+        
+      </div>
+
+         
+    </div>
+    
+     
+  </div>
+  
+    
+<nav id="article-nav">
+  <a class="article-nav-btn left " href="/android-11-action-open-document/" title="Android 11 内部ストレージにZIP展開">
+    <i class="fa-solid fa-angle-left"></i>
+    <p class="title-text">
+      
+        Android 11 内部ストレージにZIP展開
+        
+    </p>
+  </a>
+  <a class="article-nav-btn right " href="/docker-bind-mounts/" title="バインドマウントを用いたコンテナーの起動">
+
+    <p class="title-text">
+      
+        バインドマウントを用いたコンテナーの起動
+        
+    </p>
+    <i class="fa-solid fa-angle-right"></i>
+  </a>
+</nav>
+
+
+  
+</article>
+
+ 
+    </div>
+    <div id="footer-wrapper">
+      <footer id="footer">
+  
+  <div id="footer-info" class="inner">
+    
+    &copy; 2024 のい太<br>
+    Powered by <a href="https://hexo.io/" target="_blank" rel="external nofollow noopener noreferrer">Hexo</a> & Theme <a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
+  </div>
+</footer>
+
+    </div>
+    <div class="back-to-top-wrapper">
+    <button id="back-to-top-btn" class="back-to-top-btn hide" onclick="topFunction()">
+        <span class="material-symbols-rounded">keyboard_arrow_up</span>
+    </button>
+</div>
+
+<script>
+    function topFunction() {
+        window.scroll({ top: 0, behavior: 'smooth' });
+    }
+    let btn = document.getElementById('back-to-top-btn');
+    function scrollFunction() {
+        if (document.body.scrollTop > 600 || document.documentElement.scrollTop > 600) {
+            btn.classList.remove('hide')
+        } else {
+            btn.classList.add('hide')
+        }
+    }
+    window.onscroll = function() {
+        scrollFunction();
+    }
+</script>
+
+  </div>
+  <script src="/js/light-dark-switch.js"></script>
+</body>
+</html>
